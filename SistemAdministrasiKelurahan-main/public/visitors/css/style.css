@@ -131,10 +131,16 @@ mm #header .logo h1 a:hover {
     list-style: none;
 }
 
+.nav-menu > ul {
+    display: flex;
+    align-items: center;
+    gap: 7px; /* jarak antar menu */
+}
+
 .nav-menu > ul > li {
     position: relative;
     white-space: nowrap;
-    float: left;
+    /* float: left; */
 }
 
 .nav-menu a {
@@ -162,7 +168,7 @@ mm #header .logo h1 a:hover {
     color: #fff;
     border: 1px solid #3c50e0;
     border-radius: 20px;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 3px;
     padding: 5px 30px;
 }
 
