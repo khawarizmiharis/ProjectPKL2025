@@ -13,9 +13,6 @@
                 <li class="{{ request()->is('/') ? 'active' : '' }}">
                     <a href="{{ route('visitors.beranda.index') }}">Beranda</a>
                 </li>
-                <li class="{{ request()->is('artikel') ? 'active' : '' }}">
-                    <a href="{{ route('visitors.artikel.index') }}">Artikel</a>
-                </li>
                 <?php function activeProfilDesa($urlPath)
                 {
                 if ($urlPath == 'profil-desa/sejarah-visi-misi' || $urlPath == 'profil-desa/struktur-pemerintahan' || $urlPath ==
@@ -32,6 +29,9 @@
                             <a href="{{ route('profil-desa.administratif.index') }}">Administratif</a>
                         </li>
                     </ul>
+                </li>
+                <li class="{{ request()->is('artikel') ? 'active' : '' }}">
+                    <a href="{{ route('visitors.artikel.index') }}">Artikel</a>
                 </li>
                 <li class="{{ request()->is('umkm') ? 'active' : '' }}">
                     <a href="{{ route('visitors.umkm.index') }}">UMKM</a>
