@@ -4,7 +4,7 @@
             <h1 class="text-light text-uppercase">
                 <a href="{{ route('visitors.beranda.index') }}">
                     <img src="{{ asset('/images') }}/logo.png" alt="">
-                    <span>Desa Wonosuko</span>
+                    <span>Kelurahan Kota Sukabumi</span>
                 </a>
             </h1>
         </div>

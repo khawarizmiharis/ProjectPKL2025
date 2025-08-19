@@ -7,16 +7,16 @@
                 </div>
             </div>
             <div class="col-lg-7 text-lg-left pl-lg-4  text-center h-100 d-block footer-info">
-                <h3>Desa Wonosuko</h3>
-                <p class="text-center mr-lg-5 text-md-left">Website administrasi desa merupakan aplikasi berbasis
+                <h3>Kelurahan Kota Sukabumi</h3>
+                <p class="text-center mr-lg-5 text-md-left">Website administrasi Kelurahan merupakan aplikasi berbasis
                     website yang
-                    digunakan untuk membantu pengurus desa dalam
-                    mengelola data administratif serta meningkatkan pelayanan kepada penduduk desa
+                    digunakan untuk membantu Masyarakat Kelurahan Kota Sukabumi dalam
+                    mengelola data administratif serta meningkatkan pelayanan kepada penduduk di Kelurahan
                 </p>
             </div>
             <ul class=" col-lg-4 footer-distributed d-flex flex-column justify-content-center">
                 <li>
-                    <p><i class="fa fa-map-marker"></i><span>Jl. Kemutug Kidul</span> Sumpbang, Purworejo</p>
+                    <p><i class="fa fa-map-marker"></i><span>Kelurahan Kota Sukabumi, </span>Jawa Barat</p>
                 </li>
                 <li>
                     <p><i class="fa fa-phone"></i>+62 555 666 777 888</p>
