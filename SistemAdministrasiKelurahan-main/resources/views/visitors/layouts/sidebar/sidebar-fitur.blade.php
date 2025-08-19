@@ -8,21 +8,21 @@
 <div class="col-lg-12 mb-4">
     <div class="fitur">
         <div class="sidebar-heading text-center">
-            <h2>Profil Desa</h2>
+            <h2>Profil Kelurahan</h2>
         </div>
         <ul>
             <li>
-                <a href="{{ route('profil-desa.sejarah-visi-misi') }}">
+                <a href="{{ route('profil-kelurahan.sejarah-visi-misi') }}">
                     <h5>Sejarah dan Visi - Misi</h5>
                 </a>
             </li>
             <li>
-                <a href="{{ route('profil-desa.struktur-pemerintahan') }}">
+                <a href="{{ route('profil-kelurahan.struktur-pemerintahan') }}">
                     <h5>Struktur Pemerintahan</h5>
                 </a>
             </li>
             <li>
-                <a href="{{ route('profil-desa.administratif.index') }}">
+                <a href="{{ route('profil-kelurahan.administratif.index') }}">
                     <h5>Administratif</h5>
                 </a>
             </li>

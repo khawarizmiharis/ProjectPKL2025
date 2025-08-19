@@ -1,11 +1,11 @@
-@extends('visitors.layouts.master', ['title' => "Profil Desa - Administratif"])
+@extends('visitors.layouts.master', ['title' => "Profil Kelurahan - Administratif"])
 
 @section('content')
 {{-- Start Breadcumb Section --}}
 <?php
     $data=[
         'judul' => 'Administratif',
-        'page1' => '> Profil Desa',
+        'page1' => '> Profil Kelurahan',
         'page2' => '> Administratif'
     ]
 ?>

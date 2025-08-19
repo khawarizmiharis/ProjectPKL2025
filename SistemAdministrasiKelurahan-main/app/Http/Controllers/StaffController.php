@@ -227,6 +227,6 @@ class StaffController extends Controller
             Alert::success(' Berhasil ', 'Staff di non-aktifkan');
         }
 
-        return redirect()->route('info-desa.kepengurusan');
+        return redirect()->route('info-kelurahan.kepengurusan');
     }
 }

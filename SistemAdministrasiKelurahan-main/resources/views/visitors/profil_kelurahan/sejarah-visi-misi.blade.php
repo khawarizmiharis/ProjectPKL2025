@@ -1,12 +1,12 @@
-@extends('visitors.layouts.master', ['title' => "Profil Desa"])
+@extends('visitors.layouts.master', ['title' => "Profil Kelurahan"])
 
 @section('content')
 
 {{-- Start Breadcumb Section --}}
 <?php
     $data=[
-        'page1' => '> Profil Desa',
-        'page2' => '> Struktur Pemerintahan'
+        'page1' => '> Profil Kelurahan',
+        'page2' => '> Sejarah Visi Misi'
     ]
 ?>
 @include('visitors.layouts.breadcumb-artikel', $data)

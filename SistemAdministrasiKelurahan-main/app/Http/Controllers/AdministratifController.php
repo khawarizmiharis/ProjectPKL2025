@@ -100,7 +100,7 @@ class AdministratifController extends Controller
             ];
         });
 
-        return view('visitors.profil_desa.administratif', compact(
+        return view('visitors.profil_kelurahan.administratif', compact(
             'sexDatas',
             'eduDatas',
             'profDatas',
@@ -110,22 +110,22 @@ class AdministratifController extends Controller
     }
     public function pendidikan()
     {
-        return view('visitors.profil_desa.administratif.pendidikan');
+        return view('visitors.profil_kelurahan.administratif.pendidikan');
     }
     public function pekerjaan()
     {
-        return view('visitors.profil_desa.administratif.pekerjaan');
+        return view('visitors.profil_kelurahan.administratif.pekerjaan');
     }
     public function agama()
     {
-        return view('visitors.profil_desa.administratif.agama');
+        return view('visitors.profil_kelurahan.administratif.agama');
     }
     public function wilayah()
     {
-        return view('visitors.profil_desa.administratif.wilayah');
+        return view('visitors.profil_kelurahan.administratif.wilayah');
     }
     public function warganegara()
     {
-        return view('visitors.profil_desa.administratif.warga-negara');
+        return view('visitors.profil_kelurahan.administratif.warga-negara');
     }
 }

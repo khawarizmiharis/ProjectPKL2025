@@ -164,7 +164,7 @@ class VillageIdentityController extends Controller
 
         Alert::success('Berhasil', 'Identitas Desa Berhasil Diperbaharui');
 
-        return redirect(route('info-desa.identitas'));
+        return redirect(route('info-kelurahan.identitas'));
     }
 
     /**

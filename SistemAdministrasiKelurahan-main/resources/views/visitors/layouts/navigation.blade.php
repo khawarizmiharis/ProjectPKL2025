@@ -13,20 +13,20 @@
                 <li class="{{ request()->is('/') ? 'active' : '' }}">
                     <a href="{{ route('visitors.beranda.index') }}">Beranda</a>
                 </li>
-                <?php function activeProfilDesa($urlPath)
+                <?php function activeProfilKelurahan($urlPath)
                 {
-                if ($urlPath == 'profil-desa/sejarah-visi-misi' || $urlPath == 'profil-desa/struktur-pemerintahan' || $urlPath ==
-                'profil-desa/administratif/jenis-kelamin') {
+                if ($urlPath == 'profil-kelurahan/sejarah-visi-misi' || $urlPath == 'profil-kelurahan/struktur-pemerintahan' || $urlPath ==
+                'profil-kelurahan/administratif/jenis-kelamin') {
                 return ' active';
                 }
                 } ?>
-                <li class="drop-down{{ activeProfilDesa(request()->path()) }}">
-                    <a href="#">Profil Desa</a>
+                <li class="drop-down{{ activeProfilKelurahan(request()->path()) }}">
+                    <a href="#">Profil Kelurahan</a>
                     <ul>
-                        <li><a href="{{ route('profil-desa.sejarah-visi-misi') }}">Sejarah dan Visi Misi</a></li>
-                        <li><a href="{{ route('profil-desa.struktur-pemerintahan') }}">Struktur Pemerintahan</a></li>
+                        <li><a href="{{ route('profil-kelurahan.sejarah-visi-misi') }}">Sejarah dan Visi Misi</a></li>
+                        <li><a href="{{ route('profil-kelurahan.struktur-pemerintahan') }}">Struktur Pemerintahan</a></li>
                         <li>
-                            <a href="{{ route('profil-desa.administratif.index') }}">Administratif</a>
+                            <a href="{{ route('profil-kelurahan.administratif.index') }}">Administratif</a>
                         </li>
                     </ul>
                 </li>

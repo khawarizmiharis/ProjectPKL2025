@@ -9,10 +9,10 @@ class VillageProfileController extends Controller
 
     public function strukturPemerintahan()
     {
-        return view('visitors.profil_desa.struktur-pemerintahan');
+        return view('visitors.profil_kelurahan.struktur-pemerintahan');
     }
     public function sejarahVisiMisi()
     {
-        return view('visitors.profil_desa.sejarah-visi-misi');
+        return view('visitors.profil_kelurahan.sejarah-visi-misi');
     }
 }
