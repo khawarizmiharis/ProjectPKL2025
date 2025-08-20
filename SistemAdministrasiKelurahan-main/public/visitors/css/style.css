@@ -97,7 +97,7 @@ ul {
 }
 
 #header .logo h1 {
-    font-size: 24px;
+    font-size: 20px;
     margin: 0;
     padding: 0;
     line-height: 1;
@@ -115,7 +115,7 @@ mm #header .logo h1 a:hover {
 #header .logo img {
     padding: 0;
     margin: 0;
-    max-height: 40px;
+    max-height: 50px;
 }
 
 /*--------------------------------------------------------------
