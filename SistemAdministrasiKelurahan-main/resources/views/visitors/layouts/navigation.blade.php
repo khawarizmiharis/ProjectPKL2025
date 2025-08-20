@@ -30,8 +30,24 @@
                         </li>
                     </ul>
                 </li>
-                <li class="{{ request()->is('artikel') ? 'active' : '' }}">
+                <!-- <li class="{{ request()->is('artikel') ? 'active' : '' }}">
                     <a href="{{ route('visitors.artikel.index') }}">Artikel</a>
+                </li> -->
+                <?php function activeLayananPublik($urlPath)
+                {
+                if ($urlPath == 'layanan-publik/pengajuan-surat' || $urlPath == 'layanan-publik/pengaduan' || $urlPath ==
+                'layanan-publik/kontributor-berita') {
+                return ' active';
+                }
+                } ?>
+                <li class="drop-down{{ activeLayananPublik(request()->path()) }}">
+                    <a href="#">Layanan Publik</a>
+                    <ul>
+                        <li><a href="{{ route('pengajuan-surat.create') }}">Pengajuan Surat</a></li>
+                        <li><a href="{{ route('layanan-publik.pengaduan.index') }}">Pengaduan</a></li>
+                        {{-- Kalau nanti aktif --}}
+                        {{-- <li><a href="{{ route('layanan-publik.kontributor-berita.index') }}">Kontributor Berita</a></li> --}}
+                    </ul>
                 </li>
                 <li class="{{ request()->is('umkm') ? 'active' : '' }}">
                     <a href="{{ route('visitors.umkm.index') }}">UMKM</a>
@@ -43,9 +59,9 @@
                     <li><a href="">Kegiatan Pemuda</a></li>
                 </ul>
                 </li> --}}
-                <li class="{{ request()->is('pelayanan/pengajuan-surat') ? 'active' : '' }}">
+                <!-- <li class="{{ request()->is('pelayanan/pengajuan-surat') ? 'active' : '' }}">
                     <a href="{{ route('pengajuan-surat.create') }}">Pengajuan Surat</a>
-                </li>
+                </li> -->
                 @guest
                 <li class="btn-register"><a href="{{ route('register') }}">Daftar</a></li>
                 <li class="btn-login"><a href="{{ route('login') }}">Masuk</a></li>

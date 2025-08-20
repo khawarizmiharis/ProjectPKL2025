@@ -418,6 +418,26 @@ Route::prefix('profil-kelurahan')->group(function () {
     Route::get('/administratif', 'AdministratifController@index')->name('profil-kelurahan.administratif.index');
 });
 
+// // Layanan_publik
+// Route::prefix('layanan-publik')->group(function () {
+//     // Pengaduan
+//     Route::get('/pengaduan', 'ServiceComplaintController@index')->name('layanan-publik.pengaduan');
+//     Route::post('/pengaduan', 'ServiceComplaintController@store')->name('layanan-publik.pengaduan.store');
+
+//     // Pengajuan Surat
+//     Route::get('/pengajuan-surat', 'ServiceLetterSubmissionController@index')->name('layanan-publik.pengajuan-surat');
+//     Route::post('/pengajuan-surat', 'ServiceLetterSubmissionController@store')->name('layanan-publik.pengajuan-surat.store');
+
+//     // Kontributor Berita
+//     Route::get('/kontributor-berita', 'ServiceArticleController@create')->name('layanan-publik.kontributor-berita');
+//     Route::post('/kontributor-berita', 'ServiceArticleController@store')->name('layanan-publik.kontributor-berita.store');
+// });
+Route::prefix('layanan-publik')->name('layanan-publik.')->group(function () {
+    Route::resource('pengajuan-surat', 'ServiceLetterSubmissionController');
+    Route::resource('pengaduan', 'ServiceComplaintController');
+    // Kontributor Berita
+    // Route::resource('kontributor-berita', ServiceArticleController::class);
+});
 
 // UMKM
 Route::prefix('/umkm')->group(function() {
