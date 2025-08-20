@@ -65,14 +65,37 @@
                             </div>
                         </div>
                         @else
-                        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="800">
-                            {{-- <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="800"> --}}
-                            {{-- <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="800">
-                                <img src="{{ asset('/images') }}/sorry.png" style="height: 250px; width:250px;">
-                            </div> --}}
-                            <div class="alert alert-info text-center">
-                                Informasi belum tersedia. nantikan informasi terbaru dari kami atau bisa laporkan melalui form pengaduan. Terima kasih.
-                            </div>
+                        <div class="col-lg-12">
+                            <div class="card shadow-sm border-0 mb-4">
+                                <div class="card-body">
+                                    <h2 class="fw-bold mb-3">Sejarah Kelurahan Kota Sukabumi</h2>
+                                    <p class="text-justify">
+                                        Kota Sukabumi berasal dari bahasa Sunda. Yaitu Suka-Bumen, menurut keterangan mengingat udaranya yang sejuk dan nyaman, mereka yang dating ke daerah ini tidak ingin untuk pindah lagi karena suka/ senang Bumen-Bumen atau bertempat tinggal di daerah ini.
+                                        The word Sukabumi is derived from the Sundanese ‘suka’ and ‘bumen., lt was said that because the air was cool and fresh, those who came to settle here would no longer want to move elsewhere, They id ,like. (suka) ‘becoming a resident. (bumen) of this area.
+                                        Pada tahun 1914 Pemerintah Hindia Belanda menjadikan Kota Sukabumi sebagai “Burgerlijk Bestuur” dengan status “Gemeente” dennan alasan bahwa di kota ini banyak berdiam orang-orang Belanda dan Eropa pemlik perkebunan-perkebunan yang berada di daerah Kabupaten Sukabumi bagian Selatan yang harus mendapatkan pengurusan dan pelayanan yang istimewa.
+                                    </p>
+                                    <p class="text-justify">
+                                        ln 1914, the Government of the Netherlands East lndies made Kota Sukabumi (Sukabumi Town, which has developed into a Sukabumi City), a “Burgerlijk Bestuur” wrth a status of ” Gemeente ” for the reason tbat many people of tbe Netherlands and Europeans lived here They were owners of plantations in the southern part of Sukabumi Regency who deserved privileges.
+                                        Sejak ditetapkannya Sukabumi menjadi daerah otonomi pada bulan Mei 1926 makaresmi diangkat “Burgemeester” yaitu Mr. GF. Rambonnet. Pada masa ini dibangun stasiun kereta api, Mesjid Agung, Gereja dan Pembangkit Listrik. Setelah Mr. GF. Rambonnet memerintah ada tiga “Burgemesteester” sebagai penggantinya yaitu : Mr. WM Ouwekerk, Mr. A LA Van Unendan, dan Mr. W.J PH Van Waning.
+                                        From the time Sukabumi was determined as an autonomous region in Mav 1926, a ” Burgemeester” was officially appointed. Mr. GF. Rambonnet lt was tn thrspelod that the raiiroad, Grancr Mosque, Church, and power statron were constructed after Mr. GF. Rambonnet, there were other three “Burgemeester-s”. Mr. WM Ouwekerk, Mr. A LA Van Unen, dan Mr. W.J PH Van Waning.
+                                    <p/>
+                                    <h2 clas="fw-bold mt-4 mb-3">visi</h2>
+                                    <p>
+                                        “Terwujudnya Masyarakat Kota Sukabumi yang Inovatif, Mandiri, Agamis, Nasionalis”
+                                    </p>
+                                    <h2 class="fw-bold mt-4 mb-3">Misi</h2>
+                                    <ul>
+                                        <li>1. Mengembangkan Sumber Daya Manusia yang Berakhlak dan Berdaya Saing;</li>
+                                        <li>2. Mengembangkan Sumber Daya Manusia yang Berakhlak dan Berdaya Saing;Mempercepat Transformasi Ekonomi yang Inklusif dan Berkeadilan;</li>
+                                        <li>3. Menguatkan Tata Kelola Pemerintahan yang Modern dan Inovatif;</li>
+                                        <li>4. Meningkatkan Stabilitas Ketenteraman dan Ketertiban Umum;</li>
+                                        <li>5. Mewujudkan Masyarakat yang Religius, Berbudaya dan Ramah Lingkungan;</li>
+                                        <li>6. Menyediakan Infrastrukur yang Merata dan Berkelanjutan;</li>
+                                        <li>7. Menyiapkan Sarana dan Prasarana Perkotaan Berkualitas;</li>
+                                        <li>8. Mewujudkan Kesinambungan Pembangunan.</li>
+                                    </ul> 
+                                </div>
+                            </div>  
                         </div>
                         @endif
                     </div>
