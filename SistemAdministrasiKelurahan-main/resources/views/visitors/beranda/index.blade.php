@@ -72,7 +72,7 @@
 </section>
 {{-- End Services Section --}}
 
-{{-- Start Card 1 Section --}}
+<!-- {{-- Start Card 1 Section --}}
 <section id="card1">
     <div class="container mt-4 mb-lg-4 w-100 br-full " data-aos="fade-up" data-aos-delay="400">
         <div style=" background-image:url('images/bgrd-1.png'); border-radius:10px;">
@@ -122,7 +122,7 @@
         </div>
     </div>
 </section>
-{{-- End Card 1 Section --}}
+{{-- End Card 1 Section --}} -->
 
 {{-- Start Article Section --}}
 <section id="article" class="blog-posts grid-system">
