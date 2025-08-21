@@ -1260,6 +1260,19 @@ ul.page-numbers li a:hover {
 
 /* Sidebar */
 
+.misi {
+    margin-left: 20px;
+    padding-left: 10px;
+    line-height: 1.8;
+    font-size: 16px;
+    margin-bottom: 20px; /* kasih jarak bawah */
+}
+
+.misi li {
+    margin-bottom: 4px;
+    text-align: justify;
+}
+
 .sidebar {
     margin-left: 30px;
 }
