@@ -76,14 +76,14 @@
         <div class="row no-gutters">
 
             <div class="col-md-5">
-                <img src="{{ asset('auth') }}/images/login_2.jpg" alt="login" class="login-card-img" />
+                <img src="{{ asset('auth') }}/images/login_2.jpeg" alt="login" class="login-card-img" />
             </div>
 
             <div class="col-md-7">
                 <div class="card-body">
                     <div class="brand-wrapper">
                         <!-- <img src="assets/images/logo.svg" alt="logo" class="logo" /> -->
-                        <h1 class="font-weight-bold">Desa</h1>
+                        <h1 class="font-weight-bold">Kelurahan Kota Sukabumi</h1>
                     </div>
 
                     @if (session()->has('success'))
