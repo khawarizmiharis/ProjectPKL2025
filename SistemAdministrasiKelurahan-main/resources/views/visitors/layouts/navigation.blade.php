@@ -45,6 +45,7 @@
                     <ul>
                         <li><a href="{{ route('pengajuan-surat.create') }}">Pengajuan Surat</a></li>
                         <li><a href="{{ route('layanan-publik.pengaduan.index') }}">Pengaduan</a></li>
+                        <li><a href="{{ route('layanan-publik.form-pengaduan') }}">Form Pengaduan</a></li>
                         {{-- Kalau nanti aktif --}}
                         {{-- <li><a href="{{ route('layanan-publik.kontributor-berita.index') }}">Kontributor Berita</a></li> --}}
                     </ul>

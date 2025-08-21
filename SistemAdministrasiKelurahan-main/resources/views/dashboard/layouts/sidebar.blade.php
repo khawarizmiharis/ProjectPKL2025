@@ -34,58 +34,63 @@
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu ">
                 @php
-                // ambil role id dari user yang sedang login
-                $userRoleId = Auth::user()->roles->pluck('id')->first();
-                // dd($userRoleId);
-                // ambil menu yang boleh diakses user berdasarkan role user
-                $menus = \DB::table('dashboard_menus')->select('dashboard_menus.id', 'dashboard_menus.name')
-                ->join('role_has_permissions', 'dashboard_menus.id', '=', 'role_has_permissions.permission_id')
-                ->where('role_has_permissions.role_id', $userRoleId)
-                ->get();
+                // cek apakah user login
+                $userRoleId = Auth::check() && optional(Auth::user()->roles)->count() > 0
+                    ? Auth::user()->roles->pluck('id')->first()
+                    : null;
+
+                // ambil menu jika ada role
+                $menus = $userRoleId
+                    ? \DB::table('dashboard_menus')->select('dashboard_menus.id', 'dashboard_menus.name')
+                        ->join('role_has_permissions', 'dashboard_menus.id', '=', 'role_has_permissions.permission_id')
+                        ->where('role_has_permissions.role_id', $userRoleId)
+                        ->get()
+                    : collect();
                 @endphp
+
                 @foreach ($menus as $menu)
-                <li class="app-sidebar__heading ">{{ $menu->name }}</li>
-                @php
-                $subMenus = DB::table('dashboard_sub_menus')
-                ->join('dashboard_menus', 'dashboard_sub_menus.menu_id', '=', 'dashboard_menus.id')
-                ->where([
-                ['dashboard_sub_menus.menu_id', '=' , $menu->id],
-                ['dashboard_sub_menus.is_active', '=', 1]
-                ])
-                ->get();
-                @endphp
-                @foreach ($subMenus as $subMenu)
-                @php
-                $paths = Request::segments();
-                $path = '';
-                foreach ($paths as $p) {
-                $path .= '/' . $p;
-                }
-                @endphp
-                <li>
-                    <a href="{{ $subMenu->url_path }}" class="{{ $path == $subMenu->url_path ? 'mm-active':'' }}">
-                        <i class="{{ $subMenu->icon }}"></i>
-                        {{ $subMenu->sub_menu }}
-                        @if ($subMenu->sub_menu == 'UMKM')
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                        @endif
-                    </a>
-                    @if ($subMenu->sub_menu == 'UMKM')
-                    <ul>
+                    <li class="app-sidebar__heading ">{{ $menu->name }}</li>
+                    @php
+                        $subMenus = DB::table('dashboard_sub_menus')
+                            ->join('dashboard_menus', 'dashboard_sub_menus.menu_id', '=', 'dashboard_menus.id')
+                            ->where([
+                                ['dashboard_sub_menus.menu_id', '=', $menu->id],
+                                ['dashboard_sub_menus.is_active', '=', 1]
+                            ])
+                            ->get();
+                    @endphp
+                    @foreach ($subMenus as $subMenu)
+                        @php
+                            $paths = Request::segments();
+                            $path = '';
+                            foreach ($paths as $p) {
+                                $path .= '/' . $p;
+                            }
+                        @endphp
                         <li>
-                            <a href="#">
-                                <i class="metismenu-icon"></i>Profil Penjual
+                            <a href="{{ $subMenu->url_path }}" class="{{ $path == $subMenu->url_path ? 'mm-active':'' }}">
+                                <i class="{{ $subMenu->icon }}"></i>
+                                {{ $subMenu->sub_menu }}
+                                @if ($subMenu->sub_menu == 'UMKM')
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                @endif
                             </a>
+                            @if ($subMenu->sub_menu == 'UMKM')
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="metismenu-icon"></i>Profil Penjual
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="metismenu-icon"></i>Produk
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endif
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="metismenu-icon"></i>Produk
-                            </a>
-                        </li>
-                    </ul>
-                    @endif
-                </li>
-                @endforeach
+                    @endforeach
                 @endforeach
             </ul>
         </div>

@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
-
+use App\Http\Controllers\LayananPublikController;
+use App\Http\Controllers\ComplaintController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,8 @@ use Spatie\Permission\Models\Permission;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
 
 Auth::routes();
 
@@ -392,13 +395,22 @@ Route::middleware('auth')->group(function () {
 /**
  * VISITOR ROUTE
  */
-
 // Beranda
 Route::get('/', 'HomeController@beranda')->name('visitors.beranda.index');
 // Complaint
 Route::post('/pengaduan', 'ComplaintController@store')->name('visitors.complaint.store');
+// Form Pengaduan
+// Route::get('/layanan-publik/form-pengaduan', [ComplaintController::class, 'create'])
+//     ->name('layanan-publik.form-pengaduan.index');
+  
+    // Form pengaduan
+Route::get('/layanan-publik/form-pengaduan', [ComplaintController::class, 'create'])
+    ->name('layanan-publik.form-pengaduan');
 
-
+// Submit pengaduan
+Route::post('/layanan-publik/pengaduan', [ComplaintController::class, 'store'])
+    ->name('layanan-publik.complaints.store');
+    
 // Artikel
 Route::prefix('/artikel')->group(function () {
     Route::get('', 'ArticleController@index')->name('visitors.artikel.index');

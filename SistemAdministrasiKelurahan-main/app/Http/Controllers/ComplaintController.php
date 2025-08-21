@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Complaint;
-use App\ComplaintCategory;
+
 use App\Mail\ComplaintMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+use App\ComplaintCategory;
 
 class ComplaintController extends Controller
 {
@@ -36,6 +38,14 @@ class ComplaintController extends Controller
      */
     public function create()
     {
+        $user = Auth::user(); // bisa null jika guest
+    $complaint_categories = ComplaintCategory::all(); // ambil semua kategori
+
+    return view('visitors.pengaduan.form', [
+        'user' => $user,
+        'user_id' => $user ? $user->id : null,
+        'complaint_categories' => $complaint_categories
+    ]);
         //
         // $letterTypes = LetterType::get();
         // $user = Auth::user();
