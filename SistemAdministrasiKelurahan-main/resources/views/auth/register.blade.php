@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="brand-wrapper">
                         <!-- <img src="assets/images/logo.svg" alt="logo" class="logo" /> -->
-                        <h1 class="font-weight-bold">Desa</h1>
+                        <h1 class="font-weight-bold">Kelurahan Kota Sukabumi</h1>
                     </div>
 
                     @if (session()->has('fail'))
@@ -19,9 +19,9 @@
                     @endif
 
                     <h4 class="mb-4">
-                        <div class="text-secondary">Welcome,</div>
+                        <div class="text-secondary">Selamat Datang,</div>
                         <small>
-                            It only takes a <span class="text-success">few seconds</span> to create your account
+                            Silahkan Buat<span class="text-success"> Akun Anda</span> untuk dapat mengakses halaman tersebut
                         </small>
                     </h4>
 
@@ -128,24 +128,24 @@
                         </div>
 
                         <button type="submit" class="btn register-btn mb-4">
-                            {{ __('Register') }}
+                            {{ __('Daftar') }}
                         </button>
 
                     </form>
 
                     <p class="register-card-footer-text">
-                        Already have an account?
-                        <a href="{{ route('login') }}" class="text-reset">Login here</a>
+                        Apakah Kamu sudah memiliki akun?
+                        <a href="{{ route('login') }}" class="text-reset">Login disini</a>
                     </p>
 
                     <nav class="register-card-footer-nav">
-                        <a href="{{ route('visitors.beranda.index') }}">Back to Home page</a>
+                        <a href="{{ route('visitors.beranda.index') }}">Kembali ke Halaman Utama</a>
                     </nav>
                 </div>
             </div>
 
             <div class="col-md-5">
-                <img src="{{ asset('auth') }}/images/login_2.jpg" alt="login" class="register-card-img" />
+                <img src="{{ asset('auth') }}/images/login_2.jpeg" alt="login" class="register-card-img" />
             </div>
 
         </div>
