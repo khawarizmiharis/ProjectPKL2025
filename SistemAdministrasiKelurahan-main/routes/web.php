@@ -446,7 +446,7 @@ Route::prefix('profil-kelurahan')->group(function () {
 // });
 Route::prefix('layanan-publik')->name('layanan-publik.')->group(function () {
     Route::resource('pengajuan-surat', 'ServiceLetterSubmissionController');
-    Route::resource('pengaduan', 'ServiceComplaintController');
+    // Route::resource('pengaduan', 'ServiceComplaintController');
     // Kontributor Berita
     // Route::resource('kontributor-berita', ServiceArticleController::class);
 });

@@ -1714,6 +1714,11 @@ ul.page-numbers li a:hover {
 }
 
 /* Footer */
+.logo-footer {
+    height: 94px;
+    margin-left: -15px; /* atur sesuai kebutuhan */
+}
+
 .footer-distributed {
     text-align: left;
     font-weight: 600;
