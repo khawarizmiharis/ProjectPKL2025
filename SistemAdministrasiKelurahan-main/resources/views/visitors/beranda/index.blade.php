@@ -15,7 +15,7 @@
             </div>
             <div class=" sliderimage">
                 <div class=" br-full carousel-size active ">
-                    <img src="{{ asset('/images') }}/carousel-1.jpeg " class="d-block w-100 br-full" alt="...">
+                    <img src="{{ asset('/images') }}/carousel-1.jpg " class="d-block w-100 br-full" alt="...">
                 </div>
                 <div class="carousel-item br-full carousel-size">
                     <img src="{{ asset('/images') }}/carousel-2.png" class="d-block w-100 br-full" alt="...">

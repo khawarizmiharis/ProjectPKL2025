@@ -1,12 +1,17 @@
-@extends('layouts.app') {{-- sesuaikan dengan layout utama yang dipakai --}}
-@include('sweetalert::alert')
+{{-- @extends('layouts.app') {{-- sesuaikan dengan layout utama yang dipakai --}}
+{{-- @include('sweetalert::alert') --}}
+
+@extends('visitors.layouts.master', ['title' => 'Layanan - Form Pengaduan'])
+{{-- Start Breadcumb Section --}}
+@include('visitors.layouts.breadcumb', ['judul' => "Form Pengaduan"], ['page3' => "/ Form Pengaduan"])
 
 @section('content')
-<div class="container py-5">
-    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+<div class="container mb-5 pt-3">
+    <div class="row justify-content-center form-box" data-aos="fade-up" data-aos-delay="300" style="margin-bottom: 70px;">
         <div class="col-lg-10">
 
             {{-- Judul form + tombol Back ke Home --}}
+            {{--
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="mb-0">Form Pengaduan</h3>
                 <a href="{{ route('visitors.beranda.index') }}" class="btn btn-secondary btn-sm">
@@ -14,6 +19,7 @@
                 </a>
             </div>
             <hr>
+            --}}
 
             <form action="{{ route('visitors.complaint.store') }}" method="POST">
                 @csrf
@@ -89,7 +95,7 @@
                 </div>
 
                 <div class="row justify-content-center mt-4">
-                    <button type="submit" class="btn btn-primary px-4">Kirim</button>
+                    <button type="submit" class="btn-submit">Kirim</button>
                 </div>
             </form>
         </div>
