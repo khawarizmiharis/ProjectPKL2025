@@ -3,15 +3,12 @@
         <div class="row d-flex ">
             <div class="col-lg-1 mt-1 mb-2">
                 <div class="text-center">
-                    <img class="logo-footer" src="{{ asset('/images') }}/logo.png">
+                    <img class="logo-footer" src="{{ asset('/images') }}/logo.png" width="91">
                 </div>
             </div>
             <div class="col-lg-7 text-lg-left pl-lg-4  text-center h-100 d-block footer-info">
-                <h3>Kelurahan Kota Sukabumi</h3>
-                <p class="text-center mr-lg-5 text-md-left">Website administrasi Kelurahan merupakan aplikasi berbasis
-                    website yang
-                    digunakan untuk membantu Masyarakat Kelurahan Kota Sukabumi dalam
-                    mengelola data administratif serta meningkatkan pelayanan kepada penduduk di Kelurahan
+                <h3><b>Kelurahan Kota Sukabumi</b></h3>
+                <p class="text-center mr-lg-5 text-md-left">Website administrasi Kelurahan membantu masyarakat Kota Sukabumi dalam pengelolaan data dan peningkatan pelayanan.
                 </p>
             </div>
             <ul class=" col-lg-4 footer-distributed d-flex flex-column justify-content-center">
@@ -19,10 +16,10 @@
                     <p><i class="fa fa-map-marker"></i><span>Kelurahan Kota Sukabumi, </span>Jawa Barat</p>
                 </li>
                 <li>
-                    <p><i class="fa fa-phone"></i>+62 555 666 777 888</p>
+                    <p><i class="fa fa-phone"></i>+62 (266) 20229715</p>
                 </li>
                 <li>
-                    <p><i class="fa fa-envelope"></i><a href="mailto:support@company.com">support@company.com</a></p>
+                    <p><i class="fa fa-envelope"></i><a href="mailto:diskominfo@sukabumikota.go.id">diskominfo@sukabumikota.go.id</a></p>
                 </li>
             </ul>
         </div>

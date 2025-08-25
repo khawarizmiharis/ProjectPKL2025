@@ -2,9 +2,9 @@
     <div class="container d-flex align-items-center">
         <div class="logo mr-auto">
             <h1 class="text-light text-uppercase">
-                <a href="{{ route('visitors.beranda.index') }}">
-                    <img src="{{ asset('/images') }}/logo.png" alt="">
-                    <span>Kelurahan Kota Sukabumi</span>
+                <a href="{{ route('visitors.beranda.index') }}" class="brand d-flex align-items-center">
+                    <img src="{{ asset('/images') }}/logo.png" alt="Logo" class="logo-img">
+                        <span class="logo-text ml-2">Portal Kelurahan<br>Kota Sukabumi</span>
                 </a>
             </h1>
         </div>

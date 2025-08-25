@@ -7,8 +7,8 @@
     <div class="container mb-4 mt-4  ">
         <div data-aos="fade-up" data-aos-delay="400" data-ride="carousel">
             <div class="carousel-caption  d-sm-block bg-glass mb-5 mt-3">
-                <h1 data-aos="fade-up" data-aos-delay="500">Selamat Datang Di Kelurahan Kota Sukabumi</h1>
-                <p class="mt-3" data-aos="fade-up" data-aos-delay="600">“Menyampaikan seluruh informasi di Kelurahan Kota Sukabumi“</p>
+                <h1 data-aos="fade-up" data-aos-delay="500">Selamat Datang di Portal Kelurahan Kota Sukabumi</h1>
+                <p class="mt-3" data-aos="fade-up" data-aos-delay="600">“Menyediakan informasi resmi kelurahan se-Kota Sukabumi“</p>
                 <div data-aos="fade-up" data-aos-delay="700">
                     <a class="btn btn-get-started scroll-to-id " href="#services" role="button">Mulai Sekarang</a>
                 </div>

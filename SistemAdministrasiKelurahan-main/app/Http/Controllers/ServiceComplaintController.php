@@ -23,7 +23,8 @@ class ServiceComplaintController extends Controller
         // $letterSubmissions = LetterSubmission::paginate(10);
         // $letterSubmissionTotal = count(LetterSubmission::where('status_id', '!=', 4)->get());
         // $letterStatuses = LetterStatus::get();
-        $userId = Auth::user()->id;
+        $userId = optional(Auth::user())->id;
+
         $complaints = Complaint::where('user_id', $userId)->get();
         // return $complaints;
         return view('dashboard.layanan.pengaduan.pengaduan', compact('complaints'));
