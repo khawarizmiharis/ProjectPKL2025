@@ -1,4 +1,4 @@
-@extends('visitors.layouts.master', ['title' => "Beranda"])
+@extends('visitors.layouts.master', ['title' => "Portal Kelurahan - Kota Sukabumi"])
 
 @section('content')
 
