@@ -100,21 +100,21 @@
                                 <label for="tags" class="">Tag</label>
                                 <select name="tags[]" id="tags"
                                     class="mb-2 form-control select2 @error('tags') is-invalid @enderror" multiple>
-                                    {{-- <option disabled selected>Pilih tag yang sesuai</option> --}}
-                                    @forelse ($tags as $tag)
-                                    <option {{ in_array($tag->id, $tagCheck) ? 'selected' : '' }}
-                                    value="{{ $tag->id }}">
-                                    {{ $tag->name_tag }}
-                                    </option>
-                                    @empty
-                                    <option>Data tag belum ada</option>
-                                    @endforelse
+                                    {{-- Tidak ada option, user harus mengetahui tag --}}
+                                    @foreach (old('tags', $tagCheckName ?? []) as $tagName)
+                                        <option value="{{ $tagName }}" selected>{{ $tagName}}</option>
+                                    @endforeach
                                 </select>
+                                    <small class="form-text text muted">Ketik tag lalu tekan enter. tag baru akan otomatis dibuat.</small>
+                                    @error('tags')
+                                <span class="invalid-feedback mt-2" role="alert">
+                                    <i>{{ $message }}</i>
+                                <span/>
                                 {{-- <div class="mt-2 ">
                                     <label for="#" class=" bg-light pl-2 pr-2 p-1  border rounded">Tag
                                         <a href="#" class="hover-red"><i class="fas fa-times-circle"></i></a>
                                     </label>
-                                </div> --}}
+                                </div> -- }}
                                 @error('tags')
                                 <span class="invalid-feedback mt-2" role="alert">
                                     <i>{{ $message }}</i>
@@ -197,8 +197,10 @@
 
 <script>
     $(document).ready(function() {
-        $('.select2').select2({
-            placeholder: "Pilih tag yang sesuai"
+        $('#tags').select2({
+            tags: true,
+            tokenSeparators: [','],
+            placeholder: "ketik tag yang sesuai"
         });
     });
 </script>

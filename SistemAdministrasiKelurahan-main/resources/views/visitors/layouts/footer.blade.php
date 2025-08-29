@@ -28,8 +28,8 @@
 <div class=" social-media">
     <div class="container ">
         <span class=" ">
-            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="https://www.instagram.com/diskominfo_sukabumikota?utm_source=ig_web_button_share_sheet&igsh=cTZtaWc0Mm42YXBh" target="-blank"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="https://x.com/Pemkot_Sukabumi" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
             <a href="#"><i class="fab fa-facebook-square fa-lg"></i></a>
             <a href="#"><i class="fab fa-youtube fa-lg"></i></a>
         </span>

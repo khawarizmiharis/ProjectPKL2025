@@ -36,6 +36,10 @@
 {{-- Start Services Section --}}
 <section id="services">
     <div class="container mt-3">
+        <h2 class="text-center mb-4" style="font-weight:700; font-size:28px;">Layanan Kelurahan</h2>
+        <div class="row justify-content-center">
+            <!-- ...existing code... -->
+        </div>
         <div class="row justify-content-center">
             <a href="{{ route('pengajuan-surat.create') }}" class="col-lg-3 col-sm-6 text-center text-dark p-3"
                 data-aos="fade-up" data-aos-delay="400">
@@ -44,7 +48,7 @@
                         style="width: 100px; height: 100px; background-color:#FE5670; border-radius:50%;"></i>
                 </span>
                 <h4 class="mb-2 mt-2" style="font-weight: 600;">Pengajuan Surat</h4>
-                <p class=" small"> Memudahkan dalam pembuatan surat menyurat untuk warga desa secara online</p>
+                <!-- <p class=" small"> Memudahkan dalam pembuatan surat menyurat untuk Masyarakat Kelurahan secara online</p> -->
             </a>
             <a class=" col-lg-3 text-center p-3 col-sm-6 text-dark scroll-to-bottom" href="#complaint"
                 data-aos="fade-up" data-aos-delay="500">
@@ -53,8 +57,8 @@
                         style="width: 100px; height: 100px; background-color:#F8B000; border-radius:50%;"></i>
                 </span>
                 <h4 class="mb-2 mt-2" style="font-weight: 600;">Pengaduan</h4>
-                <p class=" small"> Memberikan kesempatan bagi warga desa dalam menyampaikan aspirasinya untuk
-                    meningkatkan berbagai pelayanan yang tersedia</p>
+                <!-- <p class=" small"> Memberikan kesempatan bagi Masyarakat Kelurahan dalam menyampaikan aspirasinya untuk
+                    meningkatkan berbagai pelayanan yang tersedia</p> -->
             </a>
             <a href="{{ route('layanan.kontributor') }}" class="col-lg-3 col-sm-6 text-center p-3 text-dark"
                 data-aos="fade-up" data-aos-delay="500">
@@ -63,8 +67,8 @@
                         style="width: 100px; height: 100px; background-color:#3C50E0; border-radius:50%;"></i>
                 </span>
                 <h4 class="mb-2 mt-2" style="font-weight: 600;">Kontributor Berita</h4>
-                <p class=" small"> Warga dapat membuat beritanya sendiri mengenai desa maupun kegiatan yang dilaksanakan
-                    oleh desa</p>
+                <!-- <p class=" small"> Warga dapat membuat beritanya sendiri mengenai desa maupun kegiatan yang dilaksanakan
+                    oleh desa</p> -->
             </a>
 
         </div>
@@ -79,7 +83,7 @@
             <div class="row pl-5 pr-5 ">
                 <div class="col-lg-3 m-auto title-section">
                     <div class=" text-center mt-4 title-section">
-                        <h1 style="font-weight: 600;">Kegiatan Desa</h1>
+                        <h1 style="font-weight: 600; font-size: 32px;">Pengunguman</h1>
                         <p class="m-auto w-50">Memudahkan pengguna dalam membaca dan mencari
                             artikel,berita terbaru,dan kegiatan dalam Desa
                         </p>
@@ -90,17 +94,17 @@
                         <div class="card-body">
                             <img src="{{ asset('/images') }}/img-kp-1.png"
                                 class=" float-left mr-4 w-auto mb-3 rounded-lg" alt="Responsive image">
-                            <h5 class="card-title" style="font-weight: 700;">Kegiatan 1</h5>
+                            <h5 class="card-title" style="font-weight: 700;">Pengunguman</h5>
                             <p class="card-text">Memperingati Sumpah Pemuda pada 28 Oktober setiap tahunnya. Hari Sumpah
                                 Pemuda lahir pada 28 Oktober 1928 silam.
-                            </p><a href="#" class="btn btn-yellow">Selengkapnya >></a>
+                            </p><a href="#" class="btn btn-yellow">Selengkapnya>></a>
                         </div>
                     </div>
                     <div class="card m-3 ">
                         <div class="card-body">
                             <img src="{{ asset('/images') }}/img-kp-2.png"
                                 class=" float-left mr-4 w-auto  mb-3 rounded-lg" alt="Responsive image">
-                            <h5 class="card-title" style="font-weight: 700;">Kegiatan 2</h5>
+                            <h5 class="card-title" style="font-weight: 700;">Pengunguman</h5>
                             <p class="card-text">Memperingati Sumpah Pemuda pada 28 Oktober setiap tahunnya. Hari Sumpah
                                 Pemuda lahir pada 28 Oktober 1928 silam.
                             </p><a href="#" class="btn btn-yellow">Selengkapnya >></a>
@@ -110,7 +114,7 @@
                         <div class="card-body">
                             <img src="{{ asset('/images') }}/img-kp-3.png"
                                 class=" float-left mr-4 w-auto mb-3 rounded-lg" alt="Responsive image">
-                            <h5 class="card-title" style="font-weight: 700;">Kegiatan 3</h5>
+                            <h5 class="card-title" style="font-weight: 700;">Pengunguman</h5>
                             <p class="card-text">Memperingati Sumpah Pemuda pada 28 Oktober setiap tahunnya. Hari Sumpah
                                 Pemuda lahir pada 28 Oktober 1928 silam
                             </p>
