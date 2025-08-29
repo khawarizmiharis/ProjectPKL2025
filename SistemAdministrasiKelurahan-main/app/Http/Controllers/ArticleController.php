@@ -23,6 +23,7 @@ class ArticleController extends Controller
 
         $articles = Article::filter(request(['search', 'category']))
             ->where('enabled', 1)
+            ->where('category_id', '!=', 6)
             ->orderby('updated_at', 'desc')
             ->paginate(6);
 

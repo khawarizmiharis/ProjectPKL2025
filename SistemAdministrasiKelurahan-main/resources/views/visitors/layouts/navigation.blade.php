@@ -30,9 +30,10 @@
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="{{ request()->is('artikel') ? 'active' : '' }}">
-                    <a href="{{ route('visitors.artikel.index') }}">Artikel</a>
-                </li> -->
+                <li class="{{ request()->is('artikel') ? 'active' : '' }}">
+                    <a href="{{ route('visitors.artikel.category.show', 'pengumuman') }}">Pengumuman</a>
+                </li>
+                {{-- Layanan Publik
                 <?php function activeLayananPublik($urlPath)
                 {
                 if ($urlPath == 'layanan-publik/pengajuan-surat' || $urlPath == 'layanan-publik/pengaduan' || $urlPath ==
@@ -45,12 +46,14 @@
                     <ul>
                         <li><a href="{{ route('pengajuan-surat.create') }}">Pengajuan Surat</a></li>
                         <li><a href="{{ route('layanan-publik.form-pengaduan') }}">Form Pengaduan</a></li>
-                        {{-- Kalau nanti aktif --}}
-                        {{-- <li><a href="{{ route('layanan-publik.kontributor-berita.index') }}">Kontributor Berita</a></li> --}}
                     </ul>
                 </li>
-                <li class="{{ request()->is('umkm') ? 'active' : '' }}">
-                    <a href="{{ route('visitors.umkm.index') }}">UMKM</a>
+                --}}
+                <li class="{{ request()->is('artikel') ? 'active' : '' }}">
+                    <a href="{{ route('visitors.artikel.index') }}">Berita</a>
+                </li>
+                <li class="{{ request()->is('layanan/informasi') ? 'active' : '' }}">
+                    <a href="{{ route('layanan.informasi') }}">Layanan</a>
                 </li>
                 {{-- <li class="drop-down{{ request()->is('/kegiatan-masyarakat/umkm') ? 'active' : '' }}">
                 <a href="#">Kegiatan Masyarakat</a>
@@ -59,9 +62,9 @@
                     <li><a href="">Kegiatan Pemuda</a></li>
                 </ul>
                 </li> --}}
-                <!-- <li class="{{ request()->is('pelayanan/pengajuan-surat') ? 'active' : '' }}">
+                {{-- <li class="{{ request()->is('pelayanan/pengajuan-surat') ? 'active' : '' }}">
                     <a href="{{ route('pengajuan-surat.create') }}">Pengajuan Surat</a>
-                </li> -->
+                </li> --}}
                 @guest
                 <li class="btn-register"><a href="{{ route('register') }}">Daftar</a></li>
                 <li class="btn-login"><a href="{{ route('login') }}">Masuk</a></li>

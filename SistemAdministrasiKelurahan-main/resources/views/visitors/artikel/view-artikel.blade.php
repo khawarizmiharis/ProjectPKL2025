@@ -1,14 +1,25 @@
-@extends('visitors.layouts.master', ['title' => "Artikel"])
+{{-- @extends('visitors.layouts.master', ['title' => "Berita"]) --}}
+@extends('visitors.layouts.master', ['title' => $data['judul'] ?? 'Berita'])
 
 @section('content')
 
 {{-- Start Breadcumb Section --}}
 <?php
-    $data=[
-        'link1' => route('visitors.artikel.index'),
-        'page1' => '> Artikel',
-        'page2' => '> '.$article->title
-    ]
+if (isset($article->category) && $article->category->slug == 'pengumuman') {
+        $data = [
+            'judul' => "Pengumuman",
+            'link1' => route('visitors.beranda.index'),
+            'page1' => '/ Pengumuman',
+            'page2' => '/ ' . $article->titleBerita
+        ];
+    } else {
+        $data = [
+            'judul' => "Berita",
+            'link1' => route('visitors.artikel.index'),
+            'page1' => '/ Berita',
+            'page2' => '/ ' . $article->titleBerita
+        ];
+    }
 ?>
 @include('visitors.layouts.breadcumb-artikel', $data)
 {{-- End Breadcumb Section --}}

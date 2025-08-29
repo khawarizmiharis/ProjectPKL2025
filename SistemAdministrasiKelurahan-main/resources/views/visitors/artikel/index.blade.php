@@ -1,25 +1,34 @@
-@extends('visitors.layouts.master', ['title' => "Artikel"])
+{{-- @extends('visitors.layouts.master', ['title' => "Berita"]) --}}
+@extends('visitors.layouts.master', ['title' => $data['judul'] ?? 'Berita'])
 
 @section('content')
 
 {{-- Start Breadcumb Section --}}
 @isset($category)
 <?php
-    $data=[
-        'judul' => "Artikel",
-        'link1' => route('visitors.artikel.index'),
-        'page1' => '/ Artikel',
-        'page2' => '/ '.$category->category
-    ]
+    if ($category->slug == 'pengumuman') {
+        $data = [
+            'judul' => "Pengumuman",
+            'link1' => route('visitors.beranda.index'),
+            'page2' => '/ Pengumuman'
+        ];
+    } else {
+        $data = [
+            'judul' => "Berita",
+            'link1' => route('visitors.artikel.index'),
+            'page1' => '/ Berita',
+            'page2' => '/ ' . $category->category
+        ];
+    }
 ?>
 @endisset
 
 @isset($tag)
 <?php
     $data=[
-        'judul' => "Artikel",
+        'judul' => "Berita",
         'link1' => route('visitors.artikel.index'),
-        'page1' => '/ Artikel',
+        'page1' => '/ Berita',
         'page2' => '/ '.$tag->name_tag
     ]
 ?>
@@ -27,11 +36,11 @@
 
 @if (!isset($category) && !isset($tag))
 <?php
-$data=[
-    'judul' => "Artikel",
-    'link1' => route('visitors.artikel.index'),
-    'page2' => '/ Artikel',
-]
+    $data=[
+        'judul' => "Berita",
+        'link1' => route('visitors.artikel.index'),
+        'page2' => '/ Berita',
+    ]
 ?>
 @endif
 
@@ -93,8 +102,7 @@ $data=[
                                 <img src="{{ asset('/images') }}/sorry.png" style="height: 250px; width:250px;">
                             </div> --}}
                             <div class="alert alert-info text-center">
-                                Artikel belum tersedia. nantikan artikel terbaru dari kami atau bisa laporkan melalui
-                                form pengaduan. Terima kasih.
+                                Belum ada berita yang tersedia untuk saat ini. Tetap ikuti kami untuk mendapatkan kabar dan informasi terbaru dari Kelurahan. Terima kasih.
                             </div>
                         </div>
                     </div>

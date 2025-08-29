@@ -1,5 +1,6 @@
 @extends('visitors.layouts.master', ['title' => "UMKM"])
 @section('content')
+
 <section id="card">
     <div class="container" style="margin-top: 112px;" data-aos="fade-up" data-aos-delay="400">
         <div class="row slider ">
@@ -187,6 +188,7 @@ $('.slidercard').slick({
     ]
 });
 </script>
+
 {{-- $('.sliderproduct').slick({
         dots: true,
         arrows: false,
@@ -255,6 +257,5 @@ $('.slidercard').slick({
                 }
             }
         ]
-
-    }); --}}
+        });--}}
 @endsection

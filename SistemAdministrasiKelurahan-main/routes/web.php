@@ -422,13 +422,17 @@ Route::prefix('/artikel')->group(function () {
     Route::post('/tambah-komentar', 'ArticleCommentController@store')->name('visitors.article.comment.store');
 });
 
-
 // Profil_kelurahan
 Route::prefix('profil-kelurahan')->group(function () {
     Route::get('/sejarah-visi-misi', 'ArticleController@showHistoryAndVisionMission')->name('profil-kelurahan.sejarah-visi-misi');
     Route::get('/struktur-pemerintahan', 'ArticleController@showGovernmentStructure')->name('profil-kelurahan.struktur-pemerintahan');
     Route::get('/administratif', 'AdministratifController@index')->name('profil-kelurahan.administratif.index');
 });
+
+// Layanan
+Route::get('/layanan/informasi', function () {
+    return view('visitors.layanan.informasi');
+})->name('layanan.informasi');
 
 // // Layanan_publik
 // Route::prefix('layanan-publik')->group(function () {
@@ -439,10 +443,6 @@ Route::prefix('profil-kelurahan')->group(function () {
 //     // Pengajuan Surat
 //     Route::get('/pengajuan-surat', 'ServiceLetterSubmissionController@index')->name('layanan-publik.pengajuan-surat');
 //     Route::post('/pengajuan-surat', 'ServiceLetterSubmissionController@store')->name('layanan-publik.pengajuan-surat.store');
-
-//     // Kontributor Berita
-//     Route::get('/kontributor-berita', 'ServiceArticleController@create')->name('layanan-publik.kontributor-berita');
-//     Route::post('/kontributor-berita', 'ServiceArticleController@store')->name('layanan-publik.kontributor-berita.store');
 // });
 Route::prefix('layanan-publik')->name('layanan-publik.')->group(function () {
     Route::resource('pengajuan-surat', 'ServiceLetterSubmissionController');

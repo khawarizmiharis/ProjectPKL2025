@@ -23,10 +23,10 @@
 <div class="col-lg-12  mb-4">
     <div class="popular-posts">
         <div class="sidebar-heading">
-            <h2 class="text-center">Artikel Terpopuler</h2>
+            <h2 class="text-center">Berita Terbaru</h2>
             <ul>
                 @php
-                    $popular_articles = \DB::table('articles')->orderBy('read_count', 'desc')->latest()->take(5)->get();
+                    $popular_articles = \DB::table('articles')->where('category_id', '!=', 6)->orderBy('read_count', 'desc')->latest()->take(5)->get();
                 @endphp
                 @foreach ($popular_articles as $article)
                 <li>
@@ -44,6 +44,31 @@
     </div>
 </div>
 
+<div class="col-lg-12  mb-4">
+    <div class="popular-posts">
+        <div class="sidebar-heading">
+            <h2 class="text-center">Pengumuman Terbaru</h2>
+            <ul>
+                @php
+                    $pengumuman_articles = \DB::table('articles')->where('category_id', 6)->orderBy('read_count', 'desc')->latest()->take(5)->get();
+                @endphp
+                @foreach ($pengumuman_articles as $article)
+                <li>
+                    <a href="{{ route('visitors.artikel.show', $article->slug) }}">
+                        {{$article->title}}
+                    </a>
+                    <span>
+                        {{-- {{\Carbon\Carbon::parse($article->created_at)->diffForHumans()}} --}}
+                        {{\Carbon\Carbon::parse($article->created_at)->format('d F, Y')}}
+                    </span>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
+
+{{--
 <div class="col-lg-12 ">
     <div class="covid-posts">
         <div class="sidebar-heading text-center">
@@ -80,4 +105,6 @@
             </li>
         </ul>
     </div>
+--}}
+
 </div>
