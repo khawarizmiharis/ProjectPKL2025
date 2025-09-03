@@ -36,9 +36,9 @@
 {{-- Start Services Section --}}
 <section id="services">
     <div class="container mt-3">
-        <h2 class="text-center mb-4" style="font-weight:700; font-size:28px;">Layanan Kelurahan</h2>
+        <h2 class="text-center mb-4" style="font-weight:700; font-size:28px;" data-aos="fade-up" data-aos-delay="500">Layanan Kelurahan</h2>
         <div class="row justify-content-center">
-            <!-- ...existing code... -->
+
         </div>
         <div class="row justify-content-center">
             <a href="{{ route('pengajuan-surat.create') }}" class="col-lg-3 col-sm-6 text-center text-dark p-3"
@@ -212,7 +212,7 @@
 </section>
 {{-- End Article Section --}}
 
-{{-- Start Card 2 Section --}}
+<!-- {{-- Start Card 2 Section --}}
 <section id="card2">
     <div class=" container mb-4 w-100 br-full" data-aos="fade-up" data-aos-delay="400">
         <div style="background-image:url('images/bgrd-2.png'); border-radius:10px;">
@@ -407,96 +407,236 @@
         </div>
     </div>
 </section>
-{{-- End Card 2 Section --}}
+{{-- End Card 2 Section --}} -->
 
 {{-- Start Complaint Section --}}
-<!--<section id="complaint">-->
-<!--    <div class="container mb-4 mt-4">-->
-<!--        <div class="row justify-content-center " data-aos="fade-up" data-aos-delay="300">-->
-<!--            <div class="col-lg-10 ">-->
-<!--                <h3 class="p-3">Form Pengaduan</h3>-->
-<!--                <hr>-->
-<!--                <form action="{{ route('visitors.complaint.store') }}" method="POST">-->
-<!--                    @csrf-->
-<!--                    <input type="hidden" name="user_id" id="user_id" value="{{$user_id}}">-->
-<!--                    <div class="row">-->
-<!--                        <div class=" col-sm-6 mb-3">-->
-<!--                            <label for="name" class="form-label">Nama<span class="text-danger">*</span></label>-->
-<!--                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"-->
-<!--                                id="name" placeholder="Nama lengkap anda"-->
-<!--                                value="{{$user ? $user->full_name : old('name') ?? ''}}">-->
-<!--                            @error('name')-->
-<!--                            <small>-->
-<!--                                <font style="color: red; font-style: italic">{{$message}}</font>-->
-<!--                            </small>-->
-<!--                            @enderror-->
-<!--                        </div>-->
-<!--                        <div class=" col-sm-6 mb-3">-->
-<!--                            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>-->
-<!--                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"-->
-<!--                                id="email" placeholder="name@example.com"-->
-<!--                                value="{{$user ? $user->email : old('email') ?? ''}}">-->
-<!--                            @error('email')-->
-<!--                            <small>-->
-<!--                                <font style="color: red; font-style: italic">{{$message}}</font>-->
-<!--                            </small>-->
-<!--                            @enderror-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-sm-6 mb-3">-->
-<!--                            <label for="phone_number" class="form-label">Nomor Handphone<span-->
-<!--                                    class="text-danger">*</span></label>-->
-<!--                            <input type="text" name="phone_number"-->
-<!--                                class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"-->
-<!--                                placeholder="081234567891" value="{{$user ? $user->phone : old('phone_number') ?? ''}}">-->
-<!--                            @error('phone_number')-->
-<!--                            <small>-->
-<!--                                <font style="color: red; font-style: italic">{{$message}}</font>-->
-<!--                            </small>-->
-<!--                            @enderror-->
-<!--                        </div>-->
-<!--                        <div class=" col-sm-6 mb-3">-->
-<!--                            <label for="complaint_category_id" class="form-label">Kategori<span-->
-<!--                                    class="text-danger">*</span></label>-->
-<!--                            <select class="mb-2 form-control @error('complaint_category_id') is-invalid @enderror"-->
-<!--                                name="complaint_category_id" id="complaint_category_id"-->
-<!--                                value="{{ old('complaint_category_id') }}">-->
-<!--                                <option value="{{ old('complaint_category_id') ?? '' }}">-->
-<!--                                    {{ $complaint_categories[old('complaint_category_id') - 1]->category ?? 'Pilih salah satu...' }}-->
-<!--                                </option>-->
-<!--                                @foreach ($complaint_categories as $category)-->
-<!--                                <option value="{{$category->id}}">-->
-<!--                                    {{$category->category}}-->
-<!--                                </option>-->
-<!--                                @endforeach-->
-<!--                            </select>-->
-<!--                            @error('complaint_category_id')-->
-<!--                            <small>-->
-<!--                                <font style="color: red; font-style: italic">{{$message}}</font>-->
-<!--                            </small>-->
-<!--                            @enderror-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="complaint" class="form-label">Isi Aduan<span class="text-danger">*</span></label>-->
-<!--                        <textarea class="form-control @error('complaint') is-invalid @enderror" name="complaint"-->
-<!--                            id="complaint" rows="3">{{ old('complaint') }}</textarea>-->
-<!--                        @error('complaint')-->
-<!--                        <small>-->
-<!--                            <font style="color: red; font-style: italic">{{$message}}</font>-->
-<!--                        </small>-->
-<!--                        @enderror-->
-<!--                    </div>-->
-<!--                    <div class="row justify-content-center mt-5">-->
-<!--                        <button type="submit" class="btn-submit">Kirim</button>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
+<section id="complaint">
+    <div class="container mb-4 mt-4">
+        <div class="row justify-content-center " data-aos="fade-up" data-aos-delay="300">
+            <div class="col-lg-10 ">
+                <h3 class="p-3">Form Pengaduan</h3>
+                <hr>
+                <form action="{{ route('visitors.complaint.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="user_id" id="user_id" value="{{$user_id}}">
+                    <div class="row">
+                        <div class=" col-sm-6 mb-3">
+                            <label for="name" class="form-label">Nama<span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                id="name" placeholder="Nama lengkap anda"
+                                value="{{$user ? $user->full_name : old('name') ?? ''}}">
+                            @error('name')
+                            <small>
+                                <font style="color: red; font-style: italic">{{$message}}</font>
+                            </small>
+                            @enderror
+                        </div>
+                        <div class=" col-sm-6 mb-3">
+                            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                id="email" placeholder="name@example.com"
+                                value="{{$user ? $user->email : old('email') ?? ''}}">
+                            @error('email')
+                            <small>
+                                <font style="color: red; font-style: italic">{{$message}}</font>
+                            </small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <label for="phone_number" class="form-label">Nomor Handphone<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="phone_number"
+                                class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"
+                                placeholder="081234567891" value="{{$user ? $user->phone : old('phone_number') ?? ''}}">
+                            @error('phone_number')
+                            <small>
+                                <font style="color: red; font-style: italic">{{$message}}</font>
+                            </small>
+                            @enderror
+                        </div>
+                        <div class=" col-sm-6 mb-3">
+                            <label for="complaint_category_id" class="form-label">Kategori<span
+                                    class="text-danger">*</span></label>
+                            <select class="mb-2 form-control @error('complaint_category_id') is-invalid @enderror"
+                                name="complaint_category_id" id="complaint_category_id"
+                                value="{{ old('complaint_category_id') }}">
+                                <option value="{{ old('complaint_category_id') ?? '' }}">
+                                    {{ $complaint_categories[old('complaint_category_id') - 1]->category ?? 'Pilih salah satu...' }}
+                                </option>
+                                @foreach ($complaint_categories as $category)
+                                <option value="{{$category->id}}">
+                                    {{$category->category}}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('complaint_category_id')
+                            <small>
+                                <font style="color: red; font-style: italic">{{$message}}</font>
+                            </small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="complaint" class="form-label">Isi Aduan<span class="text-danger">*</span></label>
+                        <textarea class="form-control @error('complaint') is-invalid @enderror" name="complaint"
+                            id="complaint" rows="3">{{ old('complaint') }}</textarea>
+                        @error('complaint')
+                        <small>
+                            <font style="color: red; font-style: italic">{{$message}}</font>
+                        </small>
+                        @enderror
+                    </div>
+                    <div class="row justify-content-center mt-5">
+                        <button type="submit" class="btn-submit">Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 {{-- End Services Section --}}
+
+{{-- Start Government Shortcut Section --}}
+<section id="gov-shortcuts">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4" style="font-weight:700; font-size:28px;" data-aos="fade-up" data-aos-delay="500">
+            Pintasan Aplikasi Pemerintahan
+        </h2>
+        <div class="row justify-content-center text-center">
+
+            <!-- Open Data Bandung -->
+            <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-delay="400">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <!-- Depan -->
+                        <div class="flip-card-front card text-white shadow p-4" 
+                             style="background-color:#007BFF; border-radius:12px; min-height:150px;">
+                            <div class="mb-3">
+                                <i class="fas fa-building fa-2x"></i>
+                            </div>
+                            <h5>Open Data Kota Sukabumi</h5>
+                        </div>
+                        <!-- Belakang -->
+                        <div class="flip-card-back card text-white shadow p-4" 
+                             style="background-color:#0056b3; border-radius:12px; min-height:150px;">
+                            <p>Akses layanan Open Data Kota Sukabumi untuk data publik dan terbuka.</p>
+                            <a href="https://opendata.sukabumikota.go.id/" target="_blank" 
+                               class="btn btn-light btn-sm mt-2">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lapor.go.id -->
+            <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-delay="500">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <!-- Depan -->
+                        <div class="flip-card-front card text-white shadow p-4" 
+                             style="background-color:#DC3545; border-radius:12px; min-height:150px;">
+                            <div class="mb-3">
+                                <i class="fas fa-notes-medical fa-2x"></i>
+                            </div>
+                            <h5>Lapor.go.id</h5>
+                        </div>
+                        <!-- Belakang -->
+                        <div class="flip-card-back card text-white shadow p-4" 
+                             style="background-color:#a71d2a; border-radius:12px; min-height:150px;">
+                            <p>Platform nasional untuk menyampaikan laporan dan aspirasi masyarakat.</p>
+                            <a href="https://www.lapor.go.id" target="_blank" 
+                               class="btn btn-light btn-sm mt-2">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website kota Sukabumi -->
+            <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-delay="600">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <!-- Depan -->
+                        <div class="flip-card-front card text-white shadow p-4" 
+                             style="background-color:#EBB866; border-radius:12px; min-height:150px;">
+                            <div class="mb-3">
+                                <i class="fas fa-newspaper fa-2x"></i>
+                            </div>
+                            <h5>Portal Kota Sukabumi</h5>
+                        </div>
+                        <!-- Belakang -->
+                        <div class="flip-card-back card text-white shadow p-4" 
+                             style="background-color:#a48d47; border-radius:12px; min-height:150px;">
+                            <p>Portal Kota Sukabumi untuk informasi Seluruh Kota Sukabumi.</p>
+                            <a href="https://sukabumikota.go.id/" target="_blank" 
+                               class="btn btn-light btn-sm mt-2">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disdukcapil -->
+            <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-delay="700">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <!-- Depan -->
+                        <div class="flip-card-front card text-white shadow p-4" 
+                             style="background-color:#00897B; border-radius:12px; min-height:150px;">
+                            <div class="mb-3">
+                                <i class="fas fa-id-card fa-2x"></i>
+                            </div>
+                            <h5>Disdukcapil</h5>
+                        </div>
+                        <!-- Belakang -->
+                        <div class="flip-card-back card text-white shadow p-4" 
+                             style="background-color:#00695C; border-radius:12px; min-height:150px;">
+                            <p>Layanan administrasi kependudukan dan catatan sipil Kota Sukabumi.</p>
+                            <a href="https://disdukcapil.sukabumikota.go.id/" target="_blank" 
+                               class="btn btn-light btn-sm mt-2">Kunjungi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{{-- End Government Shortcut Section --}}
+
+{{-- Tambahkan CSS --}}
+<style>
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 200px;
+  perspective: 1000px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+</style>
+
 
 <script type="text/javascript">
 $('.sliderh').slick({
