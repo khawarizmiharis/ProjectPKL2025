@@ -60,6 +60,7 @@
                 <!-- <p class=" small"> Memberikan kesempatan bagi Masyarakat Kelurahan dalam menyampaikan aspirasinya untuk
                     meningkatkan berbagai pelayanan yang tersedia</p> -->
             </a>
+            {{--
             <a href="{{ route('layanan.kontributor') }}" class="col-lg-3 col-sm-6 text-center p-3 text-dark"
                 data-aos="fade-up" data-aos-delay="500">
                 <span style="color: #EEF5FF;">
@@ -70,6 +71,7 @@
                 <!-- <p class=" small"> Warga dapat membuat beritanya sendiri mengenai desa maupun kegiatan yang dilaksanakan
                     oleh desa</p> -->
             </a>
+             --}}
 
         </div>
     </div>
@@ -130,84 +132,93 @@
 
 {{-- Start Article Section --}}
 <section id="article" class="blog-posts grid-system">
-    <div class="container mt-5 " data-aos="fade-up" data-aos-delay="400">
+    <div class="container mt-5" data-aos="fade-up" data-aos-delay="400">
         <div class="row">
             <div class="col text-center mb-4 title-section">
-                <h1 style="font-weight: 600;">- Artikel -</h1>
-                <p class="m-auto w-50">Memudahkan pengguna dalam membaca dan mencari
+                <h1 style="font-weight: 600;">- Berita -</h1>
+                <p class="m-auto w-50">
+                    Memudahkan pengguna dalam membaca dan mencari
                     artikel, berita terbaru, dan kegiatan dalam Desa
                 </p>
             </div>
         </div>
+
         <div class="all-blog-posts">
-            <div class="row ">
-                @forelse ($articles as $article)
-                <div class="col-lg-4 " data-aos="fade-up" data-aos-delay="500">
-                    <div class="blog-post">
-                        <div class="bt-home">
-                            {{-- <img src="{{ asset('/images') }}/img-article-01.png" alt=""> --}}
-                            {{-- <img src="{{ $article->thumbnail }}" alt=""> --}}
-                            <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="">
+            <div class="row">
+                @php $count = 0; @endphp
+                @forelse ($articles->take(3) as $article) {{-- ambil hanya 3 artikel --}}
+                    @if ($article->category->slug !== 'pengumuman')
+                        @php $count++; @endphp
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                            <div class="blog-post">
+                                <div class="bt-home">
+                                    <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <a href="{{ route('visitors.artikel.show', $article->slug) }}">
+                                        <h4>{{ $article->title }}</h4>
+                                    </a>
+                                    <hr>
+                                    <p>
+                                        {!! Str::limit($article->body, 150) !!}
+                                        <hr>
+                                        <a href="{{ route('visitors.artikel.show', $article->slug) }}">
+                                            Baca lebih lanjut
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="down-content">
-                            {{-- <a href="post-details.html"> --}}
-                            <a href="{{ route('visitors.artikel.show', $article->slug) }}">
-                                <h4>{{$article->title}}</h4>
-                            </a>
-                            @php
-                            // $userId = $article->user_id;
-                            // dd($article->user->roles->first()->name);
-
-                            // $roleId = \DB::table('model_has_roles')
-                            // ->where('model_id', $userId)->value('role_id');
-                            // var_dump($roleId);
-                            // $role = \DB::table('roles')
-                            // ->select('model_has_roles.model_id','model_has_roles.role_id', 'roles.name')
-                            // ->join('model_has_roles', 'roles.id', '=', 'model_has_roles.role_id')
-                            // ->where('model_has_roles.role_id', $roleId)->get()->toArray();
-                            // var_dump($role);
-                            @endphp
-
-                            {{-- <ul class="post-info ">
-                                <li><a href="#">{{$role[0]->name}}</a></li>
-                            <li><a href="#">{{$article->user->roles->first()->name}}</a></li>
-                            <li>
-                                <a href="#">
-                                    {{$article->created_at->diffForHumans()}}
-                                    {{$article->created_at->format('d F, Y')}}
-                                </a>
-                            </li>
-                            </ul> --}}
-                            <hr>
-                            <p>{!!Str::limit($article->body,150)!!}
-                                <hr>
-                                <a href="{{ route('visitors.artikel.show', $article->slug) }}">
-                                    Baca lebih lanjut
-                                </a>
-                            </p>
+                    @endif
+                @empty
+                    {{-- Kalau memang tidak ada artikel sama sekali --}}
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            Berita belum tersedia. Nantikan berita terbaru dari kami atau bisa laporkan melalui form
+                            pengaduan. Terima kasih.
                         </div>
                     </div>
-                </div>
+                @endforelse
 
-                @empty
-                <div class="row justify-content-center mx-auto pl-3 pr-3" data-aos="fade-up" data-aos-delay="500">
-                    {{-- <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="500"> --}}
-                    {{-- <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="500">
-                                    <img src="{{ asset('/images') }}/sorry.png" style="height: 250px; width:250px;">
-                </div> --}}
-                <div class="alert alert-info text-center">
-                    Artikel belum tersedia. nantikan artikel terbaru dari kami atau bisa laporkan melalui form
-                    pengaduan. Terima kasih.
+                {{-- Kalau ada artikel, tapi semuanya kategori pengumuman --}}
+                @if($count === 0 && $articles->count() > 0)
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            Belum ada berita (selain pengumuman) yang tersedia untuk saat ini.
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            {{-- tombol lihat semua berita --}}
+            @if($articles->count() > 3)
+                <div class="text-center mt-4">
+                    <a href="{{ route('visitors.artikel.index') }}" 
+                    class="btn px-4 py-2"
+                    style="background: linear-gradient(135deg, #4F46E5, #3B82F6);
+                            color: white; 
+                            font-weight: 600; 
+                            border-radius: 30px; 
+                            transition: all 0.3s ease;">
+                        <i class="fas fa-newspaper me-3"></i> Lihat Semua Berita
+                    </a>
                 </div>
+            @endif
+
+            <style>
+                a.btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+                    text-decoration: none;
+                }
+            </style>
+
+            <div class="col-lg-12 mb-5">
+                <ul class="pagination justify-content-center">
+                    {{ $articles->links() }}
+                </ul>
             </div>
         </div>
-        @endforelse
-        <div class="col-lg-12 mb-5 ">
-            <ul class="pagination justify-content-center">
-                {{$articles->links()}}
-            </ul>
-        </div>
-    </div>
     </div>
 </section>
 {{-- End Article Section --}}
@@ -514,7 +525,7 @@
                         <div class="flip-card-front card text-white shadow p-4" 
                              style="background-color:#007BFF; border-radius:12px; min-height:150px;">
                             <div class="mb-3">
-                                <i class="fas fa-building fa-2x"></i>
+                                <i class="fas fa-database fa-2x"></i>
                             </div>
                             <h5>Open Data Kota Sukabumi</h5>
                         </div>
@@ -537,7 +548,7 @@
                         <div class="flip-card-front card text-white shadow p-4" 
                              style="background-color:#DC3545; border-radius:12px; min-height:150px;">
                             <div class="mb-3">
-                                <i class="fas fa-notes-medical fa-2x"></i>
+                                <i class="fas fa-bullhorn fa-2x"></i>
                             </div>
                             <h5>Lapor.go.id</h5>
                         </div>
@@ -560,7 +571,7 @@
                         <div class="flip-card-front card text-white shadow p-4" 
                              style="background-color:#EBB866; border-radius:12px; min-height:150px;">
                             <div class="mb-3">
-                                <i class="fas fa-newspaper fa-2x"></i>
+                                <i class="fas fa-building fa-2x"></i>
                             </div>
                             <h5>Portal Kota Sukabumi</h5>
                         </div>

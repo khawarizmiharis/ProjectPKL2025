@@ -25,7 +25,7 @@ class ArticleController extends Controller
             ->where('enabled', 1)
             ->where('category_id', '!=', 6)
             ->orderby('updated_at', 'desc')
-            ->paginate(6);
+            ->paginate(10);
 
         return view('visitors.artikel.index', compact('articles'));
     }

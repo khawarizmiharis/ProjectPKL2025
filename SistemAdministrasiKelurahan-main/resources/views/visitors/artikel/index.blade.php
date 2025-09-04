@@ -102,7 +102,15 @@
                                 <img src="{{ asset('/images') }}/sorry.png" style="height: 250px; width:250px;">
                             </div> --}}
                             <div class="alert alert-info text-center">
-                                Belum ada berita yang tersedia untuk saat ini. Tetap ikuti kami untuk mendapatkan kabar dan informasi terbaru dari Kelurahan. Terima kasih.
+                                @if(isset($category) && $category->slug == 'pengumuman')
+                                    Belum ada pengumuman yang tersedia untuk saat ini. 
+                                    Tetap ikuti kami untuk mendapatkan kabar dan informasi terbaru dari Kelurahan. 
+                                    Terima kasih.
+                                @else
+                                    Belum ada berita yang tersedia untuk saat ini. 
+                                    Tetap ikuti kami untuk mendapatkan kabar dan informasi terbaru dari Kelurahan. 
+                                    Terima kasih.
+                                @endif
                             </div>
                         </div>
                     </div>
