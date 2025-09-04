@@ -1,13 +1,13 @@
-@extends('dashboard.layouts.master', ['title' => "Edit Identitas Desa"])
+@extends('dashboard.layouts.master', ['title' => "Edit Identitas Kelurahan"])
 
 @section('content')
 
 <?php
     $data=[
         'icon' => "pe-7s-note",
-        'judul' => "Edit Identitas Desa",
+        'judul' => "Edit Identitas Kelurahan",
         'link' => route('info-desa.identitas') ,
-        'page1' => "Identitas Desa",
+        'page1' => "Identitas Kelurahan",
         'page2' => "/ Edit"
     ]
 ?>
@@ -21,7 +21,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('patch')
-                    <h5 class="card-title font-weight-bold mb-4 mt-2" style="font-size: large;">Edit Identitas Desa</h5>
+                    <h5 class="card-title font-weight-bold mb-4 mt-2" style="font-size: large;">Edit Identitas Kelurahan</h5>
                     <div tabindex="-1" class="dropdown-divider"></div>
                     <div class="row">
                         <div class=" col-lg-3">
@@ -95,7 +95,7 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="position-relative form-group">
-                                        <label for="village_name" class="">Nama Desa</label>
+                                        <label for="village_name" class="">Nama Kelurahan</label>
                                         <input name="village_name" id="village_name" type="text"
                                             class="form-control @error('village_name') is-invalid @enderror"
                                             value="{{ old('village_name') ?? $villageIdentity->village_name }}">
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative form-group">
-                                        <label for="village_code" class="">Kode Desa</label>
+                                        <label for="village_code" class="">Kode Kelurahan</label>
                                         <input name="village_code" id="village_code" type="text"
                                             class="form-control @error('village_code') is-invalid @enderror"
                                             value="{{ old('village_code') ?? $villageIdentity->village_code }}">
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative form-group">
-                                        <label for="zip_code" class="">Kode Pos Desa</label>
+                                        <label for="zip_code" class="">Kode Pos Kelurahan</label>
                                         <input name="zip_code" id="zip_code" type="text"
                                             class="form-control @error('zip_code') is-invalid @enderror"
                                             value="{{ old('zip_code') ?? $villageIdentity->zip_code }}">
@@ -136,7 +136,7 @@
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="kepala_desa_name" class="">Kepala Desa</label>
+                                        <label for="kepala_desa_name" class="">Kepala Kelurahan</label>
                                         <input name="kepala_desa_name" id="kepala_desa_name" type="text"
                                             class="form-control @error('kepala_desa_name') is-invalid @enderror"
                                             value="{{ old('kepala_desa_name') ?? $villageIdentity->kepala_desa_name }}">
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="kepala_desa_nip" class="">NIP Kepala Desa</label>
+                                        <label for="kepala_desa_nip" class="">NIP Kepala Kelurahan</label>
                                         <input name="kepala_desa_nip" id="kepala_desa_nip" type="text"
                                             class="form-control @error('kepala_desa_nip') is-invalid @enderror"
                                             value="{{ old('kepala_desa_nip') ?? $villageIdentity->kepala_desa_nip }}">
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
                             <div class="position-relative form-group">
-                                <label for="office_address" class="">Alamat Kantor Desa</label>
+                                <label for="office_address" class="">Alamat Kantor Kelurahan</label>
                                 <textarea name="office_address" id="office_address"
                                     class="form-control @error('office_address') is-invalid @enderror">
                                     {{ old('office_address') ?? $villageIdentity->office_address }}
@@ -176,7 +176,7 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="position-relative form-group">
-                                        <label for="village_email" class="">Email Desa</label>
+                                        <label for="village_email" class="">Email Kelurahan</label>
                                         <input name="village_email" id="village_email" type="text"
                                             class="form-control @error('village_email') is-invalid @enderror"
                                             value="{{ old('village_email') ?? $villageIdentity->village_email }}">
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative form-group">
-                                        <label for="phone" class="">Telepon Desa</label>
+                                        <label for="phone" class="">Telepon Kelurahan</label>
                                         <input name="phone" id="phone" type="text"
                                             class="form-control @error('phone') is-invalid @enderror"
                                             value="{{ old('phone') ?? $villageIdentity->phone }}">
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative form-group">
-                                        <label for="website" class="">Website Desa</label>
+                                        <label for="website" class="">Website Kelurahan</label>
                                         <input name="website" id="website" type="text"
                                             class="form-control @error('website') is-invalid @enderror"
                                             value="{{ old('website') ?? $villageIdentity->website }}">
@@ -448,7 +448,7 @@
                                         <input name="background_pic" id="background_pic" type="file"
                                             class="form-control-file @error('background_pic') is-invalid @enderror"
                                             value="{{ old('background_pic') ?? $villageIdentity->background_pic }}">
-                                        <small class="form-text text-muted">Silahkan unggah foto kantor desa</small>
+                                        <small class="form-text text-muted">Silahkan unggah foto kantor kelurahan</small>
                                         <small class="form-text text-muted">Ukuran Maksimal : 2MB</small>
                                         @error('background_pic')
                                         <span class="invalid-feedback mt-2" role="alert">
@@ -459,11 +459,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="logo" class="">Logo Desa</label>
+                                        <label for="logo" class="">Logo Kelurahan</label>
                                         <input name="logo" id="logo" type="file"
                                             class="form-control-file @error('logo') is-invalid @enderror"
                                             value="{{ old('logo') ?? $villageIdentity->logo }}">
-                                        <small class="form-text text-muted">silahkan unggah logo desa</small>
+                                        <small class="form-text text-muted">silahkan unggah logo kelurahan</small>
                                         <small class="form-text text-muted">Ukuran Maksimal : 2MB</small>
                                         @error('logo')
                                         <span class="invalid-feedback mt-2" role="alert">

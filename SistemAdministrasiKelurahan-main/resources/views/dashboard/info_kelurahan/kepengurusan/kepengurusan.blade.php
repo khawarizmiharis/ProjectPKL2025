@@ -5,9 +5,9 @@
 <?php
     $data=[
         'icon' => "pe-7s-id",
-        'judul' => "Kepengurusan Desa",
+        'judul' => "Kepengurusan Kelurahan",
         'link' => route('info-desa.kepengurusan') ,
-        'page1' => "Kepengurusan Desa"
+        'page1' => "Kepengurusan Kelurahan"
     ]
 ?>
 @include('dashboard.layouts.page-title',$data)

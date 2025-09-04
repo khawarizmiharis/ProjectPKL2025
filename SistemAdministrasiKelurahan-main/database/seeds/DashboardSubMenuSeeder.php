@@ -18,8 +18,8 @@ class DashboardSubMenuSeeder extends Seeder
             'Dashboard',
             'Kembali Ke Beranda',
             // 2
-            'Identitas Desa',
-            'Kepengurusan Desa',
+            'Identitas Kelurahan',
+            'Kepengurusan Kelurahan',
             'Wilayah',
             'Data Administratif',
             // 3

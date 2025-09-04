@@ -1,13 +1,13 @@
-@extends('dashboard.layouts.master', ['title' => "Identitas Desa"])
+@extends('dashboard.layouts.master', ['title' => "Identitas Kelurahan"])
 
 @section('content')
 
 <?php
     $data=[
         'icon' => "pe-7s-culture",
-        'judul' => "Identitas Desa",
+        'judul' => "Identitas Kelurahan",
         'link' => route('info-desa.identitas') ,
-        'page1' => "Identitas Desa"
+        'page1' => "Identitas Kelurahan"
     ]
 ?>
 @include('dashboard.layouts.page-title',$data)
@@ -74,53 +74,53 @@
                     <thead>
                         <tr class="d-flex">
                             <div class="text-center ">
-                                <p class=" card-header  bg-secondary text-white">Desa</p>
+                                <p class=" card-header  bg-secondary text-white">Kelurahan</p>
                             </div>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="">
-                            <td class=" text-left pl-4">Nama Desa</td>
+                            <td class=" text-left pl-4">Nama Kelurahan</td>
                             <td class=" text-right ">:</td>
                             <td class=" text-left ">{{ $villageIdentity->village_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kode Desa</td>
+                            <td class=" text-left pl-4">Kode Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->village_code }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kode Pos Desa</td>
+                            <td class=" text-left pl-4">Kode Pos Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->zip_code }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kepala Desa</td>
+                            <td class=" text-left pl-4">Kepala Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->kepala_desa_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">NIP Kepala Desa</td>
+                            <td class=" text-left pl-4">NIP Kepala Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->kepala_desa_nip }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Alamat Kantor Desa</td>
+                            <td class=" text-left pl-4">Alamat Kantor Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->office_address }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">E-Mail Desa</td>
+                            <td class=" text-left pl-4">E-Mail Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->village_email }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Telepon Desa</td>
+                            <td class=" text-left pl-4">Telepon Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->phone }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Website Desa</td>
+                            <td class=" text-left pl-4">Website Kelurahan</td>
                             <td class=" text-right">:</td>
                             <td class=" text-left">{{ $villageIdentity->website }}</td>
                         </tr>
@@ -255,7 +255,7 @@
     </div>
     <div class="col-md-6">
         <div class="main-card mb-3 card">
-            <div class="card-header">Logo Desa</div>
+            <div class="card-header">Logo Kelurahan</div>
             <img class="img-fluid" style="width: 100%; height: 350px; overflow: hidden; object-fit: scale-down;"
                 alt="Responsive image" src="{{ asset('/images') }}/logo.png" alt="">
         </div>
