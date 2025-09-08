@@ -57,10 +57,12 @@
                         @forelse ($articles as $article)
                         <div class="col-lg-12" data-aos="fade-up" data-aos-delay="500">
                             <div class="blog-post">
-                                <div class="blog-thumb ">
-                                    {{-- <img src="{{ asset('/images') }}/img-article-01.png" alt=""> --}}
-                                    <img src="{{$article->thumbnail}}" alt="">
-                                    {{-- <img src="{{ asset('storage/' . $article->thumbnail) }}" alt=""> --}}
+                                <div class="blog-thumb">
+                                    <img 
+                                        src="{{ $article->thumbnail ? asset('storage/'.$article->thumbnail) : asset('images/no-image.png') }}" 
+                                        alt="{{ $article->title }}" 
+                                        style="width:100%; height:300px; object-fit:cover; border-radius:8px;"
+                                    >
                                 </div>
                                 <div class="down-content">
                                     <a href="{{ route('visitors.artikel.category.show', $article->category->slug) }}">

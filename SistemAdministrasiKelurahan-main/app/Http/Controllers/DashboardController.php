@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Article;
 use App\Villager;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class DashboardController extends Controller
 {
+
     public function index()
     {
         // $userName = Auth::user()->full_name;
@@ -16,8 +18,14 @@ class DashboardController extends Controller
 
         $villagers = Villager::where('life_status_id', 1)->where('user_id', '!=', null)->paginate(5);
 
-        return view('dashboard.beranda.index', compact('villagers'));
+        // Artikel
+        $totalArticles   = Article::count();
+        $activeArticles  = Article::where('enabled', 1)->count();
+        $inactiveArticles = Article::where('enabled', 0)->count();
+
+        return view('dashboard.beranda.index', compact('villagers','totalArticles', 'activeArticles', 'inactiveArticles'));
     }
+
 
     //penduduk
     public function pendudukaktif()

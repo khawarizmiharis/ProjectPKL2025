@@ -30,7 +30,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="{{ request()->is('artikel') ? 'active' : '' }}">
+                {{-- Pengumuman --}}
+                <li class="{{ request()->is('artikel/categories/pengumuman*') ? 'active' : '' }}">
                     <a href="{{ route('visitors.artikel.category.show', 'pengumuman') }}">Pengumuman</a>
                 </li>
                 {{-- Layanan Publik
@@ -49,9 +50,11 @@
                     </ul>
                 </li>
                 --}}
-                <li class="{{ request()->is('artikel') ? 'active' : '' }}">
+                {{-- Berita --}}
+                <li class="{{ (request()->is('artikel') || request()->is('artikel/categories/*')) && !request()->is('artikel/categories/pengumuman*') ? 'active' : '' }}">
                     <a href="{{ route('visitors.artikel.index') }}">Berita</a>
                 </li>
+                {{-- Layanan --}}
                 <li class="{{ request()->is('layanan/informasi') ? 'active' : '' }}">
                     <a href="{{ route('layanan.informasi') }}">Layanan</a>
                 </li>

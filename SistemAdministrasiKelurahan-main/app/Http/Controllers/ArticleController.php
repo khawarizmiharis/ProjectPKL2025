@@ -23,7 +23,7 @@ class ArticleController extends Controller
 
         $articles = Article::filter(request(['search', 'category']))
             ->where('enabled', 1)
-            ->where('category_id', '!=', 6)
+            ->where('category_id', '!=', 1)
             ->orderby('updated_at', 'desc')
             ->paginate(10);
 
@@ -69,4 +69,4 @@ class ArticleController extends Controller
         // dd($article);
         return view('visitors.profil_kelurahan.struktur-pemerintahan', compact('article'));
     }
-}
+} 

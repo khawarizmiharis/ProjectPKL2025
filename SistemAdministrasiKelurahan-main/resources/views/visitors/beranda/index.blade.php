@@ -138,7 +138,7 @@
                 <h1 style="font-weight: 600;">- Berita -</h1>
                 <p class="m-auto w-50">
                     Memudahkan pengguna dalam membaca dan mencari
-                    artikel, berita terbaru, dan kegiatan dalam Desa
+                    artikel, berita terbaru, dan kegiatan dalam Kelurahan
                 </p>
             </div>
         </div>

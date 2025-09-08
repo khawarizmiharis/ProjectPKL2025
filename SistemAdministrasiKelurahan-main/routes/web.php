@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\LayananPublikController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\VillageIdentityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -424,10 +427,11 @@ Route::prefix('/artikel')->group(function () {
 
 // Profil_kelurahan
 Route::prefix('profil-kelurahan')->group(function () {
-    Route::get('/sejarah-visi-misi', 'ArticleController@showHistoryAndVisionMission')->name('profil-kelurahan.sejarah-visi-misi');
-    Route::get('/struktur-pemerintahan', 'ArticleController@showGovernmentStructure')->name('profil-kelurahan.struktur-pemerintahan');
+    Route::get('/profil/sejarah-visi-misi', [VillageIdentityController::class, 'showHistoryAndVisionMission'])->name('profil-kelurahan.sejarah-visi-misi');
+    Route::get('/profil/struktur-pemerintahan', [StaffController::class, 'strukturPemerintahan'])->name('profil-kelurahan.struktur-pemerintahan');
     Route::get('/administratif', 'AdministratifController@index')->name('profil-kelurahan.administratif.index');
 });
+
 
 // Layanan
 Route::get('/layanan/informasi', function () {

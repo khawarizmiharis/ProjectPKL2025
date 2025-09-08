@@ -34,8 +34,11 @@ if (isset($article->category) && $article->category->slug == 'pengumuman') {
                         <div class="col-lg-12">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                    {{-- <img src="{{ asset('/images') }}/img-article-01.png" alt=""> --}}
-                                    <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="">
+                                    <img 
+                                        src="{{ $article->thumbnail ? asset('storage/'.$article->thumbnail) : asset('images/no-image.png') }}" 
+                                        alt="{{ $article->title }}" 
+                                        style="width:100%; height:500px; object-fit:cover; border-radius:8px;"
+                                    >
                                 </div>
                                 <div class="down-content">
                                     <a href="{{ route('visitors.artikel.category.show', $article->category->slug) }}">
@@ -71,20 +74,27 @@ if (isset($article->category) && $article->category->slug == 'pengumuman') {
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-tags"></i><a href="#">Lampiran</a></li>
-                                                    @foreach ($article->tags as $tag)
+                                                    {{-- Lampiran --}}
                                                     <li>
-                                                        <a href="{{ route('visitors.artikel.tag.show', $tag->slug) }}">
-                                                            {{ $tag->name_tag }}
-                                                        </a>,
+                                                        <i class="fa fa-paperclip"></i> Lampiran:
+                                                        @if($article->link_document)
+                                                            <a href="{{ asset('storage/' . $article->link_document) }}" target="_blank">
+                                                                {{ $article->document }}
+                                                            </a>
+                                                        @else
+                                                            <span>Tidak ada lampiran</span>
+                                                        @endif
                                                     </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-6 ">
-                                                <ul class="post-share right-align">
-                                                    <li><i class="fa fa-share-alt"></i></li>
-                                                    <li><a href="#">Copy Link</a></li>
+
+                                                    {{-- Tag Artikel --}}
+                                                    <li>
+                                                        <i class="fa fa-tags"></i> Tag:
+                                                        @foreach ($article->tags as $tag)
+                                                            <a href="{{ route('visitors.artikel.tag.show', $tag->slug) }}" class="badge bg-light text-dark">
+                                                                {{ $tag->name_tag }}
+                                                            </a>
+                                                        @endforeach
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>

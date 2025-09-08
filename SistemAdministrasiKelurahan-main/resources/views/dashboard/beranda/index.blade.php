@@ -114,7 +114,7 @@
                     <div class="widget-content">
                         <div class="widget-content-wrapper">
                             <div class="widget-content-right ml-0 mr-3">
-                                <div class="widget-numbers text-success">10</div>
+                                <div class="widget-numbers text-success">{{ $totalArticles }}</div>
                             </div>
                             <div class="widget-content-left">
                                 <div class="widget-heading">Total Artikel</div>
@@ -127,7 +127,7 @@
                     <div class="widget-content">
                         <div class="widget-content-wrapper">
                             <div class="widget-content-right ml-0 mr-3">
-                                <div class="widget-numbers text-warning">8</div>
+                                <div class="widget-numbers text-warning">{{ $activeArticles }}</div>
                             </div>
                             <div class="widget-content-left">
                                 <div class="widget-heading">Artikel Aktif</div>
@@ -140,7 +140,7 @@
                     <div class="widget-content">
                         <div class="widget-content-wrapper">
                             <div class="widget-content-right ml-0 mr-3">
-                                <div class="widget-numbers text-danger">2</div>
+                                <div class="widget-numbers text-danger">{{ $inactiveArticles }}</div>
                             </div>
                             <div class="widget-content-left">
                                 <div class="widget-heading">Artikel Tidak Aktif</div>

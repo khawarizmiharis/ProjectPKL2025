@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master', ['title' => "Kepengurusan Desa"])
+@extends('dashboard.layouts.master', ['title' => "Kepengurusan Kelurahan"])
 
 @section('content')
 

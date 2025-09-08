@@ -26,7 +26,7 @@
             <h2 class="text-center">Berita Terbaru</h2>
             <ul>
                 @php
-                    $popular_articles = \DB::table('articles')->where('category_id', '!=', 6)->orderBy('read_count', 'desc')->latest()->take(5)->get();
+                    $popular_articles = \DB::table('articles')->where('category_id', '!=', 1)->orderBy('read_count', 'desc')->latest()->take(5)->get();
                 @endphp
                 @foreach ($popular_articles as $article)
                 <li>
@@ -50,7 +50,7 @@
             <h2 class="text-center">Pengumuman Terbaru</h2>
             <ul>
                 @php
-                    $pengumuman_articles = \DB::table('articles')->where('category_id', 6)->orderBy('read_count', 'desc')->latest()->take(5)->get();
+                    $pengumuman_articles = \DB::table('articles')->where('category_id', 1)->orderBy('read_count', 'desc')->latest()->take(5)->get();
                 @endphp
                 @foreach ($pengumuman_articles as $article)
                 <li>
