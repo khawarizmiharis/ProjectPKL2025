@@ -41,9 +41,11 @@
 
                 // ambil menu jika ada role
                 $menus = $userRoleId
-                    ? \DB::table('dashboard_menus')->select('dashboard_menus.id', 'dashboard_menus.name')
+                    ? \DB::table('dashboard_menus')
+                        ->select('dashboard_menus.id', 'dashboard_menus.name')
                         ->join('role_has_permissions', 'dashboard_menus.id', '=', 'role_has_permissions.permission_id')
                         ->where('role_has_permissions.role_id', $userRoleId)
+                        ->whereNotIn('dashboard_menus.name', ['Layanan', 'Manajemen Surat']) // 🚫 sembunyikan menu
                         ->get()
                     : collect();
                 @endphp
@@ -57,8 +59,10 @@
                                 ['dashboard_sub_menus.menu_id', '=', $menu->id],
                                 ['dashboard_sub_menus.is_active', '=', 1]
                             ])
+                            ->whereNotIn('dashboard_sub_menus.sub_menu', ['Log Aktivitas Pengguna', 'Kontribusi Artikel']) // 🚫 sembunyikan sub menu
                             ->get();
                     @endphp
+
                     @foreach ($subMenus as $subMenu)
                         @php
                             $paths = Request::segments();

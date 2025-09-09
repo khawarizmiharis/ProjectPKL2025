@@ -72,173 +72,162 @@
             <div class="table-responsive ">
                 <table class="mb-0 table table-borderless table-striped">
                     <thead>
-                        <tr class="d-flex">
-                            <div class="text-center ">
-                                <p class=" card-header  bg-secondary text-white">Kelurahan</p>
-                            </div>
+                        <tr>
+                            <th colspan="3" class="card-header bg-secondary text-white text-center" style="width: 100%px">Kelurahan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td class=" text-left pl-4">Nama Kelurahan</td>
-                            <td class=" text-right ">:</td>
-                            <td class=" text-left ">{{ $villageIdentity->village_name }}</td>
+                        <tr>
+                            <td style="width: 250px;">Nama Kelurahan</td>
+                            <td style="width: 20px;" class="text-center">:</td>
+                            <td>{{ $villageIdentity->village_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kode Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->village_code }}</td>
+                            <td>Kode Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->village_code }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kode Pos Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->zip_code }}</td>
+                            <td>Kode Pos Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->zip_code }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kepala Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kepala_desa_name }}</td>
+                            <td>Kepala Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->kepala_desa_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">NIP Kepala Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kepala_desa_nip }}</td>
+                            <td>NIP Kepala Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->kepala_desa_nip }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Alamat Kantor Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->office_address }}</td>
+                            <td>Alamat Kantor Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->office_address }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">E-Mail Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->village_email }}</td>
+                            <td>E-Mail Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->village_email }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Telepon Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->phone }}</td>
+                            <td>Telepon Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->phone }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Website Kelurahan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->website }}</td>
+                            <td>Website Kelurahan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->website }}</td>
                         </tr>
                     </tbody>
-
                 </table>
-                <table class="mb-0 table table-borderless table-striped ">
+
+                <table class="mb-0 table table-borderless table-striped">
                     <thead>
-                        <tr class="d-flex">
-                            <div class="text-center ">
-                                <p class=" card-header  bg-secondary text-white">Kecamatan</p>
-                            </div>
+                        <tr>
+                            <th colspan="3" class="card-header bg-secondary text-white text-center">Kecamatan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td class=" text-left pl-4">Nama Kecamatan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kecamatan_name }}</td>
+                        <tr>
+                            <td style="width: 250px;">Nama Kecamatan</td>
+                            <td style="width: 20px;" class="text-center">:</td>
+                            <td>{{ $villageIdentity->kecamatan_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kode Kecamatan</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kecamatan_code }}</td>
+                            <td>Kode Kecamatan</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->kecamatan_code }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Nama Camat</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kepala_camat_name }}</td>
+                            <td>Nama Camat</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->kepala_camat_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">NIP Camat</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kepala_camat_nip }}</td>
+                            <td>NIP Camat</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->kepala_camat_nip }}</td>
                         </tr>
                     </tbody>
-
                 </table>
-                <table class=" mb-0 table table-borderless table-striped ">
+
+                <table class="mb-0 table table-borderless table-striped">
                     <thead>
-                        <tr class="d-flex">
-                            <div class="text-center ">
-                                <p class=" card-header  bg-secondary text-white">Kabupaten</p>
-                            </div>
+                        <tr>
+                            <th colspan="3" class="card-header bg-secondary text-white text-center">Kabupaten</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td class=" text-left pl-4">Nama Kabupaten</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kabupaten_name }}</td>
+                        <tr>
+                            <td style="width: 250px;">Nama Kabupaten</td>
+                            <td style="width: 20px;" class="text-center">:</td>
+                            <td>{{ $villageIdentity->kabupaten_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kode Kabupaten</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->kabupaten_code }}</td>
+                            <td>Kode Kabupaten</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->kabupaten_code }}</td>
                         </tr>
                     </tbody>
-
                 </table>
-                <table class=" mb-0 table table-borderless table-striped ">
+
+                <table class="mb-0 table table-borderless table-striped">
                     <thead>
-                        <tr class="d-flex">
-                            <div class="text-center ">
-                                <p class=" card-header  bg-secondary text-white">Provinsi</p>
-                            </div>
+                        <tr>
+                            <th colspan="3" class="card-header bg-secondary text-white text-center">Provinsi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td class=" text-left pl-4">Nama Provinsi</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->province_name }}</td>
+                        <tr>
+                            <td style="width: 250px;">Nama Provinsi</td>
+                            <td style="width: 20px;" class="text-center">:</td>
+                            <td>{{ $villageIdentity->province_name }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Kode Provinsi</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->province_code }}</td>
+                            <td>Kode Provinsi</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->province_code }}</td>
                         </tr>
                     </tbody>
-
                 </table>
-                <table class=" mb-0 table table-borderless table-striped ">
+
+                <table class="mb-0 table table-borderless table-striped">
                     <thead>
-                        <tr class="d-flex">
-                            <div class="text-center ">
-                                <p class=" card-header  bg-secondary text-white">Media Sosial</p>
-                            </div>
+                        <tr>
+                            <th colspan="3" class="card-header bg-secondary text-white text-center">Media Sosial</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td class=" text-left pl-4">Instagram</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->instagram }}</td>
+                        <tr>
+                            <td style="width: 250px;">Instagram</td>
+                            <td style="width: 20px;" class="text-center">:</td>
+                            <td>{{ $villageIdentity->instagram }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Facebook</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->facebook }}</td>
+                            <td>Facebook</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->facebook }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Twitter</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->twitter }}</td>
+                            <td>Twitter</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->twitter }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Youtube</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left">{{ $villageIdentity->youtube }}</td>
+                            <td>Youtube</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->youtube }}</td>
                         </tr>
                         <tr>
-                            <td class=" text-left pl-4">Link Google Maps</td>
-                            <td class=" text-right">:</td>
-                            <td class=" text-left"></td>
+                            <td>Link Google Maps</td>
+                            <td class="text-center">:</td>
+                            <td>{{ $villageIdentity->maps_link ?? '-' }}</td>
                         </tr>
                     </tbody>
-
                 </table>
             </div>
 
