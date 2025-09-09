@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     // $home = 'home';
     // Route::get('/' . $home, 'HomeController@' . $menu)->name('home');
 
+    // Tambahkan route untuk Carousel di sini
+    Route::resource('/dashboard/carousel', 'CarouselController')->except(['show', 'edit', 'update']);
+
 
     // peengajuan surat
     Route::get('/pelayanan/pengajuan-surat', 'LetterSubmissionController@create')->name('pengajuan-surat.create');
@@ -405,7 +408,7 @@ Route::post('/pengaduan', 'ComplaintController@store')->name('visitors.complaint
 // Form Pengaduan
 // Route::get('/layanan-publik/form-pengaduan', [ComplaintController::class, 'create'])
 //     ->name('layanan-publik.form-pengaduan.index');
-  
+ 
     // Form pengaduan
 Route::get('/layanan-publik/form-pengaduan', [ComplaintController::class, 'create'])
     ->name('layanan-publik.form-pengaduan');
