@@ -162,7 +162,7 @@ class VillageIdentityController extends Controller
 
         $villageIdentity->update($attr);
 
-        Alert::success('Berhasil', 'Identitas Desa Berhasil Diperbaharui');
+        Alert::success('Berhasil', 'Identitas Kelurahan Berhasil Diperbaharui');
 
         return redirect(route('info-desa.identitas'));
     }
@@ -181,9 +181,15 @@ class VillageIdentityController extends Controller
     /**
      * Tampilkan profil kelurahan di halaman frontend
      */
-    public function showHistoryAndVisionMission()
+    public function showHistory()
     {
         $villageIdentity = VillageIdentity::first();
-        return view('visitors.profil_kelurahan.sejarah-visi-misi', compact('villageIdentity'));
+        return view('visitors.profil_kelurahan.sejarah', compact('villageIdentity'));
     }
+    public function showVisionMission()
+    {
+        $villageIdentity = VillageIdentity::first();
+        return view('visitors.profil_kelurahan.visi-misi', compact('villageIdentity'));
+    }
+
 }

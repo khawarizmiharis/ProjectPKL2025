@@ -35,6 +35,7 @@ class HomeController extends Controller
     {
         // $all_articles = Article::get();
         $articles = Article::where('enabled', 1)->orderby('updated_at', 'desc')->paginate(6);
+        $latestArticles = Article::where('enabled', 1)->where('category_id', '!=', 1)->orderBy('created_at', 'desc')->take(3)->get();
         // $count = $all_articles->count();
         $complaint_categories = ComplaintCategory::get();
 
@@ -47,6 +48,7 @@ class HomeController extends Controller
 
         return view('visitors.beranda.index', compact(
             'articles',
+            'latestArticles',
             'complaint_categories',
             'user',
             'user_id'

@@ -167,6 +167,37 @@ class ArticleDashboardController extends Controller
         return redirect()->route('manajemen-artikel.artikel');
     }
 
+    public function destroySelected(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:articles,id'
+        ]);
+
+        $articles = Article::whereIn('id', $request->ids)->get();
+
+        foreach ($articles as $article) {
+            // hapus relasi tags
+            $article->tags()->detach();
+
+            // hapus file thumbnail
+            if ($article->thumbnail) {
+                Storage::disk('public')->delete($article->thumbnail);
+            }
+
+            // hapus dokumen
+            if ($article->link_document) {
+                Storage::disk('public')->delete($article->link_document);
+            }
+
+            // hapus artikel
+            $article->delete();
+        }
+
+        Alert::success('Berhasil', 'Artikel terpilih berhasil dihapus');
+        return redirect()->route('manajemen-artikel.artikel');
+    }
+
     public function commentActivation(Request $request, Article $article)
     {
         $attr = $request->validate(['commentable' => 'required|boolean']);

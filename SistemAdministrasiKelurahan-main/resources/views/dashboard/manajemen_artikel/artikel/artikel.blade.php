@@ -16,9 +16,17 @@
     <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-header">Artikel
-                <div class="btn-actions-pane-right "><a type="button"
-                        class="btn btn-lg btn-danger btn-sm text-white font-weight-normal m-1 mb-2 mt-2 btn-responsive"
-                        href="#"><i class="fas fa-trash-alt"></i> Hapus Data Terpilih</a>
+                <div class="btn-actions-pane-right ">
+                    {{-- Bulk Delete Form --}}
+                    <form id="bulkDeleteForm" action="{{ route('manajemen-artikel.artikel.destroy-selected') }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="btn btn-lg btn-danger btn-sm text-white font-weight-normal m-1 mb-2 mt-2 btn-responsive">
+                            <i class="fas fa-trash-alt"></i> Hapus Data Terpilih
+                        </button>
+                    </form>
+                    {{-- Tambah Data --}}
                     <a type="button"
                         class="btn btn-lg btn-focus btn-sm text-white font-weight-normal m-1 mb-2 mt-2 btn-responsive"
                         href="{{ route('manajemen-artikel.artikel.create') }}">+
@@ -40,7 +48,7 @@
                     <tbody>
                         @foreach ($articles as $number => $article)
                         <tr>
-                            <td class=" text-center"><input type="checkbox" name="chkbox[]" value="1"></td>
+                            <td class=" text-center"><input type="checkbox" class="checkbox-item" name="ids[]" value="{{ $article->id }}"></td>
                             <td class=" text-center">{{ $number + $articles->firstItem() }}</td>
                             <td class=" text-center">
                                 <div class="d-flex justify-content-center">
@@ -161,6 +169,48 @@
                     'Data anda masih tersimpan :)',
                     'error'
                 )
+            }
+        })
+    });
+
+    // Bulk delete dengan SweetAlert
+    $('#bulkDeleteForm').on('submit', function(e) {
+        e.preventDefault();
+        let form = this;
+        let selected = $('.checkbox-item:checked').map(function() {
+            return this.value;
+        }).get();
+
+        if (selected.length === 0) {
+            Swal.fire('Oops!', 'Pilih minimal 1 artikel untuk dihapus.', 'warning');
+            return;
+        }
+
+        Swal.fire({
+            title: 'Hapus Data Terpilih?',
+            text: "Data yang dihapus tidak bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Tidak',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Hapus input lama biar ga numpuk
+                $('input[name="ids[]"]').remove();
+
+                // Tambahkan input hidden untuk setiap ID
+                selected.forEach(function(id) {
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: 'ids[]',
+                        value: id
+                    }).appendTo(form);
+                });
+
+                form.submit();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('Dibatalkan', 'Data anda masih tersimpan :)', 'error');
             }
         })
     });

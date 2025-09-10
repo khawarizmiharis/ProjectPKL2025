@@ -146,7 +146,7 @@
         <div class="all-blog-posts">
             <div class="row">
                 @php $count = 0; @endphp
-                @forelse ($articles->take(3) as $article) {{-- ambil hanya 3 artikel --}}
+                @forelse ($latestArticles as $article) {{-- ambil hanya 3 artikel --}}
                     @if ($article->category->slug !== 'pengumuman')
                         @php $count++; @endphp
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">

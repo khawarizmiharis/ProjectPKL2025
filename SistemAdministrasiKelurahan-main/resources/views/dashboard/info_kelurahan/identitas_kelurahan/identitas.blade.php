@@ -22,8 +22,11 @@
                     href="{{route('info-desa.identitas.edit', $villageIdentity->id)}}">
                     <i class="fas fa-edit mr-1"></i> Edit Identitas Kelurahan</a>
                 <a type="button"
-                    class="btn btn-lg btn-alternate btn-sm text-white font-weight-normal btn-responsive m-1" href="#">
-                    <i class="fas fa-map mr-1"></i> Lokasi Kantor Kelurahan</a>
+                    class="btn btn-lg btn-alternate btn-sm text-white font-weight-normal btn-responsive m-1"
+                    href="https://www.google.com/maps/place/Sukabumi,+Kota+Sukabumi,+Jawa+Barat/@-6.937014,106.91731,11z/data=!4m6!3m5!1s0x2e6848256c9e44f5:0x75ce9a1669c315d6!8m2!3d-6.9181652!4d106.93152!16zL20vMDdibjAw?hl=id&entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank">
+                    <i class="fas fa-map mr-1"></i> Lokasi Kantor Kelurahan
+                </a>
             </div>
         </div>
     </div>

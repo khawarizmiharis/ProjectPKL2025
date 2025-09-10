@@ -6,7 +6,7 @@
 <?php
     $data=[
         'page1' => '> Profil Kelurahan',
-        'page2' => '> Sejarah Visi Misi'
+        'page2' => '> Sejarah'
     ]
 ?>
 @include('visitors.layouts.breadcumb-artikel', $data)
@@ -24,16 +24,6 @@
                                     <h2 class="fw-bold mb-3">Sejarah Kelurahan {{ $villageIdentity->village_name ?? '' }}</h2>
                                     <p class="text-justify">
                                         {!! $villageIdentity->history ?? 'Belum ada data sejarah' !!}
-                                    </p>
-
-                                    <h2 class="fw-bold mt-4 mb-3">Visi</h2>
-                                    <p class="text-justify">
-                                        {!! $villageIdentity->vision ?? 'Belum ada visi' !!}
-                                    </p>
-
-                                    <h2 class="fw-bold mt-4 mb-3">Misi</h2>
-                                    <p class="text-justify">
-                                        {!! $villageIdentity->mission ?? 'Belum ada misi' !!}
                                     </p>
                                 </div>
                             </div>

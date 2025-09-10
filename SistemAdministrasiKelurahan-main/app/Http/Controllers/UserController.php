@@ -36,7 +36,7 @@ class UserController extends Controller
         $villagers = Villager::where('user_id', null)->get();
         $roles = Role::get();
 
-        return view('dashboard.manajemen_pengguna.pengguna.pengguna-tambah', compact('villagers', 'roles'));
+        return view('dashboard.manajemen_pengguna.pengguna-tambah', compact('villagers', 'roles'));
     }
 
     /**

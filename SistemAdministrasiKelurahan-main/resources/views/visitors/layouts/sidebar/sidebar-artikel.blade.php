@@ -1,9 +1,15 @@
 <div class="col-lg-12 mb-4 mt-1">
     <div class="sidebar-item search">
-        <form id="search_form" name="gs" action="{{ route('visitors.artikel.index')}}">
-            <input type="text" name="search" id="search" class="searchText" placeholder="Ketik untuk mencari..." value="{{ request('search') ?? '' }}">
+        <form id="search_form" method="GET"
+            action="{{ isset($category) && $category->slug == 'pengumuman'
+                        ? route('visitors.artikel.pengumuman')
+                        : route('visitors.artikel.index') }}">
+            <input type="text" name="search" id="search" class="searchText"
+                   placeholder="Ketik untuk mencari..."
+                   value="{{ request('search') ?? '' }}">
         </form>
     </div>
+</div>
 
     {{-- <form class="form-row justify-content-center" action="{{ route('visitors.artikel.index')}}">
         <div class="input-group">
@@ -26,7 +32,7 @@
             <h2 class="text-center">Berita Terbaru</h2>
             <ul>
                 @php
-                    $popular_articles = \DB::table('articles')->where('category_id', '!=', 1)->orderBy('read_count', 'desc')->latest()->take(5)->get();
+                    $popular_articles = \DB::table('articles')->where('category_id', '!=', 1)->orderBy('created_at', 'desc')->latest()->take(5)->get();
                 @endphp
                 @foreach ($popular_articles as $article)
                 <li>
@@ -50,7 +56,7 @@
             <h2 class="text-center">Pengumuman Terbaru</h2>
             <ul>
                 @php
-                    $pengumuman_articles = \DB::table('articles')->where('category_id', 1)->orderBy('read_count', 'desc')->latest()->take(5)->get();
+                    $pengumuman_articles = \DB::table('articles')->where('category_id', 1)->orderBy('created_at', 'desc')->latest()->take(5)->get();
                 @endphp
                 @foreach ($pengumuman_articles as $article)
                 <li>

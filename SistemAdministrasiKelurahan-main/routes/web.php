@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\LayananPublikController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
@@ -225,6 +226,8 @@ Route::middleware('auth')->group(function () {
             Route::patch('/{article}/aktivasi', 'ArticleDashboardController@showActivation')->name('manajemen-artikel.artikel.activation');
             // delete article
             Route::delete('/{article}/delete', 'ArticleDashboardController@destroy')->name('manajemen-artikel.artikel.destroy');
+            // hapus banyak artikel
+            Route::delete('/delete-selected', 'ArticleDashboardController@destroySelected')->name('manajemen-artikel.artikel.destroy-selected');
         });
 
         // kategori
@@ -423,6 +426,7 @@ Route::prefix('/artikel')->group(function () {
     Route::get('/{article:slug}', 'ArticleController@show')->name('visitors.artikel.show');
     Route::get('/categories/{category:slug}', 'ArticleCategoryController@show')->name('visitors.artikel.category.show');
     Route::get('/tags/{tag:slug}', 'ArticleTagController@show')->name('visitors.artikel.tag.show');
+    Route::get('/artikel/categories/pengumuman', [ArticleController::class, 'pengumuman'])->name('visitors.artikel.pengumuman');
 
     // Comments
     Route::post('/tambah-komentar', 'ArticleCommentController@store')->name('visitors.article.comment.store');
@@ -430,7 +434,8 @@ Route::prefix('/artikel')->group(function () {
 
 // Profil_kelurahan
 Route::prefix('profil-kelurahan')->group(function () {
-    Route::get('/profil/sejarah-visi-misi', [VillageIdentityController::class, 'showHistoryAndVisionMission'])->name('profil-kelurahan.sejarah-visi-misi');
+    Route::get('/profil/sejarah', [VillageIdentityController::class, 'showHistory'])->name('profil-kelurahan.sejarah');
+    Route::get('/profil/visi-misi', [VillageIdentityController::class, 'showVisionMission'])->name('profil-kelurahan.visi-misi');
     Route::get('/profil/struktur-pemerintahan', [StaffController::class, 'strukturPemerintahan'])->name('profil-kelurahan.struktur-pemerintahan');
     Route::get('/administratif', 'AdministratifController@index')->name('profil-kelurahan.administratif.index');
 });
