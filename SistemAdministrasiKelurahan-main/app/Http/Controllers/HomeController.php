@@ -2,30 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
-use App\Carousel; 
-use App\Complaint;
-use App\LetterSubmission;
-use App\UmkmProduct;
+use  App\Article;
+use  App\ArticleComment;
+use App\ComplaintCategory;
+use ComplaintCategorySeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return view('home');
+        // $this->middleware('auth');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    // public function index()
+    // {
+    //     return view('home');
+    // }
+
     public function beranda()
     {
+        // $all_articles = Article::get();
+        $articles = Article::where('enabled', 1)->orderby('updated_at', 'desc')->paginate(6);
+        $latestArticles = Article::where('enabled', 1)->where('category_id', '!=', 1)->orderBy('created_at', 'desc')->take(3)->get();
+        // $count = $all_articles->count();
+        $complaint_categories = ComplaintCategory::get();
 
-        $carousels = Carousel::latest()->get();
+        $user = null;
+        $user_id = null;
+        if(Auth::check()) {
+            $user = Auth::user();
+            $user_id = $user->id;
+        }
 
-        $complaints = Complaint::latest()->limit(3)->get();
-        $letter_submissions = LetterSubmission::latest()->limit(3)->get();
-        $articles = Article::latest()->limit(3)->get();
-        $umkm_products = UmkmProduct::latest()->limit(4)->get();
-
-        
-        return view('visitors.beranda.index', compact('complaints', 'letter_submissions', 'articles', 'umkm_products', 'carousels'));
+        return view('visitors.beranda.index', compact(
+            'articles',
+            'latestArticles',
+            'complaint_categories',
+            'user',
+            'user_id'
+        ));
     }
 }
