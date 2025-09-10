@@ -141,6 +141,7 @@
                                         Wajib mengisi Gambar sesuai dengan aslinya
                                     </small>
                                     <small class="form-text text-muted">Ukuran Maksimal : 3MB</small>
+                                    <small class="form-text text-muted">Rekomendasi Ukuran : 1200x800 px (Landscape)</small>
                                     @error('thumbnail')
                                     <span class="invalid-feedback mt-2" role="alert">
                                         <i>{{ $message }}</i>

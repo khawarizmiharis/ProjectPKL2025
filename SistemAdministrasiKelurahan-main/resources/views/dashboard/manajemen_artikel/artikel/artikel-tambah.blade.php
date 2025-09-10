@@ -127,11 +127,10 @@
                                     <label for="thumbnail" class="">Upload Gambar</label>
                                     <input name="thumbnail" id="thumbnail" type="file"
                                         class="form-control-file @error('thumbnail') is-invalid @enderror"
-                                        value="{{ old('thumbnail') }}">
-                                    <small class="form-text text-muted">
-                                        Wajib mengisi Gambar sesuai dengan aslinya
-                                    </small>
+                                        accept="image/*"> 
+                                    <small class="form-text text-muted">Hanya file gambar (jpg, jpeg, png, gif, webp)</small>
                                     <small class="form-text text-muted">Ukuran Maksimal : 3MB</small>
+                                    <small class="form-text text-muted">Rekomendasi Ukuran : 1200x800 px (Landscape)</small>
                                     @error('thumbnail')
                                     <span class="invalid-feedback mt-2" role="alert">
                                         <i>{{ $message }}</i>
@@ -153,10 +152,8 @@
                                     <label for="document" class="">Upload Lampiran</label>
                                     <input name="document" id="document" type="file"
                                         class="form-control-file @error('document') is-invalid @enderror"
-                                        value="{{ old('document') }}">
-                                    <small class="form-text text-muted">
-                                        Untuk artikel yang membutuhkan lampiran
-                                    </small>
+                                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.txt"> 
+                                    <small class="form-text text-muted">Hanya file dokumen, bukan gambar</small>
                                     <small class="form-text text-muted">Ukuran Maksimal : 5MB</small>
                                     @error('document')
                                     <span class="invalid-feedback mt-2" role="alert">
