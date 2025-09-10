@@ -3,7 +3,7 @@
 @section('content')
 
 {{-- Start carousel section --}}
-<section id="hero">
+<!-- <section id="hero">
     <div class="container mb-4 mt-4  ">
         <div data-aos="fade-up" data-aos-delay="400" data-ride="carousel">
             <div class="carousel-caption  d-sm-block bg-glass mb-5 mt-3">
@@ -30,8 +30,56 @@
 
         </div>
     </div>
-</section>
+</section> -->
 {{-- End carousel section --}}
+{{-- HERO SECTION --}}
+<section id="hero">
+    <div class="container mb-4 mt-4">
+        <div data-aos="fade-up" data-aos-delay="400" data-ride="carousel">
+
+            @if ($carousels->isNotEmpty())
+            {{-- Bagian ini akan tampil jika ada data carousel di database --}}
+
+            {{-- Mengambil judul dan deskripsi dari data carousel pertama --}}
+            <div class="carousel-caption d-sm-block bg-glass mb-5 mt-3">
+                <h1 data-aos="fade-up" data-aos-delay="500">{{ $carousels->first()->title }}</h1>
+                <p class="mt-3" data-aos="fade-up" data-aos-delay="600">{{ $carousels->first()->description }}</p>
+                <div data-aos="fade-up" data-aos-delay="700">
+                    <a class="btn btn-get-started scroll-to-id " href="#services" role="button">Mulai Sekarang</a>
+                </div>
+            </div>
+
+            <div class="sliderimage">
+                {{-- Melakukan perulangan untuk setiap gambar carousel --}}
+                @foreach ($carousels as $carousel)
+                <div class="br-full carousel-size @if ($loop->first) active @endif">
+                    <img src="{{ asset('storage/' . $carousel->image) }}" class="d-block w-100 br-full"
+                        alt="{{ $carousel->title }}">
+                </div>
+                @endforeach
+            </div>
+
+            @else
+            {{-- Bagian ini akan tampil jika tidak ada data carousel di database --}}
+            <div class="carousel-caption d-sm-block bg-glass mb-5 mt-3">
+                <h1 data-aos="fade-up" data-aos-delay="500">Selamat Datang di Portal Kelurahan Kota Sukabumi</h1>
+                <p class="mt-3" data-aos="fade-up" data-aos-delay="600">“Menyediakan informasi resmi kelurahan
+                    se-Kota Sukabumi“</p>
+                <div data-aos="fade-up" data-aos-delay="700">
+                    <a class="btn btn-get-started scroll-to-id " href="#services" role="button">Mulai Sekarang</a>
+                </div>
+            </div>
+            <div class="sliderimage">
+                <div class="br-full carousel-size active">
+                    <img src="{{ asset('/images/carousel-1.jpg') }}" class="d-block w-100 br-full" alt="Default Image">
+                </div>
+            </div>
+            @endif
+
+        </div>
+    </div>
+</section>
+{{-- END HERO --}}
 
 {{-- Start Services Section --}}
 <section id="services">
