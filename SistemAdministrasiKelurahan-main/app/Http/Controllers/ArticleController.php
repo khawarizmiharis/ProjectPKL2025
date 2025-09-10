@@ -24,7 +24,7 @@ class ArticleController extends Controller
         $articles = Article::filter(request(['search', 'category']))
             ->where('enabled', 1)
             ->where('category_id', '!=', 1)
-            ->orderby('updated_at', 'desc')
+            ->orderby('created_at', 'desc')
             ->paginate(10);
 
         return view('visitors.artikel.index', compact('articles'));
@@ -68,5 +68,26 @@ class ArticleController extends Controller
         $article = Article::where('category_id', 2)->first();
         // dd($article);
         return view('visitors.profil_kelurahan.struktur-pemerintahan', compact('article'));
+    }
+
+    public function pengumuman()
+    {
+        $articles = Article::query()
+            ->where('enabled', 1)
+            ->whereHas('category', function($q) {
+                $q->where('slug', 'pengumuman');
+            })
+            ->when(request('search'), function($query) {
+                $query->where(function($q) {
+                    $q->where('title', 'like', '%' . request('search') . '%')
+                    ->orWhere('body', 'like', '%' . request('search') . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        $category = (object) ['slug' => 'pengumuman', 'category' => 'Pengumuman'];
+
+        return view('visitors.artikel.index', compact('articles', 'category'));
     }
 } 

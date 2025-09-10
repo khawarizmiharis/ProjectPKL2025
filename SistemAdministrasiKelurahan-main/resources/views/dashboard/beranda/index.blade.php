@@ -13,6 +13,7 @@
 {{-- Penduduk --}}
 <div class="row">
     <div class="col-md-12">
+        {{--
         <div class="main-card mb-3 card">
             <div class="card-header">
                 Tabel Info Pengajuan Surat
@@ -38,12 +39,12 @@
                                 <div class="badge badge-primary">
                                     Antrian
                                 </div>
-                                {{-- <div class="badge badge-warning">
+                                //-- <div class="badge badge-warning">
                                 </div>
                                 <div class="badge badge-success">
                                 </div>
                                 <div class="badge badge-secondary">
-                                </div> --}}
+                                </div> --//
                             </td>
                         </tr>
                     </tbody>
@@ -58,13 +59,16 @@
                 </div>
             </div>
         </div>
+        --}}
+ 
+{{--        
     </div>
 </div>
 <div class="row">
     <div class="col">
     </div>
 </div>
-{{-- Admin --}}
+// Admin
 <div class="row">
     <div class="col-md-6 col-xl-4">
         <div class="card mb-3 widget-content bg-grow-early">
@@ -106,6 +110,8 @@
         </div>
     </div>
 </div>
+--}}
+
 <div class="row">
     <div class="col-md-12">
         <div class="main-card mb-3 card">
