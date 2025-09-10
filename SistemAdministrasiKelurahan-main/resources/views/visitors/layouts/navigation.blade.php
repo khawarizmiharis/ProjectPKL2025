@@ -58,6 +58,8 @@
                 <li class="{{ request()->is('layanan/informasi') ? 'active' : '' }}">
                     <a href="{{ route('layanan.informasi') }}">Layanan</a>
                 </li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {{-- <li class="drop-down{{ request()->is('/kegiatan-masyarakat/umkm') ? 'active' : '' }}">
                 <a href="#">Kegiatan Masyarakat</a>
                 <ul>
@@ -68,9 +70,10 @@
                 {{-- <li class="{{ request()->is('pelayanan/pengajuan-surat') ? 'active' : '' }}">
                     <a href="{{ route('pengajuan-surat.create') }}">Pengajuan Surat</a>
                 </li> --}}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 @guest
-                <li class="btn-register"><a href="{{ route('register') }}">Daftar</a></li>
-                <li class="btn-login"><a href="{{ route('login') }}">Masuk</a></li>
+                <!-- <li class="btn-register"><a href="{{ route('register') }}">Daftar</a></li>
+                <li class="btn-login"><a href="{{ route('login') }}">Masuk</a></li> -->
                 @else
                 <?php
                     $name = explode(' ', Auth::user()->full_name);

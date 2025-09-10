@@ -3,150 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Complaint;
-
+use App\ComplaintCategory;
 use App\Mail\ComplaintMail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\Auth;
-use App\ComplaintCategory;
 
 class ComplaintController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function index()
     {
-        // $letterSubmissions = ComplaintController::paginate(10);
-        // $letterSubmissionTotal = count(ComplaintController::where('status_id', '!=', 4)->get());
-        // $letterStatuses = LetterStatus::get();
-        $complaints = Complaint::get();
-        // return $complaints;
+        $complaints = Complaint::latest()->paginate(10);
         return view('dashboard.manajemen_pengaduan.pengaduan', compact('complaints'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $user = Auth::user(); // bisa null jika guest
-    $complaint_categories = ComplaintCategory::all(); // ambil semua kategori
-
-    return view('visitors.pengaduan.form', [
-        'user' => $user,
-        'user_id' => $user ? $user->id : null,
-        'complaint_categories' => $complaint_categories
-    ]);
-        //
-        // $letterTypes = LetterType::get();
-        // $user = Auth::user();
-        // return view('dashboard.layanan.pengajuan_surat.pengajuan-surat-tambah'/*, compact('letterTypes', 'user')*/);
+        return view('visitors.pengaduan.form', [
+            'complaint_categories' => ComplaintCategory::all()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone_number' => 'required|string|max:255',
+        $validatedData = $request->validate([
+            'name'                  => ['required', 'string', 'max:255', 'regex:/^[\pL\s.,]+$/u'],
+            'email'                 => 'required|email|max:255',
+            'phone_number'          => 'required|string|max:15',
+            'complaint'             => ['required', 'string', 'max:5000', 'regex:/^[\pL\s.,!?-]+$/u'],
             'complaint_category_id' => 'required',
-            'complaint' => 'required|string'
+            'attachment'            => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048'
+        ], [
+            'name.regex' => 'Nama hanya boleh berisi huruf dan spasi.',
+            'complaint.regex'  => 'Isi pengaduan hanya boleh berisi huruf dan tanda baca umum.'
         ]);
 
-        if ($validator->fails()) {
-            Alert::error('Gagal', 'Terdapat kesalahan input data pengaduan, silahkan coba lagi');
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+        if ($request->file('attachment')) {
+            $validatedData['attachment'] = $request->file('attachment')->store('complaints/attachment');
         }
 
-        $complaint_data = $validator->getData();
-        // Complaint::create($validator->valid());
-        Complaint::create($complaint_data);
+        $complaint = Complaint::create($validatedData);
 
-        $category = ComplaintCategory::find($complaint_data['complaint_category_id'])->category;
-        $complaint_data = Arr::add($complaint_data, 'category', $category);
+        // Mail::to($validatedData['email'])->send(new ComplaintMail($complaint));
 
-        // Send to Gmail
-        Mail::to($complaint_data['email'])
-            ->send(new ComplaintMail($complaint_data));
+        Alert::success('Berhasil', 'Pengaduan anda berhasil terkirim. Mohon untuk menunggu respon dari kami.');
 
-        Alert::success('Berhasil', 'Pengaduan anda terkirim, silahkan cek email anda');
-
-        return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ComplaintController  $ComplaintController
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ComplaintController $ComplaintController)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ComplaintController  $ComplaintController
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ComplaintController $ComplaintController)
-    {
-        // return view('dashboard.layanan.pengajuan_surat.pengajuan-surat-edit'/*, compact('letterTypes', 'user')*/);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ComplaintController  $ComplaintController
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ComplaintController $ComplaintController)
-    {
-        // if ($request->ajax() && $request->isMethod('patch')) {
-        //     //partially update record here
-        //     dd($request->method());
-        // }
-        // $letterSubmissionId = ComplaintController::findOrFail($request->letter_id);
-        // $attr = $request->validate([
-        //     'status_id' => 'required|numeric'
-        // ]);
-
-        // $letterSubmissionId->update($attr);
-
-        // Alert::success('Berhasil', 'Status pengajuan surat berhasil diperbarui');
-        // return redirect()->route('manajemen-surat.pengajuan-surat');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ComplaintController  $ComplaintController
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ComplaintController $ComplaintController)
-    {
-        // $ComplaintController->delete();
-        // Alert::success('Berhasil', 'Data pengajuan surat berhasil Ddhapus');
-        // return redirect()->route('manajemen-surat.pengajuan-surat');
+        return redirect()->back();
     }
 }
+
