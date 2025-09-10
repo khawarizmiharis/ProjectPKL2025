@@ -62,8 +62,7 @@
                 <li class="{{ request()->is('layanan/informasi') ? 'active' : '' }}">
                     <a href="{{ route('layanan.informasi') }}">Layanan</a>
                 </li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {{-- <li class="drop-down{{ request()->is('/kegiatan-masyarakat/umkm') ? 'active' : '' }}">
                 <a href="#">Kegiatan Masyarakat</a>
                 <ul>
