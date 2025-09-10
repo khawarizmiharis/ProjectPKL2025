@@ -443,7 +443,7 @@
                                 <small><i class="text-danger">{{ $message }}</i></small>
                             @enderror
                         </div>
-
+                        
                         {{-- Email --}}
                         <div class="col-sm-6 mb-3">
                             <label for="email" class="form-label">Email <span class="text-danger">*</span></label>

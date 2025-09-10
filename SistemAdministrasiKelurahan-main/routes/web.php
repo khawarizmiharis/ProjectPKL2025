@@ -20,7 +20,7 @@ use App\Http\Controllers\VillageIdentityController;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('welcome');
 // });
 
 
@@ -32,8 +32,9 @@ Route::middleware('auth')->group(function () {
     // $home = 'home';
     // Route::get('/' . $home, 'HomeController@' . $menu)->name('home');
 
-    // Tambahkan route untuk Carousel di sini
-    Route::resource('/dashboard/carousel', 'CarouselController')->except(['show', 'edit', 'update']);
+    // Mengubah resource route untuk Carousel agar memiliki nama yang benar
+    // dan menyertakan metode edit, update, destroy.
+    Route::resource('/dashboard/carousel', 'CarouselController')->except(['show'])->names('dashboard.carousel');
 
 
     // peengajuan surat
@@ -190,7 +191,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{letter_submission}/delete', 'LetterSubmissionController@destroy')->name('manajemen-surat.pengajuan-surat.destroy');
 
             // Route::patch('/{letter_status}/edit', function () {
-            //     return 'Berhasil';
+            //     return 'Berhasil';
             // })->name('manajemen-surat.pengajuan-surat.update');
             // Route::get('/edit', 'dashboardController@editpermohonansurat')->name('manajemen-surat.edit-permohonan-surat');
         });
@@ -407,8 +408,8 @@ Route::get('/', 'HomeController@beranda')->name('visitors.beranda.index');
 Route::post('/pengaduan', 'ComplaintController@store')->name('visitors.complaint.store');
 // Form Pengaduan
 // Route::get('/layanan-publik/form-pengaduan', [ComplaintController::class, 'create'])
-//     ->name('layanan-publik.form-pengaduan.index');
- 
+//     ->name('layanan-publik.form-pengaduan.index');
+
     // Form pengaduan
 Route::get('/layanan-publik/form-pengaduan', [ComplaintController::class, 'create'])
     ->name('layanan-publik.form-pengaduan');
@@ -443,13 +444,13 @@ Route::get('/layanan/informasi', function () {
 
 // // Layanan_publik
 // Route::prefix('layanan-publik')->group(function () {
-//     // Pengaduan
-//     Route::get('/pengaduan', 'ServiceComplaintController@index')->name('layanan-publik.pengaduan');
-//     Route::post('/pengaduan', 'ServiceComplaintController@store')->name('layanan-publik.pengaduan.store');
+//     // Pengaduan
+//     Route::get('/pengaduan', 'ServiceComplaintController@index')->name('layanan-publik.pengaduan');
+//     Route::post('/pengaduan', 'ServiceComplaintController@store')->name('layanan-publik.pengaduan.store');
 
-//     // Pengajuan Surat
-//     Route::get('/pengajuan-surat', 'ServiceLetterSubmissionController@index')->name('layanan-publik.pengajuan-surat');
-//     Route::post('/pengajuan-surat', 'ServiceLetterSubmissionController@store')->name('layanan-publik.pengajuan-surat.store');
+//     // Pengajuan Surat
+//     Route::get('/pengajuan-surat', 'ServiceLetterSubmissionController@index')->name('layanan-publik.pengajuan-surat');
+//     Route::post('/pengajuan-surat', 'ServiceLetterSubmissionController@store')->name('layanan-publik.pengajuan-surat.store');
 // });
 Route::prefix('layanan-publik')->name('layanan-publik.')->group(function () {
     Route::resource('pengajuan-surat', 'ServiceLetterSubmissionController');
@@ -467,3 +468,4 @@ Route::prefix('/umkm')->group(function() {
 Route::get('/kegiatan-masyarakat/umkm/view-product', function () {
     return view('visitors.kegiatan_masyarakat.umkm.view-product');
 })->name('visitors.kegiatan_masyarakat.umkm.view-product');
+
