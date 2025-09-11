@@ -423,6 +423,7 @@ Route::post('/layanan-publik/pengaduan', [ComplaintController::class, 'store'])
 // Artikel
 Route::prefix('/artikel')->group(function () {
     Route::get('', 'ArticleController@index')->name('visitors.artikel.index');
+    Route::get('/pengumuman', 'ArticleController@pengumuman')->name('visitors.artikel.pengumuman');
     Route::get('/{article:slug}', 'ArticleController@show')->name('visitors.artikel.show');
     Route::get('/categories/{category:slug}', 'ArticleCategoryController@show')->name('visitors.artikel.category.show');
     Route::get('/tags/{tag:slug}', 'ArticleTagController@show')->name('visitors.artikel.tag.show');
