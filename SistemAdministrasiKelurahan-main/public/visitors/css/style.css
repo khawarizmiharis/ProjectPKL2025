@@ -822,13 +822,14 @@ section {
 .br-full {
     border-radius: 10px;
 }
-.bg-glass {
+/* .bg-glass {
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;
-    background-color: rgba(123, 123, 123, 0.197);
-    backdrop-filter: blur(5px);
+    background-color: rgba(123, 123, 123, 0.7); 
+    backdrop-filter: none; 
     padding: 30px;
-}
+} */
+
 
 .social-media {
     text-align: center;
