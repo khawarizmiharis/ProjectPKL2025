@@ -59,7 +59,7 @@
                                 ['dashboard_sub_menus.menu_id', '=', $menu->id],
                                 ['dashboard_sub_menus.is_active', '=', 1]
                             ])
-                            ->whereNotIn('dashboard_sub_menus.sub_menu', ['Log Aktivitas Pengguna', 'Kontribusi Artikel']) // 🚫 sembunyikan sub menu
+                            ->whereNotIn('dashboard_sub_menus.sub_menu', ['Wilayah', 'Data Administratif', 'Log Aktivitas Pengguna', 'Kontribusi Artikel']) // 🚫 sembunyikan sub menu
                             ->get();
                     @endphp
 
