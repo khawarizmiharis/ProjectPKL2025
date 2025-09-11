@@ -19,6 +19,7 @@ use App\VillagerStayStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -303,14 +304,18 @@ class VillagerController extends Controller
     // Export data penduduk kedalam excel
     public function export()
     {
-        // return Excel::download(new VillagerExport, 'penduduk.xlsx');
-        return (new VillagerExport)->download('data_penduduk.xlsx');
+        return Excel::download(new VillagerExport, 'data_penduduk.xlsx');
     }
 
     // import excel data penduduk ke dalam database
     public function import(Request $request)
     {
-        (new VillagerImport)->import($request->file('data_penduduk'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+        $request->validate([
+            'data_penduduk' => 'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new VillagerImport, $request->file('data_penduduk'));
+
         Alert::success(' Berhasil ', ' Data Penduduk Berhasil Ditambahkan');
         return redirect()->route('penduduk');
     }
