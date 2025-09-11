@@ -363,24 +363,22 @@
                     }
                 }
             });
-        //pendidikan
+
+            // pendidikan
             var ctx_2 = document.getElementById("pendidikan").getContext('2d');
+            var eduData = @json($eduDatas->pluck('total'));
+            var eduLabels = @json($eduDatas->pluck('education'));
+
             var data_2 = {
                 datasets: [{
-                    data: [10, 20, 30],
-                    backgroundColor: [
-                        '#3c8dbc',
-                        '#f56954',
-                        '#f39c12',
-                    ],
+                    data: eduData,
+                    backgroundColor: eduData.map((_, i) =>
+                        'hsl(' + (i * 360 / eduData.length) + ',70%,50%)'
+                    ),
                 }],
-                labels: [
-                    'Request',
-                    'Layanan',
-                    'Problem'
-                ]
+                labels: eduLabels
             };
-            var myDoughnutChart_2 = new Chart(ctx_2, {
+            new Chart(ctx_2, {
                 type: 'doughnut',
                 data: data_2,
                 options: {
@@ -388,41 +386,54 @@
                     maintainAspectRatio: true,
                     legend: {
                         position: 'right',
-                        labels: {
-                            boxWidth: 12
-                        }
+                        labels: { boxWidth: 12 }
                     }
                 }
             });
 
-        //pekerjaan
-            var ctx_3 = document.getElementById("pekerjaan").getContext('2d');
-            var data_3 = {
-                datasets: [{
-                    data: [10, 20, 30],
-                    backgroundColor: [
-                        '#3c8dbc',
-                        '#f56954',
-                        '#f39c12',
-                    ],
-                }],
-                labels: [
-                    'Request',
-                    'Layanan',
-                    'Problem'
-                ]
-            };
-            var myDoughnutChart_3 = new Chart(ctx_3, {
+            // pekerjaan
+            var profData = @json($profDatas->pluck('total'));
+            var profLabels = @json($profDatas->pluck('profession'));
+
+            // Gabung label + value
+            var combined = profLabels.map((label, index) => {
+                return { label: label, value: profData[index] };
+            });
+
+            // Urutkan desc
+            combined.sort((a, b) => b.value - a.value);
+
+            // Ambil Top 10
+            var top10 = combined.slice(0, 10);
+            var others = combined.slice(10);
+
+            // Hitung "Lainnya"
+            var othersTotal = others.reduce((sum, item) => sum + item.value, 0);
+            if (othersTotal > 0) {
+                top10.push({ label: "Lainnya", value: othersTotal });
+            }
+
+            // Tambahkan "Lainnya" meskipun totalnya 0
+            top10.push({ label: "Lainnya", value: othersTotal });
+
+            var ctx_prof_donut = document.getElementById("pekerjaan").getContext('2d');
+            new Chart(ctx_prof_donut, {
                 type: 'doughnut',
-                data: data_3,
+                data: {
+                    labels: top10.map(item => item.label),
+                    datasets: [{
+                        data: top10.map(item => item.value),
+                        backgroundColor: top10.map((_, i) =>
+                            'hsl(' + (i * 360 / top10.length) + ',70%,50%)'
+                        ),
+                    }]
+                },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
-                    legend: {
+                    legend: {               // ⬅️ disamain kaya pendidikan
                         position: 'right',
-                        labels: {
-                            boxWidth: 12
-                        }
+                        labels: { boxWidth: 12 }
                     }
                 }
             });
@@ -519,7 +530,6 @@
             //     }
             // });
     });
-
 
 </script>
 @endsection
