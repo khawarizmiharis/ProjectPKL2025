@@ -78,11 +78,15 @@ if (isset($article->category) && $article->category->slug == 'pengumuman') {
                                                     <li>
                                                         <i class="fa fa-paperclip"></i> Lampiran:
                                                         @if($article->link_document)
-                                                            <a href="{{ asset('storage/' . $article->link_document) }}" target="_blank">
+                                                            <a href="{{ asset('storage/' . $article->link_document) }}" 
+                                                            target="_blank" 
+                                                            onclick="return confirm('Apakah Anda yakin ingin mendownload lampiran ini?')">
                                                                 {{ $article->document }}
                                                             </a>
                                                         @else
-                                                            <span>Tidak ada lampiran</span>
+                                                            <span style="font-weight: normal; text-transform: none; font-size: 13px; color: #555;">
+                                                                Tidak ada lampiran
+                                                            </span>
                                                         @endif
                                                     </li>
 

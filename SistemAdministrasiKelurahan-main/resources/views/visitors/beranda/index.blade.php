@@ -194,31 +194,7 @@
         <div class="all-blog-posts">
             <div class="row">
                 @php $count = 0; @endphp
-                @forelse ($latestArticles as $article) {{-- ambil hanya 3 artikel --}}
-                    @if ($article->category->slug !== 'pengumuman')
-                        @php $count++; @endphp
-                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">
-                            <div class="blog-post">
-                                <div class="bt-home">
-                                    <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <a href="{{ route('visitors.artikel.show', $article->slug) }}">
-                                        <h4>{{ $article->title }}</h4>
-                                    </a>
-                                    <hr>
-                                    <p>
-                                        {!! Str::limit($article->body, 150) !!}
-                                        <hr>
-                                        <a href="{{ route('visitors.artikel.show', $article->slug) }}">
-                                            Baca lebih lanjut
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @empty
+                @if($articles->count() === 0)
                     {{-- Kalau memang tidak ada artikel sama sekali --}}
                     <div class="col-12">
                         <div class="alert alert-info text-center">
@@ -226,17 +202,41 @@
                             pengaduan. Terima kasih.
                         </div>
                     </div>
-                @endforelse
+                @else
+                    @foreach ($latestArticles as $article)
+                        @if ($article->category->slug !== 'pengumuman')
+                            @php $count++; @endphp
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                                <div class="blog-post">
+                                    <div class="bt-home">
+                                        <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="">
+                                    </div>
+                                    <div class="down-content">
+                                        <a href="{{ route('visitors.artikel.show', $article->slug) }}">
+                                            <h4>{{ $article->title }}</h4>
+                                        </a>
+                                        <hr>
+                                        <p>
+                                            {!! Str::limit($article->body, 150) !!}
+                                            <hr>
+                                            <a href="{{ route('visitors.artikel.show', $article->slug) }}">
+                                                Baca lebih lanjut
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
 
-                {{-- Kalau ada artikel, tapi semuanya kategori pengumuman --}}
-                @if($count === 0 && $articles->count() > 0)
-                    <div class="col-12">
-                        <div class="alert alert-info text-center">
-                            Belum ada berita (selain pengumuman) yang tersedia untuk saat ini.
+                    @if($count === 0)
+                        <div class="col-12">
+                            <div class="alert alert-info text-center">
+                                Belum ada berita (selain pengumuman) yang tersedia untuk saat ini.
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endif
-            </div>
 
             {{-- tombol lihat semua berita --}}
             @if($articles->count() > 3)

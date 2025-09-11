@@ -32,45 +32,41 @@ class ArticleDashboardController extends Controller
      */
     public function store(Request $request)
     {
+        $attr = $request->validate([
+            'category_id' => 'required|numeric',
+            'title'       => 'required|string',
+            'thumbnail'   => 'required|mimes:jpg,jpeg,png,gif,webp|max:3000', // hanya gambar
+            'body'        => 'required|string',
+            'document'    => 'nullable|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,txt|max:5000', // hanya dokumen
+            'tags'        => 'required|array',
+        ]);
+
         $userId = Auth::user()->id;
 
         $thumbnailUrl = null;
-        $documentUrl = null;
+        $documentUrl  = null;
         $documentName = null;
 
         // thumbnail
         if ($request->hasFile('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
-            if ($thumbnail->getSize() <= 3000000) {
-                $thumbnailName = pathinfo($thumbnail->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $thumbnail->extension();
-                $thumbnailUrl = $thumbnail->storeAs("images/thumbnail", $thumbnailName, 'public');
-            }
+            $thumbnailName = pathinfo($thumbnail->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $thumbnail->extension();
+            $thumbnailUrl = $thumbnail->storeAs("images/thumbnail", $thumbnailName, 'public');
         }
 
         // document
         if ($request->hasFile('document')) {
             $document = $request->file('document');
-            if ($document->getSize() <= 5000000) {
-                $documentName = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $document->extension();
-                $documentUrl = $document->storeAs("document/article_document", $documentName, 'public');
-            }
+            $documentName = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $document->extension();
+            $documentUrl = $document->storeAs("document/article_document", $documentName, 'public');
         }
 
-        $attr = $request->validate([
-            'category_id' => 'required|numeric',
-            'title' => 'required|string',
-            'thumbnail' => 'required|image|max:3000',
-            'body' => 'required|string',
-            'document' => 'file|max:5000',
-            'tags' => 'required|array',
-        ]);
-
-        $attr['user_id'] = $userId;
-        $attr['slug'] = \Str::slug($attr['title']);
-        $attr['thumbnail'] = $thumbnailUrl;
-        $attr['enabled'] = 1;
-        $attr['commentable'] = 1;
-        $attr['document'] = $documentName;
+        $attr['user_id']      = $userId;
+        $attr['slug']         = \Str::slug($attr['title']);
+        $attr['thumbnail']    = $thumbnailUrl;
+        $attr['enabled']      = 1;
+        $attr['commentable']  = 1;
+        $attr['document']     = $documentName;
         $attr['link_document'] = $documentUrl;
 
         $article = Article::create($attr);
@@ -96,47 +92,43 @@ class ArticleDashboardController extends Controller
     {
         $attr = $request->validate([
             'category_id' => 'required|numeric',
-            'title' => 'required|string',
-            'thumbnail' => 'image|max:3000',
-            'body' => 'required|string',
-            'tags' => 'required|array',
-            'document' => 'file|max:5000',
+            'title'       => 'required|string',
+            'thumbnail'   => 'nullable|mimes:jpg,jpeg,png,gif,webp|max:3000', // hanya gambar
+            'body'        => 'required|string',
+            'tags'        => 'required|array',
+            'document'    => 'nullable|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,txt|max:5000', // hanya dokumen
         ]);
 
         $userId = Auth::user()->id;
 
         $thumbnailUrl = $article->thumbnail;
-        $documentUrl = $article->link_document;
+        $documentUrl  = $article->link_document;
         $documentName = $article->document;
 
         // thumbnail
         if ($request->hasFile('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            if ($thumbnail->getSize() <= 3000000) {
-                if ($article->thumbnail) {
-                    Storage::disk('public')->delete($article->thumbnail);
-                }
-                $thumbnailName = pathinfo($thumbnail->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $thumbnail->extension();
-                $thumbnailUrl = $thumbnail->storeAs("images/thumbnail", $thumbnailName, 'public');
+            if ($article->thumbnail) {
+                Storage::disk('public')->delete($article->thumbnail);
             }
+            $thumbnail = $request->file('thumbnail');
+            $thumbnailName = pathinfo($thumbnail->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $thumbnail->extension();
+            $thumbnailUrl = $thumbnail->storeAs("images/thumbnail", $thumbnailName, 'public');
         }
 
         // document
         if ($request->hasFile('document')) {
-            $document = $request->file('document');
-            if ($document->getSize() <= 5000000) {
-                if ($article->link_document) {
-                    Storage::disk('public')->delete($article->link_document);
-                }
-                $documentName = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $document->extension();
-                $documentUrl = $document->storeAs("document/article_document", $documentName, 'public');
+            if ($article->link_document) {
+                Storage::disk('public')->delete($article->link_document);
             }
+            $document = $request->file('document');
+            $documentName = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $document->extension();
+            $documentUrl = $document->storeAs("document/article_document", $documentName, 'public');
         }
 
-        $attr['user_id'] = $userId;
-        $attr['slug'] = \Str::slug($attr['title']);
-        $attr['thumbnail'] = $thumbnailUrl;
-        $attr['document'] = $documentName;
+        $attr['user_id']       = $userId;
+        $attr['slug']          = \Str::slug($attr['title']);
+        $attr['thumbnail']     = $thumbnailUrl;
+        $attr['document']      = $documentName;
         $attr['link_document'] = $documentUrl;
 
         $article->update($attr);
@@ -170,27 +162,23 @@ class ArticleDashboardController extends Controller
     public function destroySelected(Request $request)
     {
         $request->validate([
-            'ids' => 'required|array',
+            'ids'   => 'required|array',
             'ids.*' => 'exists:articles,id'
         ]);
 
         $articles = Article::whereIn('id', $request->ids)->get();
 
         foreach ($articles as $article) {
-            // hapus relasi tags
             $article->tags()->detach();
 
-            // hapus file thumbnail
             if ($article->thumbnail) {
                 Storage::disk('public')->delete($article->thumbnail);
             }
 
-            // hapus dokumen
             if ($article->link_document) {
                 Storage::disk('public')->delete($article->link_document);
             }
 
-            // hapus artikel
             $article->delete();
         }
 

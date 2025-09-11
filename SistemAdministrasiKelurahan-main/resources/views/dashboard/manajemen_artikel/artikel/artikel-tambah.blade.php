@@ -49,12 +49,12 @@
                                         <label for="category_id" class="">Kategori</label>
                                         <select name="category_id" id="category_id"
                                             class="mb-2 form-control @error('category_id') is-invalid @enderror">
-                                            <option value="{{ old('category_id') }}" disabled selected>
-                                                Pilih salah satu
-                                            </option>
+                                            <option value="" disabled selected>Pilih salah satu</option>
 
                                             @forelse ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                {{ $category->category }}
+                                            </option>
                                             @empty
                                             <option>Data kategori belum ada</option>
                                             @endforelse
@@ -70,10 +70,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="editor">Isi</label>
-                                        <textarea class="form-control @error('body') is-invalid @enderror" name="body"
-                                            id="editor" rows="5">
-                                                                            {{ old('body') }}
-                                                                        </textarea>
+                                        <textarea class="form-control @error('body') is-invalid @enderror" 
+                                            name="body" id="editor" rows="5">{{ old('body') }}</textarea>
+
                                         @error('body')
                                         <span class="invalid-feedback mt-2" role="alert">
                                             <i>{{ $message }}</i>
@@ -97,7 +96,10 @@
                                     class="mb-2 form-control select2 @error('tags') is-invalid @enderror" multiple>
                                     {{-- <option disabled selected>Pilih tag yang sesuai</option> --}}
                                     @forelse ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name_tag }}</option>
+                                    <option value="{{ $tag->id }}" 
+                                        {{ (collect(old('tags'))->contains($tag->id)) ? 'selected' : '' }}>
+                                        {{ $tag->name_tag }}
+                                    </option>
                                     @empty
                                     <option>Data tag belum ada</option>
                                     @endforelse

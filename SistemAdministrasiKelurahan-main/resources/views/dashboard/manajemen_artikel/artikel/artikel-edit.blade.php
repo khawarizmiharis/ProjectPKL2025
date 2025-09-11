@@ -22,10 +22,11 @@
                 <div tabindex="-1" class="dropdown-divider"></div>
 
                 <form action="{{ route('manajemen-artikel.artikel.update', $article->id) }}" method="POST"
-                    enctype="multipart/form-data">
+                      enctype="multipart/form-data">
                     @csrf
                     @method('patch')
 
+                    {{-- Artikel --}}
                     <div class="row">
                         <div class=" col-lg-3 mb-2 mt-1">
                             <h4 class="card-title font-weight-bold">Artikel</h4>
@@ -33,64 +34,65 @@
                         </div>
                         <div class=" col-lg-9 ">
                             <div class="form-row">
+                                {{-- Judul --}}
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="title" class="">Judul Artikel</label>
+                                        <label for="title">Judul Artikel</label>
                                         <input name="title" id="title" type="text"
-                                            class="form-control @error('title') is-invalid @enderror"
-                                            value="{{ old('title') ?? $article->title }}">
+                                               class="form-control @error('title') is-invalid @enderror"
+                                               value="{{ old('title', $article->title) }}">
                                         @error('title')
-                                        <span class="invalid-feedback mt-2" role="alert">
-                                            <i>{{ $message }}</i>
-                                        </span>
+                                            <span class="invalid-feedback mt-2" role="alert">
+                                                <i>{{ $message }}</i>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
+
+                                {{-- Kategori --}}
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="category_id" class="">Kategori</label>
+                                        <label for="category_id">Kategori</label>
                                         <select name="category_id" id="category_id"
-                                            class="mb-2 form-control @error('category_id') is-invalid @enderror">
-                                            <option value="{{ old('category_id') }}" disabled selected>
-                                                Pilih salah satu
-                                            </option>
-
+                                                class="mb-2 form-control @error('category_id') is-invalid @enderror">
+                                            <option value="" disabled>Pilih salah satu</option>
                                             @forelse ($categories as $category)
-                                            <option {{ $category->id == $article->category_id ? 'selected' : '' }}
-                                                value="{{ $category->id }}">
-                                                {{ $category->category }}
-                                            </option>
+                                                <option value="{{ $category->id }}"
+                                                    {{ old('category_id', $article->category_id) == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->category }}
+                                                </option>
                                             @empty
-                                            <option>Data kategori belum ada</option>
+                                                <option>Data kategori belum ada</option>
                                             @endforelse
-
                                         </select>
                                         @error('category_id')
-                                        <span class="invalid-feedback mt-2" role="alert">
-                                            <i>{{ $message }}</i>
-                                        </span>
+                                            <span class="invalid-feedback mt-2" role="alert">
+                                                <i>{{ $message }}</i>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
+
+                                {{-- Isi Artikel --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="editor">Isi</label>
-                                        <textarea class="form-control @error('body') is-invalid @enderror" name="body"
-                                            id="editor" rows="5">
-                                                                        {{ old('body') ?? $article->body }}
-                                                                    </textarea>
+                                        <textarea class="form-control @error('body') is-invalid @enderror"
+                                                  name="body" id="editor" rows="5">{{ old('body', $article->body) }}</textarea>
                                         @error('body')
-                                        <span class="invalid-feedback mt-2" role="alert">
-                                            <i>{{ $message }}</i>
-                                        </span>
+                                            <span class="invalid-feedback mt-2" role="alert">
+                                                <i>{{ $message }}</i>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+
                     <div tabindex="-1" class="dropdown-divider mt-4"></div>
+
+                    {{-- Tag --}}
                     <div class="row">
                         <div class=" col-lg-3">
                             <h4 class="card-title">Tag</h4>
@@ -98,33 +100,30 @@
                         </div>
                         <div class=" col-lg-9">
                             <div class="position-relative form-group">
-                                <label for="tags" class="">Tag</label>
+                                <label for="tags">Tag</label>
                                 <select name="tags[]" id="tags"
-                                    class="mb-2 form-control select2 @error('tags') is-invalid @enderror" multiple>
-                                    {{-- <option disabled selected>Pilih tag yang sesuai</option> --}}
+                                        class="mb-2 form-control select2 @error('tags') is-invalid @enderror" multiple>
                                     @forelse ($tags as $tag)
-                                    <option {{ in_array($tag->id, $tagCheck) ? 'selected' : '' }}
-                                        value="{{ $tag->id }}">
-                                        {{ $tag->name_tag }}
-                                    </option>
+                                        <option value="{{ $tag->id }}"
+                                            {{ in_array($tag->id, old('tags', $tagCheck)) ? 'selected' : '' }}>
+                                            {{ $tag->name_tag }}
+                                        </option>
                                     @empty
-                                    <option>Data tag belum ada</option>
+                                        <option>Data tag belum ada</option>
                                     @endforelse
                                 </select>
-                                {{-- <div class="mt-2 ">
-                                    <label for="#" class=" bg-light pl-2 pr-2 p-1  border rounded">Tag
-                                        <a href="#" class="hover-red"><i class="fas fa-times-circle"></i></a>
-                                    </label>
-                                </div> --}}
                                 @error('tags')
-                                <span class="invalid-feedback mt-2" role="alert">
-                                    <i>{{ $message }}</i>
-                                </span>
+                                    <span class="invalid-feedback mt-2" role="alert">
+                                        <i>{{ $message }}</i>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
                     </div>
+
                     <div tabindex="-1" class="dropdown-divider"></div>
+
+                    {{-- Gambar --}}
                     <div class="row">
                         <div class=" col-lg-3">
                             <h4 class="card-title">Gambar</h4>
@@ -133,25 +132,31 @@
                         <div class=" col-lg-9">
                             <div class="form-row ml-1 mb-2 mt-3">
                                 <div class="position-relative form-group">
-                                    <label for="thumbnail" class="">Upload Gambar</label>
+                                    <label for="thumbnail">Upload Gambar</label>
                                     <input name="thumbnail" id="thumbnail" type="file"
-                                        class="form-control-file @error('thumbnail') is-invalid @enderror"
-                                        value="{{ old('thumbnail') }}">
-                                    <small class="form-text text-muted">
-                                        Wajib mengisi Gambar sesuai dengan aslinya
-                                    </small>
+                                           class="form-control-file @error('thumbnail') is-invalid @enderror"
+                                           accept="image/*">
+                                    @if($article->thumbnail)
+                                        <div class="mt-2">
+                                            <img src="{{ asset('storage/'.$article->thumbnail) }}" alt="Thumbnail lama"
+                                                 style="max-height: 120px; border-radius: 6px;">
+                                        </div>
+                                    @endif
                                     <small class="form-text text-muted">Ukuran Maksimal : 3MB</small>
-                                    <small class="form-text text-muted">Rekomendasi Ukuran : 1200x800 px (Landscape)</small>
+                                    <small class="form-text text-muted">Rekomendasi : 1200x800 px (Landscape)</small>
                                     @error('thumbnail')
-                                    <span class="invalid-feedback mt-2" role="alert">
-                                        <i>{{ $message }}</i>
-                                    </span>
+                                        <span class="invalid-feedback mt-2" role="alert">
+                                            <i>{{ $message }}</i>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div tabindex="-1" class="dropdown-divider"></div>
+
+                    {{-- Lampiran --}}
                     <div class="row">
                         <div class=" col-lg-3">
                             <h4 class="card-title">Lampiran</h4>
@@ -160,18 +165,22 @@
                         <div class=" col-lg-9">
                             <div class="form-row ml-1 mb-2 mt-3">
                                 <div class="position-relative form-group">
-                                    <label for="document" class="">Upload Lampiran</label>
+                                    <label for="document">Upload Lampiran</label>
                                     <input name="document" id="document" type="file"
-                                        class="form-control-file @error('document') is-invalid @enderror"
-                                        value="{{ old('document') }}">
-                                    <small class="form-text text-muted">
-                                        Untuk artikel yang membutuhkan lampiran
-                                    </small>
+                                           class="form-control-file @error('document') is-invalid @enderror"
+                                           accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.txt">
+                                    @if($article->document)
+                                        <div class="mt-2">
+                                            <a href="{{ asset('storage/'.$article->link_document) }}" target="_blank" class="btn btn-sm btn-outline-info">
+                                                Lihat Lampiran Lama
+                                            </a>
+                                        </div>
+                                    @endif
                                     <small class="form-text text-muted">Ukuran Maksimal : 5MB</small>
                                     @error('document')
-                                    <span class="invalid-feedback mt-2" role="alert">
-                                        <i>{{ $message }}</i>
-                                    </span>
+                                        <span class="invalid-feedback mt-2" role="alert">
+                                            <i>{{ $message }}</i>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
@@ -193,8 +202,6 @@
         .catch ( error => {
             console.error( error );
         });
-
-    // CKEDITOR.replace('body');
 </script>
 
 <script>
