@@ -17,8 +17,8 @@ class CreateVillageIdentitiesTable extends Migration
             $table->id();
             $table->string('village_name', 100)->nullable();
             $table->string('village_code', 100)->nullable();
-            $table->string('kepala_desa_name', 100)->nullable();
-            $table->char('kepala_desa_nip', 18)->nullable();
+            $table->string('kepala_kelurahan_name', 100)->nullable();
+            $table->char('kepala_kelurahan_nip', 18)->nullable();
             $table->char('zip_code', 5)->nullable();
             $table->string('kecamatan_name', 100)->nullable();
             $table->string('kecamatan_code', 100)->nullable();

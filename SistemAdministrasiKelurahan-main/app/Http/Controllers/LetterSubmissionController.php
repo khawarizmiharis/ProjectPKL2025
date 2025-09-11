@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Alert;
 use App\LetterStatus;
 use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
+use RealRashid\SweetAlert\Facades\Alert as FacaKelurahanlert;
 
 class LetterSubmissionController extends Controller
 {
@@ -116,7 +116,7 @@ class LetterSubmissionController extends Controller
         ]);
 
         if ($validator->fails()) {
-            FacadesAlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
+            FacaKelurahanlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -129,9 +129,9 @@ class LetterSubmissionController extends Controller
 
             $letter->update($attr);
 
-            FacadesAlert::success('Berhasil', 'Status surat berhasil diperbarui');
+            FacaKelurahanlert::success('Berhasil', 'Status surat berhasil diperbarui');
         } else {
-            FacadesAlert::error('Gagal', 'Surat tidak dapat ditemukan');
+            FacaKelurahanlert::error('Gagal', 'Surat tidak dapat ditemukan');
         }
 
         return back();
@@ -146,7 +146,7 @@ class LetterSubmissionController extends Controller
     public function destroy(LetterSubmission $letterSubmission)
     {
         $letterSubmission->delete();
-        FacadesAlert::success('Berhasil', 'Data pengajuan surat berhasil Ddhapus');
+        FacaKelurahanlert::success('Berhasil', 'Data pengajuan surat berhasil Ddhapus');
         return redirect()->route('manajemen-surat.pengajuan-surat');
     }
 }

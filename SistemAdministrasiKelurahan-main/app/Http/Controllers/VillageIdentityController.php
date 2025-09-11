@@ -77,8 +77,8 @@ class VillageIdentityController extends Controller
         $attr = $request->validate([
             'village_name' => 'required|string|max:100',
             'village_code' => 'required|string|max:100',
-            'kepala_desa_name' => 'required|string|max:100',
-            'kepala_desa_nip' => 'required|numeric|digits:18',
+            'kepala_kelurahan_name' => 'required|string|max:100',
+            'kepala_kelurahan_nip' => 'required|numeric|digits:18',
             'zip_code' => 'required|numeric|digits:5',
             'kecamatan_name' => 'required|string|max:100',
             'kecamatan_code' => 'required|string|max:100',
@@ -164,7 +164,7 @@ class VillageIdentityController extends Controller
 
         Alert::success('Berhasil', 'Identitas Kelurahan Berhasil Diperbaharui');
 
-        return redirect(route('info-desa.identitas'));
+        return redirect(route('info-kelurahan.identitas'));
     }
 
     /**

@@ -9,8 +9,8 @@ class VillageIdentity extends Model
     protected $fillable = [
         'village_name',
         'village_code',
-        'kepala_desa_name',
-        'kepala_desa_nip',
+        'kepala_kelurahan_name',
+        'kepala_kelurahan_nip',
         'zip_code',
         'kecamatan_name',
         'kecamatan_code',

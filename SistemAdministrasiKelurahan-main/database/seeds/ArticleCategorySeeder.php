@@ -16,7 +16,7 @@ class ArticleCategorySeeder extends Seeder
         $categories = collect([
             'Sejarah dan Visi Misi',
             'Struktur Pemerintahan',
-            'Kegiatan Desa',
+            'Kegiatan Kelurahan',
             'Teknologi',
             'Bisnis',
         ]);

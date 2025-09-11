@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Alert;
 use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
+use RealRashid\SweetAlert\Facades\Alert as FacaKelurahanlert;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -42,7 +42,7 @@ class UserRoleAccessController extends Controller
         ]);
 
         if ($validator->fails()) {
-            FacadesAlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
+            FacaKelurahanlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -52,7 +52,7 @@ class UserRoleAccessController extends Controller
             'name' => $request->name
         ]);
 
-        FacadesAlert::success('Berhasil', 'Role baru berhasil ditambahkan');
+        FacaKelurahanlert::success('Berhasil', 'Role baru berhasil ditambahkan');
         return back();
     }
 
@@ -63,7 +63,7 @@ class UserRoleAccessController extends Controller
         ]);
 
         if ($validator->fails()) {
-            FacadesAlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
+            FacaKelurahanlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -73,7 +73,7 @@ class UserRoleAccessController extends Controller
             'name' => $request->name
         ]);
 
-        FacadesAlert::success('Berhasil', 'Jenis hak akses baru berhasil ditambahkan');
+        FacaKelurahanlert::success('Berhasil', 'Jenis hak akses baru berhasil ditambahkan');
         return back();
     }
 
@@ -132,7 +132,7 @@ class UserRoleAccessController extends Controller
         ]);
 
         if ($validator->fails()) {
-            FacadesAlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
+            FacaKelurahanlert::error('Gagal', 'Terdapat kesalahan input, silahkan coba lagi');
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -142,7 +142,7 @@ class UserRoleAccessController extends Controller
 
         $role->update($attr);
 
-        FacadesAlert::success('Berhasil', 'Role berhasil diperbarui');
+        FacaKelurahanlert::success('Berhasil', 'Role berhasil diperbarui');
         return back();
     }
 
@@ -151,7 +151,7 @@ class UserRoleAccessController extends Controller
         // $role->permissions()->sync($request->permission_id);
         $role->syncPermissions($request->permission_id);
 
-        FacadesAlert::success('Berhasil', 'Hak akses berhasil diperbarui');
+        FacaKelurahanlert::success('Berhasil', 'Hak akses berhasil diperbarui');
         return back();
     }
 
@@ -165,7 +165,7 @@ class UserRoleAccessController extends Controller
     {
         $role->delete();
 
-        FacadesAlert::success('Berhasil', 'Role berhasil dihapus');
+        FacaKelurahanlert::success('Berhasil', 'Role berhasil dihapus');
         return back();
     }
 

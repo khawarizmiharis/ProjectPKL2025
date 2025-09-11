@@ -21,7 +21,7 @@
                     <option value="Website">Website</option>
                     <option value="Administratif">Administratif</option>
                     <option value="Pelayanan">Pelayanan</option>
-                    <option value="Kegiatan Desa">Kegiatan Desa</option>
+                    <option value="Kegiatan Kelurahan">Kegiatan Kelurahan</option>
                 </select>
             </div>
             <div class="col-12 mb-3">

@@ -97,8 +97,8 @@ class VillagerProfessionSeeder extends Seeder
             'Pialang',
             'Paranormal',
             'Pedagang',
-            'Perangkat Desa',
-            'Kepala Desa',
+            'Perangkat Kelurahan',
+            'Kepala Kelurahan',
             'Biarawati',
             'Wiraswasta',
             'Lainnya'

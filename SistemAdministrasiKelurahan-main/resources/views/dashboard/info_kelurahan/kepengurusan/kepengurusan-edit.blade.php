@@ -6,7 +6,7 @@
     $data=[
         'icon' => "pe-7s-note",
         'judul' => "Edit Kepengurusan Kelurahan",
-        'link' => route('info-desa.kepengurusan') ,
+        'link' => route('info-kelurahan.kepengurusan') ,
         'page1' => "Kepengurusan Kelurahan",
         'page2' => "/ Edit",
         'page3' =>"/ $staff->full_name"
@@ -18,10 +18,10 @@
     <div class="tab-pane tabs-animation fade show active" role="tabpanel">
         <div class="main-card mb-3 card">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold mb-4 mt-2" style="font-size: large;">Edit Staf Desa</h5>
+                <h5 class="card-title font-weight-bold mb-4 mt-2" style="font-size: large;">Edit Staf Kelurahan</h5>
 
                 <div tabindex="-1" class="dropdown-divider"></div>
-                <form action="{{ route('info-desa.kepengurusan-update', $staff->nik) }}" method="post"
+                <form action="{{ route('info-kelurahan.kepengurusan-update', $staff->nik) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('patch')
@@ -480,7 +480,7 @@
         </div>
 
         <button type="submit" class="mt-2 btn btn-primary">Simpan Data</button>
-        <a href="{{ route('info-desa.kepengurusan') }}" class="mt-2 btn btn-outline-danger">Batal</a>
+        <a href="{{ route('info-kelurahan.kepengurusan') }}" class="mt-2 btn btn-outline-danger">Batal</a>
     </div>
 </div>
 </form>

@@ -89,7 +89,7 @@ class StaffController extends Controller
         Staff::create($attr);
 
         Alert::success(' Berhasil ', 'Data staff berhasil ditambahkan');
-        return redirect()->route('info-desa.kepengurusan');
+        return redirect()->route('info-kelurahan.kepengurusan');
     }
 
     /**
@@ -171,7 +171,7 @@ class StaffController extends Controller
         $staff->update($attr);
 
         Alert::success(' Berhasil ', 'Data staff berhasil diperbarui');
-        return redirect()->route('info-desa.kepengurusan');
+        return redirect()->route('info-kelurahan.kepengurusan');
     }
 
     /**
@@ -210,7 +210,7 @@ class StaffController extends Controller
 
         $staff->delete();
         Alert::success(' Berhasil ', 'Staff berhasil dihapus');
-        return redirect()->route('info-desa.kepengurusan');
+        return redirect()->route('info-kelurahan.kepengurusan');
     }
 
     public function activation(Request $request, Staff $staff)
@@ -227,7 +227,7 @@ class StaffController extends Controller
             Alert::success(' Berhasil ', 'Staff di non-aktifkan');
         }
 
-        return redirect()->route('info-desa.kepengurusan');
+        return redirect()->route('info-kelurahan.kepengurusan');
     }
     
     public function strukturPemerintahan()

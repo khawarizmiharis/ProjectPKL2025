@@ -15,8 +15,8 @@ class VillageIdentitySeeder extends Seeder
         VillageIdentity::create([
             'village_name' => null,
             'village_code' => null,
-            'kepala_desa_name' => null,
-            'kepala_desa_nip' => null,
+            'kepala_kelurahan_name' => null,
+            'kepala_kelurahan_nip' => null,
             'zip_code' => null,
             'kecamatan_name' => null,
             'kecamatan_code' => null,

@@ -6,7 +6,7 @@
     $data=[
         'icon' => "pe-7s-culture",
         'judul' => "Identitas Kelurahan",
-        'link' => route('info-desa.identitas') ,
+        'link' => route('info-kelurahan.identitas') ,
         'page1' => "Identitas Kelurahan"
     ]
 ?>
@@ -19,7 +19,7 @@
                     href="#">
                     <i class="fas fa-plus mr-1"></i> Tambah Identitas Kelurahan </a> --}}
                 <a type="button" class="btn btn-lg btn-primary btn-sm text-white font-weight-normal btn-responsive m-1"
-                    href="{{route('info-desa.identitas.edit', $villageIdentity->id)}}">
+                    href="{{route('info-kelurahan.identitas.edit', $villageIdentity->id)}}">
                     <i class="fas fa-edit mr-1"></i> Edit Identitas Kelurahan</a>
                 <a type="button"
                     class="btn btn-lg btn-alternate btn-sm text-white font-weight-normal btn-responsive m-1"
@@ -98,12 +98,12 @@
                         <tr>
                             <td>Kepala Kelurahan</td>
                             <td class="text-center">:</td>
-                            <td>{{ $villageIdentity->kepala_desa_name }}</td>
+                            <td>{{ $villageIdentity->kepala_kelurahan_name }}</td>
                         </tr>
                         <tr>
                             <td>NIP Kepala Kelurahan</td>
                             <td class="text-center">:</td>
-                            <td>{{ $villageIdentity->kepala_desa_nip }}</td>
+                            <td>{{ $villageIdentity->kepala_kelurahan_nip }}</td>
                         </tr>
                         <tr>
                             <td>Alamat Kantor Kelurahan</td>

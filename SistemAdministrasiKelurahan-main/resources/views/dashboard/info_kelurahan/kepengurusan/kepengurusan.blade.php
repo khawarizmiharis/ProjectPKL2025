@@ -6,7 +6,7 @@
     $data=[
         'icon' => "pe-7s-id",
         'judul' => "Kepengurusan Kelurahan",
-        'link' => route('info-desa.kepengurusan') ,
+        'link' => route('info-kelurahan.kepengurusan') ,
         'page1' => "Kepengurusan Kelurahan"
     ]
 ?>
@@ -35,7 +35,7 @@
                         href="#"><i class="fas fa-trash-alt mr-1"></i> Hapus Data Terpilih</a>
                     <a type="button"
                         class="btn btn-lg btn-focus btn-sm text-white font-weight-normal m-1 mb-2  btn-responsive"
-                        href="{{route('info-desa.kepengurusan-create')}}">
+                        href="{{route('info-kelurahan.kepengurusan-create')}}">
                         <i class="fa fa-plus mr-1"></i>
                         Tambah Pengurus
                     </a>
@@ -74,14 +74,14 @@
                                         <i class="fas fa-caret-square-down"></i>
                                     </a>
 
-                                    <a href="{{route('info-desa.kepengurusan-edit', $st->nik)}}"
+                                    <a href="{{route('info-kelurahan.kepengurusan-edit', $st->nik)}}"
                                         class="btn btn-primary btn-sm mr-1 " data-toggle="tooltip"
                                         title="Edit Kepengurusan Kelurahan" data-placement="bottom">
                                         <i class="fas fa-edit "></i>
                                     </a>
 
                                     <form id="delete-form"
-                                        action="{{ route('info-desa.kepengurusan-destroy', $st->nik) }}" method="post">
+                                        action="{{ route('info-kelurahan.kepengurusan-destroy', $st->nik) }}" method="post">
                                         @csrf
                                         @method('delete')
 
@@ -93,7 +93,7 @@
 
                                     @if ($st->is_active == 1)
                                     <form method="POST"
-                                        action="{{ route('info-desa.kepengurusan-activation', $st->nik) }}">
+                                        action="{{ route('info-kelurahan.kepengurusan-activation', $st->nik) }}">
                                         @csrf
                                         @method('patch')
                                         <input type="hidden" name="is_active" value="0">
@@ -104,7 +104,7 @@
                                     </form>
                                     @else
                                     <form method="POST"
-                                        action="{{ route('info-desa.kepengurusan-activation', $st->nik) }}">
+                                        action="{{ route('info-kelurahan.kepengurusan-activation', $st->nik) }}">
                                         @csrf
                                         @method('patch')
                                         <input type="hidden" name="is_active" value="1">

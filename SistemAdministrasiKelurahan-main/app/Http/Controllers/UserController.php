@@ -9,7 +9,7 @@ use App\Staff;
 use App\User;
 use App\Villager;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
+use RealRashid\SweetAlert\Facades\Alert as FacaKelurahanlert;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -97,10 +97,10 @@ class UserController extends Controller
                 'user_id' => $userId
             ]);
 
-            FacadesAlert::success('Berhasil', 'Akun user berhasil dibuat');
+            FacaKelurahanlert::success('Berhasil', 'Akun user berhasil dibuat');
             return redirect()->route('manajemen-pengguna.pengguna');
         } else {
-            FacadesAlert::error('Penduduk bukan staff kelurahan', 'Silahkan daftarkan penduduk sebagai staff kelurahan');
+            FacaKelurahanlert::error('Penduduk bukan staff kelurahan', 'Silahkan daftarkan penduduk sebagai staff kelurahan');
             return back();
         }
     }
@@ -147,7 +147,7 @@ class UserController extends Controller
         // dd($user);
         $user->syncRoles([$request->role_name]);
 
-        FacadesAlert::success('Berhasil', 'Role pengguna berhasil diperbarui');
+        FacaKelurahanlert::success('Berhasil', 'Role pengguna berhasil diperbarui');
         return back();
     }
 
@@ -179,7 +179,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        FacadesAlert::success('Berhasil', 'Akun Pengguna berhasil dihapus');
+        FacaKelurahanlert::success('Berhasil', 'Akun Pengguna berhasil dihapus');
         return redirect()->route('manajemen-pengguna.pengguna');
     }
 
@@ -192,9 +192,9 @@ class UserController extends Controller
         $user->update($attr);
 
         if ($request->is_active == 1) {
-            FacadesAlert::success(' Berhasil ', 'Akun pengguna di aktifkan');
+            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna di aktifkan');
         } else {
-            FacadesAlert::success(' Berhasil ', 'Akun pengguna di non-aktifkan');
+            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna di non-aktifkan');
         }
 
         return redirect()->route('manajemen-pengguna.pengguna');

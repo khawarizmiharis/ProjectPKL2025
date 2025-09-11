@@ -18,7 +18,7 @@ class RoleTableSeeder extends Seeder
 
         $roles = collect([
             'Administrator',
-            'Kepala Desa',
+            'Kepala Kelurahan',
             'Sekretaris',
             'KAUR Umum',
             'KAUR Keuangan',

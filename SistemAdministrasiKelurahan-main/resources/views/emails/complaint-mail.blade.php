@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Desa Wonosuko</title>
+    <title>Kelurahan Wonosuko</title>
 </head>
 <body>
     <p>Hai {{ $data['name'] }},</p>
@@ -38,12 +38,12 @@
     </table>
     <br>
     <p>
-        Pengaduan anda telah terkirim dan akan disampaikan ke pengurus desa untuk diproses lebih lanjut.
+        Pengaduan anda telah terkirim dan akan disampaikan ke pengurus kelurahan untuk diproses lebih lanjut.
         <br>
-        Terimakasih sudah ikut berkontribusi dalam memajukan Desa Wonosuko.
+        Terimakasih sudah ikut berkontribusi dalam memajukan Kelurahan Wonosuko.
     </p>
     <br>
     <p>Salam</p>
-    <p>Pengurus Desa Wonosuko</p>
+    <p>Pengurus Kelurahan Wonosuko</p>
 </body>
 </html>

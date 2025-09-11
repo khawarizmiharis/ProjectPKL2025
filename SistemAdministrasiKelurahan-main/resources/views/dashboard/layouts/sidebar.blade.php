@@ -45,7 +45,7 @@
                         ->select('dashboard_menus.id', 'dashboard_menus.name')
                         ->join('role_has_permissions', 'dashboard_menus.id', '=', 'role_has_permissions.permission_id')
                         ->where('role_has_permissions.role_id', $userRoleId)
-                        ->whereNotIn('dashboard_menus.name', ['Layanan', 'Manajemen Surat']) // 🚫 sembunyikan menu
+                        ->whereNotIn('dashboard_menus.name', ['Layanan', 'Manajemen Surat', 'Manajemen UMKM']) // 🚫 sembunyikan menu
                         ->get()
                     : collect();
                 @endphp

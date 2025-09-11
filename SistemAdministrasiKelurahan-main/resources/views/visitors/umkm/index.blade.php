@@ -129,7 +129,7 @@
                             @empty
                             <div class="row justify-content-center mt-3" data-aos="fade-up" data-aos-delay="800">
                                 <div class="alert alert-info text-center">
-                                    Produk belum tersedia. nantikan produk terbaru dari UMKM Desa Wonosuko atau bisa
+                                    Produk belum tersedia. nantikan produk terbaru dari UMKM Kelurahan Wonosuko atau bisa
                                     laporkan melalui
                                     form pengaduan. Terima kasih.
                                 </div>

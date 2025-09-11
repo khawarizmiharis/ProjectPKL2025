@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.master', ['title' => "Beranda"])
 @section('content')
+
 <?php
     $data=[
         'icon' => "pe-7s-rocket",

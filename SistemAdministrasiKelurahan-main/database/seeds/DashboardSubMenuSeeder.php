@@ -63,10 +63,10 @@ class DashboardSubMenuSeeder extends Seeder
             '/dashboard',
             '/',
             //  2
-            '/dashboard/info-desa/identitas',
-            '/dashboard/info-desa/kepengurusan',
-            '/dashboard/info-desa/wilayah',
-            '/dashboard/info-desa/data-administratif',
+            '/dashboard/info-kelurahan/identitas',
+            '/dashboard/info-kelurahan/kepengurusan',
+            '/dashboard/info-kelurahan/wilayah',
+            '/dashboard/info-kelurahan/data-administratif',
             // 3
             '/dashboard/kependudukan/penduduk',
             // 4

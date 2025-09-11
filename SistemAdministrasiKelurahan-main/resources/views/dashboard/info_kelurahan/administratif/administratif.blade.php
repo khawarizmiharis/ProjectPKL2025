@@ -4,7 +4,7 @@
     $data=[
         'icon' => "pe-7s-copy-file",
         'judul' => "Administratif",
-        'link' => route('info-desa.data-administratif') ,
+        'link' => route('info-kelurahan.data-administratif') ,
         'page1' => "Administratif  "
     ]
 ?>

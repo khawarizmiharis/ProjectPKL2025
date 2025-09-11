@@ -33,7 +33,7 @@
                         <label for="#" class="">Nomor Surat</label>
                         <input name="#" id="#" type="text" class="form-control">
                         <p class=" mt-2 font-italic font-weight-light" style="color: red;">Format nomor surat:
-                            S-02/001/[kode_desa]/XII/2020</p>
+                            S-02/001/[kode_kelurahan]/XII/2020</p>
                     </div>
                     <div class="position-relative form-group">
                         <label for="#" class="">Keterangan</label>
@@ -62,7 +62,7 @@
                     <div class=" form-row">
                         <div class="col-md-6">
                             <div class="position-relative form-group">
-                                <label for="#" class="">Staf Pemerintah Desa</label>
+                                <label for="#" class="">Staf Pemerintah Kelurahan</label>
                                 <select name="#" id="#" class="mb-2 form-control" value="#">
                                     <option>Pilih...</option>
                                     <option value="#"></option>

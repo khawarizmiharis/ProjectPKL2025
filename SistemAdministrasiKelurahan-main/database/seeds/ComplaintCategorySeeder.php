@@ -16,7 +16,7 @@ class ComplaintCategorySeeder extends Seeder
             'Website',
             'Administratif',
             'Pelayanan',
-            'Kegiatan Desa'
+            'Kegiatan Kelurahan'
         ]);
 
         $categories->each(function ($category) {

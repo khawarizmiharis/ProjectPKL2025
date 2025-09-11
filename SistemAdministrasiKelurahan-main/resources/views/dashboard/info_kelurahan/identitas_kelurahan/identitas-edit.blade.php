@@ -6,7 +6,7 @@
     $data=[
         'icon' => "pe-7s-note",
         'judul' => "Edit Identitas Kelurahan",
-        'link' => route('info-desa.identitas') ,
+        'link' => route('info-kelurahan.identitas') ,
         'page1' => "Identitas Kelurahan",
         'page2' => "/ Edit"
     ]
@@ -17,7 +17,7 @@
     <div class="tab-pane tabs-animation fade show active" role="tabpanel">
         <div class="main-card mb-3 card">
             <div class="card-body">
-                <form action="{{ route('info-desa.identitas.update', $villageIdentity->id) }}" method="post"
+                <form action="{{ route('info-kelurahan.identitas.update', $villageIdentity->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('patch')
@@ -131,11 +131,11 @@
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="kepala_desa_name" class="">Kepala Kelurahan</label>
-                                        <input name="kepala_desa_name" id="kepala_desa_name" type="text"
-                                            class="form-control @error('kepala_desa_name') is-invalid @enderror"
-                                            value="{{ old('kepala_desa_name') ?? $villageIdentity->kepala_desa_name }}">
-                                        @error('kepala_desa_name')
+                                        <label for="kepala_kelurahan_name" class="">Kepala Kelurahan</label>
+                                        <input name="kepala_kelurahan_name" id="kepala_kelurahan_name" type="text"
+                                            class="form-control @error('kepala_kelurahan_name') is-invalid @enderror"
+                                            value="{{ old('kepala_kelurahan_name') ?? $villageIdentity->kepala_kelurahan_name }}">
+                                        @error('kepala_kelurahan_name')
                                         <span class="invalid-feedback mt-2" role="alert">
                                             <i>{{ $message }}</i>
                                         </span>
@@ -144,11 +144,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="kepala_desa_nip" class="">NIP Kepala Kelurahan</label>
-                                        <input name="kepala_desa_nip" id="kepala_desa_nip" type="text"
-                                            class="form-control @error('kepala_desa_nip') is-invalid @enderror"
-                                            value="{{ old('kepala_desa_nip') ?? $villageIdentity->kepala_desa_nip }}">
-                                        @error('kepala_desa_nip')
+                                        <label for="kepala_kelurahan_nip" class="">NIP Kepala Kelurahan</label>
+                                        <input name="kepala_kelurahan_nip" id="kepala_kelurahan_nip" type="text"
+                                            class="form-control @error('kepala_kelurahan_nip') is-invalid @enderror"
+                                            value="{{ old('kepala_kelurahan_nip') ?? $villageIdentity->kepala_kelurahan_nip }}">
+                                        @error('kepala_kelurahan_nip')
                                         <span class="invalid-feedback mt-2" role="alert">
                                             <i>{{ $message }}</i>
                                         </span>
@@ -467,7 +467,7 @@
                                 </div>
                             </div>
                             <button class="mt-2 btn btn-primary">Simpan Data</button>
-                            <a href="{{ route('info-desa.identitas') }}" class="mt-2 btn btn-outline-danger">Batal</a>
+                            <a href="{{ route('info-kelurahan.identitas') }}" class="mt-2 btn btn-outline-danger">Batal</a>
                         </div>
                     </div>
                 </form>

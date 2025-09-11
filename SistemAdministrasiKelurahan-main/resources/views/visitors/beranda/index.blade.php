@@ -33,13 +33,12 @@
 </section> -->
 {{-- End carousel section --}}
 {{-- HERO SECTION --}}
+
 <section id="hero">
     <div class="container mb-4 mt-4">
         <div data-aos="fade-up" data-aos-delay="400" data-ride="carousel">
 
             @if ($carousels->isNotEmpty())
-            {{-- Bagian ini akan tampil jika ada data carousel di database --}}
-
             {{-- Mengambil judul dan deskripsi dari data carousel pertama --}}
             <div class="carousel-caption d-sm-block bg-glass mb-5 mt-3">
                 <h1 data-aos="fade-up" data-aos-delay="500">{{ $carousels->first()->title }}</h1>
@@ -79,9 +78,112 @@
         </div>
     </div>
 </section>
+
+{{-- END HERO --}}
+<!-- {{-- HERO SECTION --}}
+<section id="hero">
+    <div class="container mb-4 mt-4">
+        @if ($carousels->isNotEmpty())
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner br-full">
+                @foreach ($carousels as $carousel)
+                {{-- Setiap item carousel (gambar + teks) akan diulang di sini --}}
+                <div class="carousel-item @if ($loop->first) active @endif">
+                    <img src="{{ asset('storage/' . $carousel->image) }}" class="d-block w-100 carousel-image"
+                        alt="{{ $carousel->title }}">
+                    {{-- Judul dan deskripsi sekarang berada di dalam setiap item --}}
+                    <div class="carousel-caption d-sm-block bg-glass">
+                        <h1 data-aos="fade-up">{{ $carousel->title }}</h1>
+                        <p class="mt-3" data-aos="fade-up" data-aos-delay="100">
+                            {{ $carousel->description }}
+                        </p>
+                        @if ($loop->first)
+                        <div data-aos="fade-up" data-aos-delay="200">
+                            <a class="btn btn-get-started scroll-to-id" href="#services" role="button">Mulai
+                                Sekarang</a>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+            {{-- Tombol Navigasi Carousel --}}
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        @else
+        {{-- Tampilan jika tidak ada data carousel --}}
+        <div class="carousel-item active">
+            <img src="{{ asset('images/carousel-1.jpg') }}" class="d-block w-100 carousel-image" alt="Default Image">
+            <div class="carousel-caption d-sm-block bg-glass">
+                <h1 data-aos="fade-up">Selamat Datang di Portal Kelurahan Kota Sukabumi</h1>
+                <p class="mt-3" data-aos="fade-up" data-aos-delay="100">
+                    “Menyediakan informasi resmi kelurahan se-Kota Sukabumi“
+                </p>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <a class="btn btn-get-started scroll-to-id" href="#services" role="button">Mulai Sekarang</a>
+                </div>
+            </div>
+        </div>
+        @endif
+    </div>
+</section>
 {{-- END HERO --}}
 
-{{-- Start Services Section --}}
+@push('style')
+<style>
+    /* Style untuk membuat slider memiliki ukuran yang sesuai */
+    .carousel-item {
+        /* ANDA BISA MENGUBAH UKURAN TINGGI SLIDER DI SINI (untuk desktop) */
+        height: 550px;
+        background: no-repeat center center scroll;
+        background-size: cover;
+    }
+
+    .carousel-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Penting: agar gambar menutupi area tanpa distorsi */
+        object-position: center;
+    }
+
+    .bg-glass {
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Latar belakang semi-transparan untuk teks */
+        border-radius: 10px;
+        padding: 1rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Ukuran untuk layar yang lebih kecil */
+    @media (max-width: 768px) {
+        .carousel-item {
+            /* ANDA BISA MENGUBAH UKURAN TINGGI SLIDER DI SINI (untuk HP/tablet) */
+            height: 400px;
+        }
+
+        .bg-glass h1 {
+            font-size: 1.5rem;
+        }
+
+        .bg-glass p {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+@endpush
+ -->
+
+
+<!-- {{-- Start Services Section --}}
 <section id="services">
     <div class="container mt-3">
         <h2 class="text-center mb-4" style="font-weight:700; font-size:28px;" data-aos="fade-up" data-aos-delay="500">Layanan Kelurahan</h2>
@@ -95,19 +197,19 @@
                     <i class="fas fa-envelope fa-3x p-4"
                         style="width: 100px; height: 100px; background-color:#FE5670; border-radius:50%;"></i>
                 </span>
-                <h4 class="mb-2 mt-2" style="font-weight: 600;">Pengajuan Surat</h4>
+                <h4 class="mb-2 mt-2" style="font-weight: 600;">Pengajuan Surat</h4> -->
                 <!-- <p class=" small"> Memudahkan dalam pembuatan surat menyurat untuk Masyarakat Kelurahan secara online</p> -->
-            </a>
+            <!-- </a>
             <a class=" col-lg-3 text-center p-3 col-sm-6 text-dark scroll-to-bottom" href="#complaint"
                 data-aos="fade-up" data-aos-delay="500">
                 <span style="color: #EEF5FF;">
                     <i class="fas fa-exclamation-triangle fa-3x p-4"
                         style="width: 100px; height: 100px; background-color:#F8B000; border-radius:50%;"></i>
                 </span>
-                <h4 class="mb-2 mt-2" style="font-weight: 600;">Pengaduan</h4>
+                <h4 class="mb-2 mt-2" style="font-weight: 600;">Pengaduan</h4> -->
                 <!-- <p class=" small"> Memberikan kesempatan bagi Masyarakat Kelurahan dalam menyampaikan aspirasinya untuk
                     meningkatkan berbagai pelayanan yang tersedia</p> -->
-            </a>
+            <!-- </a>
             {{--
             <a href="{{ route('layanan.kontributor') }}" class="col-lg-3 col-sm-6 text-center p-3 text-dark"
                 data-aos="fade-up" data-aos-delay="500">
@@ -115,16 +217,16 @@
                     <i class="fas fa-pencil-alt fa-3x p-4"
                         style="width: 100px; height: 100px; background-color:#3C50E0; border-radius:50%;"></i>
                 </span>
-                <h4 class="mb-2 mt-2" style="font-weight: 600;">Kontributor Berita</h4>
-                <!-- <p class=" small"> Warga dapat membuat beritanya sendiri mengenai desa maupun kegiatan yang dilaksanakan
-                    oleh desa</p> -->
-            </a>
+                <h4 class="mb-2 mt-2" style="font-weight: 600;">Kontributor Berita</h4> -->
+                <!-- <p class=" small"> Warga dapat membuat beritanya sendiri mengenai kelurahan maupun kegiatan yang dilaksanakan
+                    oleh kelurahan</p> -->
+            <!-- </a>
              --}}
 
         </div>
     </div>
 </section>
-{{-- End Services Section --}}
+{{-- End Services Section --}} -->
 
 <!-- {{-- Start Card 1 Section --}}
 <section id="card1">
@@ -135,7 +237,7 @@
                     <div class=" text-center mt-4 title-section">
                         <h1 style="font-weight: 600; font-size: 32px;">Pengunguman</h1>
                         <p class="m-auto w-50">Memudahkan pengguna dalam membaca dan mencari
-                            artikel,berita terbaru,dan kegiatan dalam Desa
+                            artikel,berita terbaru,dan kegiatan dalam Kelurahan
                         </p>
                     </div>
                 </div>
@@ -278,7 +380,7 @@
             <div class="row">
                 <div class="col text-center mt-4 mb-4 title-section">
                     <h1 style="font-weight: 600;">- UMKM -</h1>
-                    <p class="m-auto w-50">Menampilkan seluruh UMKM di Desa ... dan memudahkan pengguna dalam
+                    <p class="m-auto w-50">Menampilkan seluruh UMKM di Kelurahan ... dan memudahkan pengguna dalam
                         bertranksaksi
                     </p>
                 </div>

@@ -32,8 +32,8 @@ class ComplaintMail extends Mailable
     {
         // return $this->view('view.name');
         // return $this->view('emails.complaint-mail');
-        return $this->subject('Informasi Pengaduan Desa Wonosuko')
-                    ->from('farreldevtest@gmail.com', 'Admin Desa Wonosuko')
+        return $this->subject('Informasi Pengaduan Kelurahan Wonosuko')
+                    ->from('farreldevtest@gmail.com', 'Admin Kelurahan Wonosuko')
                     ->view('emails.complaint-mail');
     }
 }

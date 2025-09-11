@@ -23,7 +23,7 @@ class LetterDocumentSeeder extends Seeder
             'Surat Keterangan Cerai',
             'Fotokopi Ijazah Terakhir',
             'SK. PNS / KARIP / SK. TNI – POLRI',
-            'Surat Keterangan Kematian dari Kepala Desa / Kelurahan',
+            'Surat Keterangan Kematian dari Kepala Kelurahan / Kelurahan',
             'Surat imigrasi / STMD (Surat Tanda Melapor Diri)'
         ]);
 
