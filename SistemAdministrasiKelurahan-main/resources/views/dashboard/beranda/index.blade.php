@@ -175,13 +175,14 @@
                         <div class="col-md-12 col-lg-4">
                             <div class="widget-chart p-4">
                                 <div>
-                                    <canvas style="position: relative; height:130vh; width:80vw" id="penduduk"></canvas>
+                                    <canvas style="position: relative; height:250px; width:250px" id="penduduk"></canvas>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-8">
                             <div class="pt-2 card-body">
                                 <div class="row">
+                                    {{-- Total Penduduk --}}
                                     <div class="col-lg-12 ">
                                         <div class=" mb-3 widget-content">
                                             <div class="widget-content-outer">
@@ -191,19 +192,21 @@
                                                         <div class="widget-subheading">Total Seluruh Penduduk </div>
                                                     </div>
                                                     <div class="widget-content-right">
-                                                        <div class="widget-numbers text-danger">100</div>
+                                                        <div class="widget-numbers text-danger">{{ $totalVillager }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="widget-progress-wrapper">
                                                     <div class="progress-bar-lg progress-bar-animated progress">
                                                         <div class="progress-bar bg-danger" role="progressbar"
                                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                                                            style="width: 100%;"></div>
+                                                            style="width: 100%;">100%</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    {{-- Penduduk Aktif --}}
                                     <div class="col-lg-6 ">
                                         <div class=" mb-3 widget-content">
                                             <div class="widget-content-outer">
@@ -213,51 +216,56 @@
                                                         <div class="widget-subheading">Total Penduduk Aktif</div>
                                                     </div>
                                                     <div class="widget-content-right">
-                                                        <div class="widget-numbers text-success">75</div>
+                                                        <div class="widget-numbers text-success">{{ $activeVillager }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="widget-progress-wrapper">
                                                     <div class="progress-bar-lg progress-bar-animated progress">
                                                         <div class="progress-bar progress-bar-animated bg-success progress-bar-striped"
-                                                            role="progressbar" aria-valuenow="75" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: 75%;">75%</div>
+                                                            role="progressbar" aria-valuenow="{{ $percentActive }}" aria-valuemin="0"
+                                                            aria-valuemax="100" style="width: {{ $percentActive }}%;">
+                                                            {{ $percentActive }}%
+                                                        </div>
                                                     </div>
                                                     <div class="progress-sub-label">
-                                                        <div class="sub-label-left">presentase</div>
+                                                        <div class="sub-label-left">persentase</div>
                                                         <div class="sub-label-right">100%</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    {{-- Penduduk Tidak Aktif --}}
                                     <div class="col-lg-6 ">
                                         <div class=" mb-3 widget-content">
                                             <div class="widget-content-outer">
                                                 <div class="widget-content-wrapper">
                                                     <div class="widget-content-left">
                                                         <div class="widget-heading">Tidak Aktif</div>
-                                                        <div class="widget-subheading">Total Penduduk Tidak Aktif
-                                                        </div>
+                                                        <div class="widget-subheading">Total Penduduk Tidak Aktif</div>
                                                     </div>
                                                     <div class="widget-content-right">
-                                                        <div class="widget-numbers text-warning">25</div>
+                                                        <div class="widget-numbers text-warning">{{ $notActiveVillager }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="widget-progress-wrapper">
                                                     <div class="progress-bar-lg progress-bar-animated progress">
                                                         <div class="progress-bar progress-bar-animated bg-warning progress-bar-striped"
-                                                            role="progressbar" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: 25%;">25%
+                                                            role="progressbar" aria-valuenow="{{ $percentNotActive }}" aria-valuemin="0"
+                                                            aria-valuemax="100" style="width: {{ $percentNotActive }}%;">
+                                                            {{ $percentNotActive }}%
                                                         </div>
                                                     </div>
                                                     <div class="progress-sub-label">
-                                                        <div class="sub-label-left">presentase</div>
+                                                        <div class="sub-label-left">persentase</div>
                                                         <div class="sub-label-right">100%</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    {{-- End Penduduk --}}
                                 </div>
                             </div>
                         </div>
@@ -327,10 +335,10 @@ $(function() {
     var ctx = document.getElementById("penduduk").getContext('2d');
     var data = {
         datasets: [{
-            data: [75, 25],
+            data: [{{ $percentActive }}, {{ $percentNotActive }}],
             backgroundColor: [
-                '#3ac47d',
-                '#f7b924',
+                '#3ac47d', // hijau (aktif)
+                '#f7b924', // kuning (tidak aktif)
             ],
         }],
         labels: [
@@ -345,8 +353,24 @@ $(function() {
             responsive: true,
             maintainAspectRatio: true,
             legend: {
-                display: false
+                display: true,
+                position: 'bottom',
+                labels: {
+                    fontSize: 12,
+                    boxWidth: 15
+                }
             },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            let label = data.labels[tooltipItem.dataIndex] || '';
+                            let value = data.datasets[0].data[tooltipItem.dataIndex] || 0;
+                            return label + ': ' + value + '%';
+                        }
+                    }
+                }
+            }
         }
     });
 

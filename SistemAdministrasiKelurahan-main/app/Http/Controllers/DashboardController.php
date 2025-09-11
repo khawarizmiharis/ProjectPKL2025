@@ -23,7 +23,16 @@ class DashboardController extends Controller
         $activeArticles  = Article::where('enabled', 1)->count();
         $inactiveArticles = Article::where('enabled', 0)->count();
 
-        return view('dashboard.beranda.index', compact('villagers','totalArticles', 'activeArticles', 'inactiveArticles'));
+        // Penduduk
+        $totalVillager     = Villager::where('life_status_id', 1)->count();
+        $activeVillager    = Villager::where('life_status_id', 1)->whereNotNull('user_id')->count();
+        $notActiveVillager = Villager::where('life_status_id', 1)->whereNull('user_id')->count();
+
+        // Hitung persentase (hindari division by zero)
+        $percentActive    = $totalVillager > 0 ? round(($activeVillager / $totalVillager) * 100, 2) : 0;
+        $percentNotActive = $totalVillager > 0 ? round(($notActiveVillager / $totalVillager) * 100, 2) : 0;
+
+        return view('dashboard.beranda.index', compact('villagers','totalArticles', 'activeArticles', 'inactiveArticles', 'totalVillager', 'activeVillager', 'notActiveVillager', 'percentActive', 'percentNotActive'));
     }
 
 
