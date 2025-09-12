@@ -4,7 +4,7 @@
             <h1 class="text-light text-uppercase">
                 <a href="{{ route('visitors.beranda.index') }}" class="brand d-flex align-items-center">
                     <img src="{{ asset('/images') }}/logo.png" alt="Logo" class="logo-img">
-                        <span class="logo-text ml-2">Portal Kelurahan<br>Kota Sukabumi</span>
+                        <span class="logo-text ml-2">Portal Kelurahan<br>{{ $villageIdentity->village_name ?? '' }}</span>
                 </a>
             </h1>
         </div>

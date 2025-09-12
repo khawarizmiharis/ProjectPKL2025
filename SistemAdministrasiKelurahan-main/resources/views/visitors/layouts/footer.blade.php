@@ -7,13 +7,13 @@
                 </div>
             </div>
             <div class="col-lg-7 text-lg-left pl-lg-4  text-center h-100 d-block footer-info">
-                <h3><b>Kelurahan Kota Sukabumi</b></h3>
+                <h3><b>Kelurahan {{ $villageIdentity->village_name ?? '' }}</b></h3>
                 <p class="text-center mr-lg-5 text-md-left">Website administrasi Kelurahan membantu masyarakat Kota Sukabumi dalam pengelolaan data dan peningkatan pelayanan.
                 </p>
             </div>
             <ul class=" col-lg-4 footer-distributed d-flex flex-column justify-content-center">
                 <li>
-                    <p><i class="fa fa-map-marker"></i><span>Kelurahan Kota Sukabumi, </span>Jawa Barat</p>
+                    <p><i class="fa fa-map-marker"></i><span>Kelurahan {{ $villageIdentity->village_name ?? '' }}, </span>Jawa Barat</p>
                 </li>
                 <li>
                     <p><i class="fa fa-phone"></i>+62 (266) 20229715</p>

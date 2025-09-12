@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\VillageIdentity;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Share villageIdentity ke semua view
+        View::share('villageIdentity', VillageIdentity::first());
         // make the asset() can run on both http or https
         // asset() generate http
         // secure_asset() generate https
