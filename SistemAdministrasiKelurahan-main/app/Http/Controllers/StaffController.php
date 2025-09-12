@@ -250,4 +250,42 @@ class StaffController extends Controller
         return view('visitors.profil_kelurahan.struktur-pemerintahan', compact('staff'));
     }
 
+    public function deleteSelected(Request $request)
+    {
+        $ids = $request->ids; // array dari checkbox
+
+        if ($ids && count($ids) > 0) {
+            $staffs = Staff::whereIn('nik', $ids)->get();
+
+            foreach ($staffs as $staff) {
+                // hapus relasi user & villager seperti di destroy()
+                $staffUserData = $staff->user;
+                $staffVillagerData = $staffUserData ? $staffUserData->villager : null;
+
+                if ($staffVillagerData && $staffVillagerData->where('id', $staff->user_id)->count() == 1) {
+                    $staffVillagerData->update(['user_id' => null]);
+                }
+
+                if ($staffUserData && $staffUserData->where('id', $staff->user_id)->count() == 1) {
+                    if ($staffUserData->photo) {
+                        \Storage::delete($staffUserData->photo);
+                    }
+                    $staffUserData->delete();
+                }
+
+                if ($staff->photo) {
+                    \Storage::delete($staff->photo);
+                }
+
+                $staff->delete();
+            }
+
+            Alert::success('Berhasil', 'Data staff terpilih berhasil dihapus');
+        } else {
+            Alert::warning('Perhatian', 'Tidak ada data yang dipilih');
+        }
+
+        return redirect()->route('info-kelurahan.kepengurusan');
+    }
+
 }
