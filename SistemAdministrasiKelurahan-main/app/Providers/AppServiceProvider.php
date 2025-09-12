@@ -26,6 +26,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Ambil logo sekali saja
+        $villageIdentity = VillageIdentity::first();
+
+        // Share ke semua view
+        View::share('globalVillageIdentity', $villageIdentity);
+
         // Share villageIdentity ke semua view
         View::share('villageIdentity', VillageIdentity::first());
 

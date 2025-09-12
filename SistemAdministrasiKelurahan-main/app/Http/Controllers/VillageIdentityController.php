@@ -120,7 +120,7 @@ class VillageIdentityController extends Controller
                 // rename file foto
                 $bgName = "bg_" . time() . "." . $bg->extension();
                 // menentukan lokasi penyimpanan foto
-                $bgUrl = $bg->storeAs("images/village/background_pic", "{$bgName}");
+                $bgUrl = $bg->storeAs("images/village/background_pic", $bgName, 'public');
             } else {
                 // jika foto yg diupload lebih dari 2MB, simpan yg lama
                 $bgUrl = $villageIdentity->background_pic;
@@ -147,7 +147,7 @@ class VillageIdentityController extends Controller
                 // rename file logo
                 $logoName = "logo_" . time() . "." . $logo->extension();
                 // menentukan lokasi penyimpanan logo
-                $logoUrl = $logo->storeAs("images/village/logo", "{$logoName}");
+                $logoUrl = $logo->storeAs("images/village/logo", $logoName, 'public');
             } else {
                 // jika logo yg diupload lebih dari 2MB, simpan yg lama
                 $logoUrl = $villageIdentity->logo;

@@ -3,7 +3,17 @@
         <div class="row d-flex">
             <div class="col-lg-1 mt-1 mb-2">
                 <div class="text-center">
-                    <img class="logo-footer" src="{{ asset('/images') }}/logo.png" width="91">
+                    @if(!empty($globalVillageIdentity->logo))
+                        <img class="logo-footer" 
+                             src="{{ asset('storage/' . $globalVillageIdentity->logo) }}" 
+                             width="91" 
+                             alt="Logo Kelurahan">
+                    @else
+                        <img class="logo-footer" 
+                             src="{{ asset('/images/logo.png') }}" 
+                             width="91" 
+                             alt="Default Logo">
+                    @endif
                 </div>
             </div>
             <div class="col-lg-7 text-lg-left pl-lg-4 text-center h-100 d-block footer-info">

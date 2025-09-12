@@ -241,15 +241,33 @@
     <div class="col-md-6">
         <div class="main-card mb-3 card">
             <div class="card-header">Foto Gedung</div>
-            <img class="img-fluid" style="width: 100%; height: 350px; overflow: hidden; object-fit: cover;"
-                alt="Responsive image" src="{{ asset('/admin') }}/images/foto-kelurahan.jpg" alt="">
+            @if(!empty($villageIdentity->background_pic))
+                <img src="{{ asset('storage/' . $villageIdentity->background_pic) }}" 
+                    alt="Foto Gedung Kelurahan" 
+                    class="img-fluid"
+                    style="width: 100%; height: 350px; object-fit: cover;">
+            @else
+                <img src="{{ asset('/images/foto-kelurahan.jpg') }}" 
+                    alt="Default Foto Gedung" 
+                    class="img-fluid"
+                    style="width: 100%; height: 350px; object-fit: cover;">
+            @endif
         </div>
     </div>
     <div class="col-md-6">
         <div class="main-card mb-3 card">
             <div class="card-header">Logo Kelurahan</div>
-            <img class="img-fluid" style="width: 100%; height: 350px; overflow: hidden; object-fit: scale-down;"
-                alt="Responsive image" src="{{ asset('/images') }}/logo.png" alt="">
+            @if(!empty($villageIdentity->logo))
+                <img src="{{ asset('storage/' . $villageIdentity->logo) }}" 
+                    alt="Logo Kelurahan" 
+                    class="img-fluid"
+                    style="width: 100%; height: 350px; object-fit: scale-down;">
+            @else
+                <img src="{{ asset('/images/logo.png') }}" 
+                    alt="Default Logo" 
+                    class="img-fluid"
+                    style="width: 100%; height: 350px; object-fit: scale-down;">
+            @endif
         </div>
     </div>
 </div>

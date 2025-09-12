@@ -1,11 +1,20 @@
 <div class="app-header header-shadow">
-    <div class="app-header__logo">
-        <a href="{{ route('dashboard') }}" class="text-decoration-none text-dark">
-            <div class="logo-src">
-                <img src="{{ asset('/images') }}/logo.png" alt="">
-                <h5 class="ml-2">Kelurahan</h5>
-            </div>
+    <div class="app-header__logo d-flex align-items-center justify-content-between">
+        <a href="{{ route('dashboard') }}" class="d-flex align-items-center text-decoration-none text-dark">
+            @if(!empty($villageIdentity->logo))
+                <img src="{{ asset('storage/' . $villageIdentity->logo) }}" 
+                    alt="Logo Kelurahan" 
+                    class="logo-img">
+            @else
+                <img src="{{ asset('images/logo.png') }}" 
+                    alt="Default Logo" 
+                    class="logo-img">
+            @endif
+            <h5 class="ml-2 mb-0 village-name">
+                {{ $villageIdentity->village_name ?? 'Kelurahan' }}
+            </h5>
         </a>
+
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -16,6 +25,8 @@
             </div>
         </div>
     </div>
+
+    {{-- Mobile header --}}
     <div class="app-header__mobile-menu">
         <div>
             <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
@@ -34,10 +45,10 @@
             </button>
         </span>
     </div>
+
+    {{-- Bagian kanan --}}
     <div class="app-header__content">
-        <div class="app-header-left">
-            {{-- Jika ada menu kiri bisa ditambahkan di sini --}}
-        </div>
+        <div class="app-header-left"></div>
         <div class="app-header-right">
             <div class="header-btn-lg pr-0">
                 <div class="widget-content p-0">
@@ -59,13 +70,6 @@
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                    {{--
-                                    <button type="button" tabindex="0" class="dropdown-item">Akun Pengguna</button>
-                                    <button type="button" tabindex="0" class="dropdown-item">Pengaturan</button>
-                                    <button type="button" tabindex="0" class="dropdown-item">Notifikasi</button>
-                                    <a href="{{ route('visitors.beranda.index') }}" type="button" tabindex="0" class="dropdown-item">Kembali Ke Beranda</a>
-                                    <div tabindex="-1" class="dropdown-divider"></div>
-                                    --}}
                                     @if(Auth::check())
                                         <a type="button" tabindex="0" class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -87,3 +91,17 @@
         </div>
     </div>
 </div>
+
+{{-- Inline CSS --}}
+<style>
+    .logo-img {
+        max-height: 40px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* Saat sidebar ditutup, sembunyikan teks biar gak tabrakan */
+    .closed-sidebar .village-name {
+        display: none !important;
+    }
+</style>
