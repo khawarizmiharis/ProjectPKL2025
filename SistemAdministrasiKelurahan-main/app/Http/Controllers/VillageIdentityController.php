@@ -97,10 +97,11 @@ class VillageIdentityController extends Controller
             'village_email' => 'nullable|email',
             'phone' => 'nullable|numeric',
             'website' => 'nullable|url',
-            'instagram' => 'nullable|url',
-            'facebook' => 'nullable|url',
-            'twitter' => 'nullable|url',
-            'youtube' => 'nullable|url',
+            // after (boleh username atau full url)
+            'instagram' => 'nullable|string|max:255',
+            'facebook'  => 'nullable|string|max:255',
+            'twitter'   => 'nullable|string|max:255',
+            'youtube'   => 'nullable|string|max:255',
         ]);
 
         // cek apakah background pict sudah di inputkan

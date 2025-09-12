@@ -28,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // Share villageIdentity ke semua view
         View::share('villageIdentity', VillageIdentity::first());
+
+        View::composer('*', function ($view) {
+        $view->with('villageIdentity', VillageIdentity::first());
+    });
         // make the asset() can run on both http or https
         // asset() generate http
         // secure_asset() generate https
