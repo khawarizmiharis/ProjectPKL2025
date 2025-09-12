@@ -35,6 +35,10 @@
                                 <p class="answer"> {{ $villager->full_name }}</p>
                             </div>
                             <div class="col-md-12 d-inline-flex ">
+                                <p class="">Jenis Kelamin</p>
+                                <p class="answer"> {{ $villager->villagerSex->sex }}</p>
+                            </div>
+                            <div class="col-md-12 d-inline-flex ">
                                 <p class="">Tempat Lahir</p>
                                 <p class="answer"> {{ $villager->birth_place }}</p>
                             </div>

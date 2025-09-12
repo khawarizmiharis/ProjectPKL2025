@@ -119,7 +119,7 @@ class VillagerController extends Controller
                 // rename file foto
                 $photoName = $request->nik . "." . $photo->extension();
                 // menentukan lokasi penyimpanan foto
-                $photoUrl = $photo->storeAs("images/profile_pic", "{$photoName}");
+                $photoUrl = $photo->storeAs("images/profile_pic", "{$photoName}", 'public');  
             }
         }
 
@@ -212,7 +212,7 @@ class VillagerController extends Controller
                 // rename file foto
                 $photoName = $villager->nik . "." . $photo->extension();
                 // menentukan lokasi penyimpanan foto
-                $photoUrl = $photo->storeAs("images/profile_pic", "{$photoName}");
+                $photoUrl = $photo->storeAs("images/profile_pic", "{$photoName}", 'public');
             } else {
                 // jika foto yg diupload lebih dari 1024KB, simpan yg lama
                 $photoUrl = $villager->photo;

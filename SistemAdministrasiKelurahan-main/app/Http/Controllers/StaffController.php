@@ -73,7 +73,7 @@ class StaffController extends Controller
                 // rename file foto
                 $photoName = $request->nip . "." . $photo->extension();
                 // menentukan lokasi penyimpanan foto
-                $photoUrl = $photo->storeAs("images/staff_profile_pic", "{$photoName}");
+                $photoUrl = $photo->storeAs("public/images/staff_profile_pic", "{$photoName}");
             }
         }
 
@@ -143,7 +143,7 @@ class StaffController extends Controller
                 // rename file foto
                 $photoName = $staff->nip . "." . $photo->extension();
                 // menentukan lokasi penyimpanan foto
-                $photoUrl = $photo->storeAs("images/staff_profile_pic", "{$photoName}");
+                $photoUrl = $photo->storeAs("public/images/staff_profile_pic", "{$photoName}");
             } else {
                 // jika foto yg diupload lebih dari 1024KB, simpan yg lama
                 $photoUrl = $staff->photo;
@@ -163,9 +163,9 @@ class StaffController extends Controller
             'position_period' => 'required|string',
             'pangkat' => 'required|string',
             // 'is_active' => 'required|boolean',
-            'nomor_sk_angkat' => 'required|numeric',
+            'nomor_sk_angkat' => 'required|string',
             'tgl_sk_angkat' => 'required|date',
-            'nomor_sk_henti' => 'numeric',
+            'nomor_sk_henti' => 'string',
             'tgl_sk_henti' => 'date',
         ]);
 

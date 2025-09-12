@@ -46,55 +46,51 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
     Route::prefix('dashboard/info-kelurahan')
-        ->middleware(['permission:Info Kelurahan'])
-        ->group(function () {
-            // Identitas Kelurahan
-            Route::get('identitas', [App\Http\Controllers\VillageIdentityController::class, 'index'])
-                ->name('info-kelurahan.identitas');
-            Route::get('identitas/{village_identity}/edit', [App\Http\Controllers\VillageIdentityController::class, 'edit'])
-                ->name('info-kelurahan.identitas.edit');
-            Route::patch('identitas/{village_identity}/edit', [App\Http\Controllers\VillageIdentityController::class, 'update'])
-                ->name('info-kelurahan.identitas.update');
+            ->middleware(['permission:Info Kelurahan'])
+            ->group(function () {
 
-            // Kepengurusan / Staff
-            Route::get('kepengurusan', [App\Http\Controllers\StaffController::class, 'index'])
-                ->name('info-kelurahan.kepengurusan');
-            Route::get('kepengurusan/tambah', [App\Http\Controllers\StaffController::class, 'create'])
-                ->name('info-kelurahan.kepengurusan-create');
-            Route::post('kepengurusan/tambah', [App\Http\Controllers\StaffController::class, 'store'])
-                ->name('info-kelurahan.kepengurusan-store');
-            Route::get('kepengurusan/{staff}/edit', [App\Http\Controllers\StaffController::class, 'edit'])
-                ->name('info-kelurahan.kepengurusan-edit');
-            Route::patch('kepengurusan/{staff}/edit', [App\Http\Controllers\StaffController::class, 'update'])
-                ->name('info-kelurahan.kepengurusan-update');
-            Route::patch('kepengurusan/{staff}/aktivasi', [App\Http\Controllers\StaffController::class, 'activation'])
-                ->name('info-kelurahan.kepengurusan-activation');
-            Route::delete('kepengurusan/{staff}/delete', [App\Http\Controllers\StaffController::class, 'destroy'])
-                ->name('info-kelurahan.kepengurusan-destroy');
-            Route::delete('/kepengurusan/delete-selected', [StaffController::class, 'deleteSelected'])
-                ->name('info-kelurahan.kepengurusan-delete-selected');
+                // Kepengurusan / Staff
+                Route::get('kepengurusan', [App\Http\Controllers\StaffController::class, 'index'])
+                    ->name('info-kelurahan.kepengurusan');
+                Route::get('kepengurusan/tambah', [App\Http\Controllers\StaffController::class, 'create'])
+                    ->name('info-kelurahan.kepengurusan-create');
+                Route::post('kepengurusan/tambah', [App\Http\Controllers\StaffController::class, 'store'])
+                    ->name('info-kelurahan.kepengurusan-store');
+                Route::get('kepengurusan/{staff}/edit', [App\Http\Controllers\StaffController::class, 'edit'])
+                    ->name('info-kelurahan.kepengurusan-edit');
+                Route::patch('kepengurusan/{staff}/edit', [App\Http\Controllers\StaffController::class, 'update'])
+                    ->name('info-kelurahan.kepengurusan-update');
+                Route::patch('kepengurusan/{staff}/aktivasi', [App\Http\Controllers\StaffController::class, 'activation'])
+                    ->name('info-kelurahan.kepengurusan-activation');
+                Route::delete('kepengurusan/{staff}/delete', [App\Http\Controllers\StaffController::class, 'destroy'])
+                    ->name('info-kelurahan.kepengurusan-destroy');
+                Route::delete('/kepengurusan/delete-selected', [StaffController::class, 'deleteSelected'])
+                    ->name('info-kelurahan.kepengurusan-delete-selected');
 
+                // Wilayah
+                Route::get('wilayah', [App\Http\Controllers\InfoRegionController::class, 'index'])
+                    ->name('info-kelurahan.wilayah');
+                Route::get('wilayah/tambah', [App\Http\Controllers\InfoRegionController::class, 'create'])
+                    ->name('info-kelurahan.wilayah-create');
+                Route::post('wilayah/tambah', [App\Http\Controllers\InfoRegionController::class, 'store'])
+                    ->name('info-kelurahan.wilayah-store');
+                Route::get('wilayah/edit', [App\Http\Controllers\InfoRegionController::class, 'edit'])
+                    ->name('info-kelurahan.wilayah-edit');
+                Route::patch('wilayah/edit', [App\Http\Controllers\InfoRegionController::class, 'update'])
+                    ->name('info-kelurahan-wilayah.update');
 
-            // Wilayah
-            Route::get('wilayah', [App\Http\Controllers\InfoRegionController::class, 'index'])
-                ->name('info-kelurahan.wilayah');
-            Route::get('wilayah/tambah', [App\Http\Controllers\InfoRegionController::class, 'create'])
-                ->name('info-kelurahan.wilayah-create');
-            Route::post('wilayah/tambah', [App\Http\Controllers\InfoRegionController::class, 'store'])
-                ->name('info-kelurahan.wilayah-store');
-            Route::get('wilayah/edit', [App\Http\Controllers\InfoRegionController::class, 'edit'])
-                ->name('info-kelurahan.wilayah-edit');
-            Route::patch('wilayah/edit', [App\Http\Controllers\InfoRegionController::class, 'update'])
-                ->name('info-kelurahan-wilayah.update');
-
-            // Data Administratif
-            Route::get('data-administratif', [App\Http\Controllers\InfoAdministratifController::class, 'index'])
-                ->name('info-kelurahan.data-administratif');
-        });
-
+                // Data Administratif
+                Route::get('data-administratif', [App\Http\Controllers\InfoAdministratifController::class, 'index'])
+                    ->name('info-kelurahan.data-administratif');
+            });
 
     //InfoKelurahan
     Route::prefix('/dashboard/info-kelurahan')->middleware('permission:Info Kelurahan')->group(function () {
+
+        // Identitas Kelurahan
+        Route::get('identitas', [App\Http\Controllers\VillageIdentityController::class, 'index'])->name('info-kelurahan.identitas');
+        Route::get('identitas/{village_identity}/edit', [App\Http\Controllers\VillageIdentityController::class, 'edit'])->name('info-kelurahan.identitas.edit');
+        Route::patch('identitas/{village_identity}/edit', [App\Http\Controllers\VillageIdentityController::class, 'update'])->name('info-kelurahan.identitas.update');
 
         // Identitas Kelurahan
         Route::prefix('/identitas')->group(function () {
@@ -145,7 +141,7 @@ Route::middleware('auth')->group(function () {
             Route::patch('{staff:nik}/aktivasi', 'StaffController@activation')->name('info-kelurahan.kepengurusan-activation');
             // expor excel
             Route::get('/export', [StaffController::class, 'export'])->name('info-kelurahan.kepengurusan-export');
-
+            Route::delete('/kepengurusan/delete-selected', [StaffController::class, 'deleteSelected'])->name('info-kelurahan.kepengurusan-delete-selected');
         });
         // Wilayah Kelurahan
         Route::prefix('/data-administratif')->group(function () {

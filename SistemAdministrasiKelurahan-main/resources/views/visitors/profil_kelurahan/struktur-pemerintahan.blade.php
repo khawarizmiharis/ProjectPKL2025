@@ -25,9 +25,15 @@
                                     <div class="blog-post">
                                         <div class="blog-thumb text-center">
                                             @if ($s->photo)
-                                                <img src="{{ asset('storage/' . $s->photo) }}" alt="{{ $s->full_name }}" style="max-height: 250px; width:auto;">
+                                                <img src="{{ Storage::url($s->photo) }}" 
+                                                    alt="{{ $s->full_name }}" 
+                                                    class="img-fluid rounded mb-3" 
+                                                    style="max-height: 250px; object-fit: cover;">
                                             @else
-                                                <img src="{{ asset('/images/default-user.png') }}" alt="default" style="max-height: 250px; width:auto;">
+                                                <img src="{{ asset('/images/default-user.png') }}" 
+                                                    alt="default" 
+                                                    class="img-fluid rounded mb-3" 
+                                                    style="max-height: 250px; object-fit: cover;">
                                             @endif
                                         </div>
                                         <div class="down-content text-center mt-3">

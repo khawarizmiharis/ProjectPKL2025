@@ -115,9 +115,9 @@
                                 </td>
                                 <td class=" text-center">
                                     @if ($st->photo)
-                                    <img src="{{ asset('storage/' . $st->photo) }}" alt="" width="70">
+                                        <img src="{{ Storage::url($st->photo) }}" alt="Foto {{ $st->full_name }}" width="120">
                                     @else
-                                    <i>Belum ada foto</i>
+                                        <i>Belum ada foto</i>
                                     @endif
                                 </td>
                                 <td class="text-left">
