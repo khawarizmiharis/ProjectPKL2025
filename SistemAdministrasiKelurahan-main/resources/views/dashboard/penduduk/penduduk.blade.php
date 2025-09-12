@@ -145,11 +145,11 @@
                         href="{{ route('penduduk-export-excel') }}">
                         <i class="fas fa-file-download "> </i> Unduh Data Excel
                     </a>
-                    <button type="button"
+                    <!-- <button type="button"
                         class="btn btn-lg btn-success btn-sm text-white font-weight-normal btn-responsive m-1 mb-2 "
                         data-toggle="modal" data-target="#importExcelVillagerModal">
                         <i class="fas fa-file-upload"></i> Unggah Data Excel
-                    </button>
+                    </button> -->
                     <a type="button"
                         class="btn btn-lg btn-focus btn-sm text-white font-weight-normal m-1 mb-2 btn-responsive"
                         href="{{ route('penduduk-tambah') }}">+

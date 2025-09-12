@@ -19,17 +19,17 @@
                 <div class="btn-actions-pane-right ">
                     <a type="button"
                         class="btn btn-lg btn-success btn-sm text-white font-weight-normal m-1 mb-2  btn-responsive"
-                        href="#">
-                        <i class="fas fa-file-download "> </i> Unduh Data Excel
+                        href="{{ route('info-kelurahan.kepengurusan-export') }}">
+                        <i class="fas fa-file-download"> </i> Unduh Data Excel
                     </a>
-                    <button type="button"
+                    <!-- <button type="button"
                         class="btn btn-lg btn-success btn-sm text-white font-weight-normal btn-responsive m-1 mb-2 "
                         data-toggle="modal" data-target="#importExcelVillagerModal">
                         <i class="fas fa-file-upload mr-1"></i> Unggah Data Excel
                     </button>
                     <a type="button"
                         class="btn btn-lg btn-alternate btn-sm text-white font-weight-normal m-1 mb-2  btn-responsive"
-                        href="#"><i class="fas fa-print  mr-1"></i> Cetak </a>
+                        href="#"><i class="fas fa-print  mr-1"></i> Cetak </a> -->
                     <a type="button"
                         class="btn btn-lg btn-danger btn-sm text-white font-weight-normal m-1 mb-2  btn-responsive"
                         href="#"><i class="fas fa-trash-alt mr-1"></i> Hapus Data Terpilih</a>
@@ -115,7 +115,7 @@
                                     </form>
                                     @endif
 
-                                    <a href="#" target="_blank" class="btn btn-focus btn-sm mr-1" data-toggle="tooltip"
+                                    <!-- <a href="#" target="_blank" class="btn btn-focus btn-sm mr-1" data-toggle="tooltip"
                                         title=" Aktifkan TTD" data-placement="bottom">
                                         <del>a.n</del>
                                     </a>
@@ -123,7 +123,7 @@
                                     <a href="#" target="_blank" class="btn btn-focus btn-sm mr-1" data-toggle="tooltip"
                                         title="Non Aktifkan TTD" data-placement="bottom">
                                         u.b
-                                    </a>
+                                    </a> -->
                                 </div>
                             </td>
                             <td class=" text-center">

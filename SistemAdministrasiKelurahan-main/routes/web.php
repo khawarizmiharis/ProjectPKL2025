@@ -96,6 +96,9 @@ Route::middleware('auth')->group(function () {
             Route::delete('{staff:nik}/delete', 'StaffController@destroy')->name('info-kelurahan.kepengurusan-destroy');
             // staff activation
             Route::patch('{staff:nik}/aktivasi', 'StaffController@activation')->name('info-kelurahan.kepengurusan-activation');
+            // expor excel
+            Route::get('/export', [StaffController::class, 'export'])->name('info-kelurahan.kepengurusan-export');
+
         });
         // Wilayah Kelurahan
         Route::prefix('/data-administratif')->group(function () {

@@ -8,6 +8,9 @@ use App\Villager;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Exports\StaffExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class StaffController extends Controller
 {
@@ -228,6 +231,11 @@ class StaffController extends Controller
         }
 
         return redirect()->route('info-kelurahan.kepengurusan');
+    }
+
+    public function export()
+    {
+        return Excel::download(new StaffExport, 'kepengurusan_kelurahan.xlsx');
     }
     
     public function strukturPemerintahan()
