@@ -65,8 +65,15 @@
                         case 'instagram': return 'https://instagram.com/'.$value;
                         case 'facebook':  return 'https://facebook.com/'.$value;
                         case 'twitter':   return 'https://twitter.com/'.$value;
-                        case 'youtube':   return 'https://youtube.com/'.$value;
-                        default: return $value;
+                        case 'youtube':
+                            // kalau pakai @ atau channel ID, langsung tambahin
+                            if (preg_match('/^@/', $value)) {
+                                return 'https://www.youtube.com/'.$value; 
+                            }
+                            if (preg_match('/^channel\//', $value) || preg_match('/^playlist\?/', $value)) {
+                                return 'https://www.youtube.com/'.$value;
+                            }
+                            return 'https://www.youtube.com/@'.$value;
                     }
                 };
 

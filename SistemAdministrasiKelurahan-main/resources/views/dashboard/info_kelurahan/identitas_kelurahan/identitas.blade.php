@@ -228,7 +228,15 @@
                         <tr>
                             <td>Link Google Maps</td>
                             <td class="text-center">:</td>
-                            <td>{{ $villageIdentity->maps_link ?? '-' }}</td>
+                            <td>
+                                @if(!empty($villageIdentity->google_maps))
+                                    <a href="{{ $villageIdentity->google_maps }}" target="_blank">
+                                        {{ $villageIdentity->google_maps }}
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
                         </tr>
                     </tbody>
                 </table>

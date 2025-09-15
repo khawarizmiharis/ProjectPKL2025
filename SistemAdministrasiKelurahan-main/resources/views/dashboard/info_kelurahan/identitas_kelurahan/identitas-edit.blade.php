@@ -413,11 +413,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="youtube" class="">Link Google Maps</label>
-                                        <input name="youtube" id="youtube" type="text"
-                                            class="form-control @error('youtube') is-invalid @enderror"
-                                            value="{{ old('youtube') ?? $villageIdentity->youtube }}">
-                                        @error('youtube')
+                                        <label for="google_maps" class="">Link Google Maps</label>
+                                        <input name="google_maps" id="google_maps" type="text"
+                                            class="form-control @error('google_maps') is-invalid @enderror"
+                                            value="{{ old('google_maps') ?? $villageIdentity->google_maps }}">
+                                        @error('google_maps')
                                         <span class="invalid-feedback mt-2" role="alert">
                                             <i>{{ $message }}</i>
                                         </span>

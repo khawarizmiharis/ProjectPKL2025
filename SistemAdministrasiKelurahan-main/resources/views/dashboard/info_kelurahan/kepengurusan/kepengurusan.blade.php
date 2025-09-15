@@ -65,7 +65,7 @@
                                 <td class=" text-center">{{ ++$number }}</td>
                                 <td class=" text-center">
                                     <div class="d-flex justify-content-center">
-                                        <a href="#" target="_blank" class="btn btn-success btn-sm mr-1"
+                                        <!-- <a href="#" target="_blank" class="btn btn-success btn-sm mr-1"
                                             data-toggle="tooltip" title="Pindah Posisi Keatas" data-placement="bottom">
                                             <i class="fas fa-caret-square-up "></i>
                                         </a>
@@ -73,7 +73,7 @@
                                         <a href="#" target="_blank" class="btn btn-success btn-sm mr-1"
                                             data-toggle="tooltip" title="Pindah Posisi Kebawah" data-placement="bottom">
                                             <i class="fas fa-caret-square-down"></i>
-                                        </a>
+                                        </a> -->
 
                                         <a href="{{route('info-kelurahan.kepengurusan-edit', $st->nik)}}"
                                             class="btn btn-primary btn-sm mr-1 " data-toggle="tooltip"
@@ -130,7 +130,7 @@
                                     {{ date('d F Y', strtotime($st->villager->birth_date)) }}
                                 </td>
                                 <td class=" text-center">
-                                    {{ $st->villager->sex->sex ?? '-' }}
+                                    {{ $st->villager->villagerSex->sex ?? '-' }}
                                 </td>
                                 <td class=" text-center">{{ $st->staff_position }}</td>
                             </tr>

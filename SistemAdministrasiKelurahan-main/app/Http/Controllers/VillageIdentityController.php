@@ -102,6 +102,7 @@ class VillageIdentityController extends Controller
             'facebook'  => 'nullable|string|max:255',
             'twitter'   => 'nullable|string|max:255',
             'youtube'   => 'nullable|string|max:255',
+            'google_maps' => 'nullable|string|max:1000',
         ]);
 
         // cek apakah background pict sudah di inputkan

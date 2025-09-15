@@ -33,5 +33,6 @@ class VillageIdentity extends Model
         'facebook',
         'twitter',
         'youtube',
+        'google_maps',
     ];
 }

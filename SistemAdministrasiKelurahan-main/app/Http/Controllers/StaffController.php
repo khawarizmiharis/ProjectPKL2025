@@ -56,9 +56,9 @@ class StaffController extends Controller
             'position_period' => 'required|string',
             'pangkat' => 'required|string',
             // 'is_active' => 'required|boolean',
-            'nomor_sk_angkat' => 'required|numeric',
+            'nomor_sk_angkat' => 'required|string',
             'tgl_sk_angkat' => 'required|date',
-            'nomor_sk_henti' => 'numeric',
+            'nomor_sk_henti' => 'string',
             'tgl_sk_henti' => 'date',
         ]);
 
@@ -88,6 +88,7 @@ class StaffController extends Controller
         $attr['photo'] = $photoUrl;
         $attr['registered'] = date('Y-m-d', strtotime(Carbon::now()));
         $attr['urutan'] = Staff::get()->count() + 1;
+        $attr['is_active'] = 1;
 
         Staff::create($attr);
 
