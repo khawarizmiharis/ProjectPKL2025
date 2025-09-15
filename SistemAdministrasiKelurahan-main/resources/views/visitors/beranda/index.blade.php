@@ -238,28 +238,30 @@
                     @endif
                 @endif
 
-            {{-- tombol lihat semua berita --}}
-            @if($articles->count() > 3)
-                <div class="text-center mt-4">
-                    <a href="{{ route('visitors.artikel.index') }}" 
-                    class="btn px-4 py-2"
-                    style="background: linear-gradient(135deg, #4F46E5, #3B82F6);
-                            color: white; 
-                            font-weight: 600; 
-                            border-radius: 30px; 
-                            transition: all 0.3s ease;">
-                        <i class="fas fa-newspaper me-3"></i> Lihat Semua Berita
-                    </a>
-                </div>
-            @endif
+                {{-- setelah loop artikel selesai, masih di dalam .row --}}
+                @if($articles->count() > 3)
+                    <div class="col-12 d-flex justify-content-center mt-4">
+                        <a href="{{ route('visitors.artikel.index') }}" class="btn lihat-berita-btn px-4 py-2">
+                            <i class="fas fa-newspaper me-2"></i> Lihat Semua Berita
+                        </a>
+                    </div>
+                @endif
 
-            <style>
-                a.btn:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
-                    text-decoration: none;
-                }
-            </style>
+                <style>
+                    .lihat-berita-btn {
+                        background: linear-gradient(135deg, #4F46E5, #3B82F6);
+                        color: white;
+                        font-weight: 600;
+                        border-radius: 30px;
+                        transition: all 0.3s ease;
+                    }
+
+                    .lihat-berita-btn:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+                        text-decoration: none;
+                    }
+                </style>
 
             <div class="col-lg-12 mb-5">
                 <ul class="pagination justify-content-center">

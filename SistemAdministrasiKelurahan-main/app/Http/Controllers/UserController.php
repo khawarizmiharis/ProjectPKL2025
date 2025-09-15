@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\User; 
+use App\Villager; 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use App\Staff;
-use App\User;
-use App\Villager;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert as FacaKelurahanlert;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 use Spatie\Permission\Models\Role;
+use App\Staff;
 
 class UserController extends Controller
 {
@@ -28,15 +27,21 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     *  
      * @return \Illuminate\Http\Response
      */
+    // UserController.php
+
     public function create()
     {
         $villagers = Villager::where('user_id', null)->get();
         $roles = Role::get();
 
-        return view('dashboard.manajemen_pengguna.pengguna-tambah', compact('villagers', 'roles'));
+        // TAMBAHKAN BARIS INI untuk mengambil data staff
+        $staffs = Staff::where('user_id', null)->get();
+
+        // TAMBAHKAN 'staffs' ke dalam compact()
+        return view('dashboard.manajemen_pengguna.pengguna-tambah', compact('villagers', 'roles', 'staffs'));
     }
 
     /**
@@ -73,7 +78,8 @@ class UserController extends Controller
 
             $user->assignRole($request->role);
 
-            return redirect()->route('manajemen-pengguna.pengguna')
+            
+            return redirect()->route('dashboard.manajemen-pengguna.pengguna.index')
                 ->with('success', 'Pengguna berhasil ditambahkan');
 
         } catch (\Exception $e) {
@@ -84,27 +90,30 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    
+    public function edit(User $user)
     {
-        return view('dashboard.manajemen_pengguna.pengguna.pengguna-edit');
+        $roles = Role::get();
+        return view('dashboard.manajemen_pengguna.pengguna-edit', compact('user', 'roles'));
     }
 
     /**
-     * Update user role (perbaikan dari BadMethodCallException)
+     * Update user role
      */
     public function updateRole(Request $request)
     {
         $request->validate([
             'id' => 'required|exists:users,id',
-            'role_name' => 'required|string'
+            'role_name' => 'required|string|exists:roles,name'
         ]);
 
         $user = User::findOrFail($request->id);
         $user->syncRoles([$request->role_name]);
 
-        FacaKelurahanlert::success('Berhasil', 'Role pengguna berhasil diperbarui');
+        FacadesAlert::success('Berhasil', 'Role pengguna berhasil diperbarui');
 
         return back();
     }
@@ -112,22 +121,21 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    
+    public function destroy(User $user)
     {
-        $user = User::find($id);
-
-        if (!$user) {
-            return redirect()->route('manajemen-pengguna.pengguna')
-                            ->with('error', 'Data pengguna tidak ditemukan.');
+        // PERBAIKAN: Hapus file foto dari storage jika ada
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
         }
 
         $user->delete();
 
-        return redirect()->route('manajemen-pengguna.pengguna')
-                        ->with('success', 'Pengguna berhasil dihapus.');
+        return redirect()->route('dashboard.manajemen-pengguna.pengguna.index')
+                         ->with('success', 'Pengguna berhasil dihapus.');
     }
 
     public function activation(Request $request, User $user)
@@ -138,13 +146,10 @@ class UserController extends Controller
 
         $user->update($attr);
 
-        if ($request->is_active == 1) {
-            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna diaktifkan');
-        } else {
-            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna dinonaktifkan');
-        }
+        $message = $request->is_active ? 'Akun pengguna diaktifkan' : 'Akun pengguna dinonaktifkan';
+        FacadesAlert::success('Berhasil', $message);
 
-        return redirect()->route('manajemen-pengguna.pengguna');
+        return redirect()->route('dashboard.manajemen-pengguna.pengguna.index');
     }
 
     public function massDestroy(Request $request)
@@ -152,10 +157,19 @@ class UserController extends Controller
         $ids = $request->input('selected_id', []);
 
         if (!empty($ids)) {
+            $usersToDelete = User::whereIn('id', $ids)->get();
+
+            foreach ($usersToDelete as $user) {
+                // PERBAIKAN: Hapus foto untuk setiap user
+                if ($user->photo) {
+                    Storage::disk('public')->delete($user->photo);
+                }
+            }
+            
             User::whereIn('id', $ids)->delete();
         }
 
-        return redirect()->route('manajemen-pengguna.pengguna')
-                        ->with('success', 'Data pengguna terpilih berhasil dihapus.');
+        return redirect()->route('dashboard.manajemen-pengguna.pengguna.index')
+                         ->with('success', 'Data pengguna terpilih berhasil dihapus.');
     }
 }

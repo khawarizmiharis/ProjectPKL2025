@@ -8,6 +8,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\VillageIdentityController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -377,23 +378,26 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    //ManajemenPengguna
+   // MANAJEMEN PENGGUNA
     Route::prefix('/dashboard/manajemen-pengguna')->middleware('permission:Manajemen Pengguna')->group(function () {
 
-        // Pengguna
+        // Grup untuk Pengguna
         Route::prefix('/pengguna')->group(function () {
-            Route::get('', 'UserController@index')->name('manajemen-pengguna.pengguna');
-            // store user
-            Route::get('/tambah', 'UserController@create')->name('manajemen-pengguna.pengguna-create');
-            Route::post('/tambah', 'UserController@store')->name('manajemen-pengguna.pengguna-store');
-            // Update User Role
-            Route::patch('/ubah-role-pengguna', 'UserController@updateRole')->name('manajemen-pengguna.pengguna.update-user-role');
-            // delete user
-            Route::delete('/{user}/delete', 'UserController@destroy')->name('manajemen-pengguna.pengguna-destroy');
-            // user activation
-            Route::patch('/{user}/aktivasi', 'UserController@activation')->name('manajemen-pengguna.pengguna-activation');
-            Route::delete('/pengguna/mass-destroy', [UserController::class, 'massDestroy'])->name('users.massDestroy');
+
+            Route::get('', [UserController::class, 'index'])->name('manajemen-pengguna.pengguna');
+            Route::get('/tambah', [UserController::class, 'create'])->name('manajemen-pengguna.pengguna-create');
+            Route::post('/tambah', [UserController::class, 'store'])->name('manajemen-pengguna.pengguna-store');
+
+            // TAMBAHKAN BARIS INI
+            Route::get('/{user}/edit', [UserController::class, 'edit'])->name('manajemen-pengguna.pengguna-edit');
+            
+            Route::patch('/ubah-role-pengguna', [UserController::class, 'updateRole'])->name('manajemen-pengguna.pengguna.update-user-role');
+            Route::delete('/{user}/delete', [UserController::class, 'destroy'])->name('manajemen-pengguna.pengguna-destroy');
+            Route::patch('/{user}/aktivasi', [UserController::class, 'activation'])->name('manajemen-pengguna.pengguna-activation');
+            Route::delete('/mass-destroy', [UserController::class, 'massDestroy'])->name('users.massDestroy');
+
         });
+
 
         // RoleDanHakAkses
         Route::prefix('/role')->group(function () {
