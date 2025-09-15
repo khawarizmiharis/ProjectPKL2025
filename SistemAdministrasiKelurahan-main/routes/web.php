@@ -8,6 +8,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\VillageIdentityController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -386,11 +387,12 @@ Route::middleware('auth')->group(function () {
             Route::get('/tambah', 'UserController@create')->name('manajemen-pengguna.pengguna-create');
             Route::post('/tambah', 'UserController@store')->name('manajemen-pengguna.pengguna-store');
             // Update User Role
-            Route::patch('/ubah-role-pengguna', 'UserController@update')->name('manajemen-pengguna.pengguna.update-user-role');
+            Route::patch('/ubah-role-pengguna', 'UserController@updateRole')->name('manajemen-pengguna.pengguna.update-user-role');
             // delete user
             Route::delete('/{user}/delete', 'UserController@destroy')->name('manajemen-pengguna.pengguna-destroy');
             // user activation
             Route::patch('/{user}/aktivasi', 'UserController@activation')->name('manajemen-pengguna.pengguna-activation');
+            Route::delete('/pengguna/mass-destroy', [UserController::class, 'massDestroy'])->name('users.massDestroy');
         });
 
         // RoleDanHakAkses

@@ -6,7 +6,7 @@
     $data=[
         'icon' => "pe-7s-user",
         'judul' => "Tambah Pengguna",
-        'link' => route('manajemen-pengguna.pengguna') ,
+        'link' => route('manajemen-pengguna.pengguna'),
         'page1' => "Pengguna",
         'page2' => "/ Tambah"
     ]
@@ -22,33 +22,51 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="full_name">Nama Lengkap</label>
-                        <input type="text" name="full_name" id="full_name" class="form-control" required>
+                        <label for="staff">Pilih Staf Kelurahan</label>
+                        <select name="staff" id="staff" class="form-control @error('staff') is-invalid @enderror" required>
+                            <option value="">-- Pilih salah satu --</option>
+                            @foreach($staffs as $staff)
+                                @if($staff->villager)
+                                    <option value="{{ $staff->id }}" {{ old('staff') == $staff->id ? 'selected' : '' }}>
+                                        {{ $staff->villager->nik }} - {{ $staff->villager->full_name }} ({{ $staff->position }})
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                        @error('staff')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
-                    </div>
+                    {{-- BLOK INPUT EMAIL DIHAPUS --}}
 
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" required>
-                    </div>
+                    {{-- BLOK INPUT PASSWORD DIHAPUS --}}
 
                     <div class="form-group">
                         <label for="role">Role</label>
-                        <select name="role" id="role" class="form-control" required>
+                        <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
                             <option value="">-- Pilih Role --</option>
                             @foreach($roles as $role)
-                                <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
                             @endforeach
                         </select>
+                         @error('role')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="photo">Foto (opsional)</label>
-                        <input type="file" name="photo" id="photo" class="form-control">
+                        <label for="photo">Foto (opsional, maks: 1MB)</label>
+                        <input type="file" name="photo" id="photo" class="form-control @error('photo') is-invalid @enderror">
+                        @error('photo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary">Simpan</button>

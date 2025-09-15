@@ -16,10 +16,17 @@
     <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-header">Pengguna
-                <div class="btn-actions-pane-right">
-                    <a type="button"
-                        class="btn btn-lg btn-danger btn-sm text-white font-weight-normal m-1 mb-2 btn-responsive"
-                        href="#"><i class="fas fa-trash-alt"></i> Hapus Data Terpilih</a>
+                <div class="btn-actions-pane-right d-flex">
+                    <!-- Form hapus massal -->
+                <form id="formDeleteSelected" action="{{ route('users.massDestroy') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="selected_id" id="selected_ids">
+                    <button type="submit" id="btnDeleteSelected" class="btn btn-danger" disabled>
+                        Hapus Data Terpilih
+                    </button>
+                </form>
+
                     <a type="button"
                         class="btn btn-lg btn-focus btn-sm text-white font-weight-normal m-1 mb-2 btn-responsive"
                         href="{{ route('manajemen-pengguna.pengguna-create') }}">+
@@ -32,7 +39,9 @@
                 <table class="align-middle mb-0 table table-borderless table-striped table-hover p-5">
                     <thead>
                         <tr>
-                            <th class="text-center"><input type="checkbox" onchange="checkAll(this)" name="chk[]"></th>
+                            <th class="text-center">
+                                <input type="checkbox" id="checkAll">
+                            </th>
                             <th class="text-center">No.</th>
                             <th class="text-center">Aksi</th>
                             <th class="text-center">Foto</th>
@@ -45,7 +54,9 @@
                     <tbody>
                         @foreach ($users as $number => $user)
                         <tr>
-                            <td class="text-center"><input type="checkbox" name="chkbox[]" value="#"></td>
+                            <td class="text-center">
+                                <input type="checkbox" name="selected_id[]" value="{{ $user->id }}" class="chkbox">
+                            </td>
                             <td class="text-center">{{ $number + $users->firstItem() }}</td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center">
@@ -135,6 +146,7 @@
 </div>
 
 <script>
+    // Modal Edit Role
     $(document).on("click", ".editUserRoleModal", function () {
         const id = $(this).data('id');
         const name = $(this).data('name');
@@ -142,6 +154,7 @@
         $("#editUserRoleModal .modal-body #role_name").val(name);
     });
 
+    // Delete 1 data (swal)
     $(document).on('click', '#delete-form', function(e) {
         var form = this;
         e.preventDefault();
@@ -157,11 +170,43 @@
             if (result.isConfirmed) {
                 return form.submit();
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                swal.fire(
-                    'Dibatalkan',
-                    'Data anda masih tersimpan :)',
-                    'error'
-                );
+                swal.fire('Dibatalkan', 'Data anda masih tersimpan :)', 'error');
+            }
+        });
+    });
+
+    // Hapus Massal
+    const btnDeleteSelected = document.getElementById('btnDeleteSelected');
+    const checkAll = document.getElementById('checkAll');
+    const checkboxes = document.querySelectorAll('.chkbox');
+    const formDeleteSelected = document.getElementById('formDeleteSelected');
+
+    checkAll.addEventListener('change', function () {
+        checkboxes.forEach(cb => cb.checked = this.checked);
+        toggleButton();
+    });
+
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', toggleButton);
+    });
+
+    function toggleButton() {
+        const anyChecked = [...checkboxes].some(cb => cb.checked);
+        btnDeleteSelected.disabled = !anyChecked;
+    }
+
+    formDeleteSelected.addEventListener('submit', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Hapus Data Terpilih?',
+            text: "Data yang dipilih tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                formDeleteSelected.submit();
             }
         });
     });

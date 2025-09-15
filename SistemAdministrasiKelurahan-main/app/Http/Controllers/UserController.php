@@ -47,140 +47,87 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $photoUrl = null;
-
-        $attr = $request->validate([
-            'villager' => 'required',
-            'email' => 'required|email|unique:users,email,',
-            'password' => 'required|string|min:6',
-            'role' => 'required|string',
-            'photo' => 'image|max:1000'
+        $request->validate([
+            'nik'       => 'required|string|max:20|unique:users,nik',
+            'full_name' => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users,email',
+            'password'  => 'required|string|min:6',
+            'role'      => 'required|string',
+            'photo'     => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // cek apakah foto sudah di inputkan
+        $photoPath = null;
         if ($request->hasFile('photo')) {
-            // ambil ukuran foto
-            $photoSize = $request->file('photo')->getSize();
-            // cek ukuran foto yg diupload, max masih 1MB
-            if ($photoSize <= 1000000) {
-                // ambil file foto
-                $photo = $request->file('photo');
-                // rename file foto
-                $prefix = explode('@', $request->email);
-                $photoName = $prefix[0] . "." . $photo->extension();
-                // menentukan lokasi penyimpanan foto
-                $photoUrl = $photo->storeAs("images/user_profile_pic", "{$photoName}");
-            }
+            $photoPath = $request->file('photo')->store('users', 'public');
         }
 
-        $villagerStaffData = Staff::where('villager_id', $request->villager)->get()->first();
-        $villagerData = Villager::where('id', $request->villager)->get()->first();
-        $registeredAsStaff = Staff::where('nik', $villagerData->nik)->get()->count();
-
-        if ($registeredAsStaff != 0) {
-            $attr['nik'] = $villagerData->nik;
-            $attr['full_name'] = $villagerData->full_name;
-            $attr['password'] = Hash::make($request->password);
-            $attr['phone'] = $villagerData->phone_number;
-            $attr['photo'] = $photoUrl;
-            $attr['is_active'] = 1;
-
-            // buat akun dan berikan role
-            User::create($attr)->assignRole($request->role);
-
-            // update attribut user_id di tabel villagers dan staff
-            $userId = User::where('nik', $villagerData->nik)->pluck('id')->first();
-            $villagerData->update([
-                'user_id' => $userId
-            ]);
-            $villagerStaffData->update([
-                'user_id' => $userId
+        try {
+            $user = User::create([
+                'nik'       => $request->nik,
+                'full_name' => $request->full_name,
+                'email'     => $request->email,
+                'password'  => Hash::make($request->password),
+                'photo'     => $photoPath,
+                'is_active' => 1,
             ]);
 
-            FacaKelurahanlert::success('Berhasil', 'Akun user berhasil dibuat');
-            return redirect()->route('manajemen-pengguna.pengguna');
-        } else {
-            FacaKelurahanlert::error('Penduduk bukan staff kelurahan', 'Silahkan daftarkan penduduk sebagai staff kelurahan');
-            return back();
+            $user->assignRole($request->role);
+
+            return redirect()->route('manajemen-pengguna.pengguna')
+                ->with('success', 'Pengguna berhasil ditambahkan');
+
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ArticleCategory  $articleCategory
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(ArticleCategory $category)
-    // {
-    //     $all_articles = Article::get();
-    //     $articles = $category->articles()->where('enabled', 1)->latest()->paginate(6);
-    //     // dd($articles);
-    //     $count = $articles->count();
-    //     $article_comments = ArticleComment::take(5)->latest()->get();
-
-    //     return view('visitors.artikel.index', compact('all_articles', 'articles', 'category', 'count', 'article_comments'));
-    // }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ArticleCategory  $articleCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(/*ArticleCategory $articleCategory*/)
+    public function edit()
     {
-        return view('dashboard.manajemen_pengguna.pengguna.pengguna-edit'/*, compact('articleCategory')*/);
+        return view('dashboard.manajemen_pengguna.pengguna.pengguna-edit');
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ArticleCategory  $articleCategory
-     * @return \Illuminate\Http\Response
+     * Update user role (perbaikan dari BadMethodCallException)
      */
-    public function update(Request $request)
+    public function updateRole(Request $request)
     {
-        // dd($request);
+        $request->validate([
+            'id' => 'required|exists:users,id',
+            'role_name' => 'required|string'
+        ]);
+
         $user = User::findOrFail($request->id);
-        // dd($user);
         $user->syncRoles([$request->role_name]);
 
         FacaKelurahanlert::success('Berhasil', 'Role pengguna berhasil diperbarui');
+
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $userStaff = $user->staff;
-        $userVillager = $user->villager;
+        $user = User::find($id);
 
-        // update user_id di tabel staff
-        $userStaff->update([
-            'user_id' => null
-        ]);
-
-        // update user_id di tabel villager
-        $userVillager->update([
-            'user_id' => null
-        ]);
-
-        // hapus dari storage juga jika user punya foto
-        if ($user->photo) {
-            Storage::delete($user->photo);
+        if (!$user) {
+            return redirect()->route('manajemen-pengguna.pengguna')
+                            ->with('error', 'Data pengguna tidak ditemukan.');
         }
 
         $user->delete();
 
-        FacaKelurahanlert::success('Berhasil', 'Akun Pengguna berhasil dihapus');
-        return redirect()->route('manajemen-pengguna.pengguna');
+        return redirect()->route('manajemen-pengguna.pengguna')
+                        ->with('success', 'Pengguna berhasil dihapus.');
     }
 
     public function activation(Request $request, User $user)
@@ -192,11 +139,23 @@ class UserController extends Controller
         $user->update($attr);
 
         if ($request->is_active == 1) {
-            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna di aktifkan');
+            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna diaktifkan');
         } else {
-            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna di non-aktifkan');
+            FacaKelurahanlert::success(' Berhasil ', 'Akun pengguna dinonaktifkan');
         }
 
         return redirect()->route('manajemen-pengguna.pengguna');
+    }
+
+    public function massDestroy(Request $request)
+    {
+        $ids = $request->input('selected_id', []);
+
+        if (!empty($ids)) {
+            User::whereIn('id', $ids)->delete();
+        }
+
+        return redirect()->route('manajemen-pengguna.pengguna')
+                        ->with('success', 'Data pengguna terpilih berhasil dihapus.');
     }
 }

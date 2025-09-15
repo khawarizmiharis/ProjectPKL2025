@@ -33,7 +33,7 @@ class CreateStaffTable extends Migration
             $table->smallInteger('ttd_an')->nullable();
             $table->smallInteger('ttd_ub')->default(0);
             $table->integer('urutan')->nullable();
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
         });
     }
