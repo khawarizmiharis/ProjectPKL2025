@@ -91,7 +91,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">{{ $subMenu->sub_menu }}</td>
-                                    <td class="text-center">{{ $subMenu->dashboardMenu->name }}</td>
+                                    <td class="text-center">{{ $subMenu->dashboardMenu->name ?? '-' }}</td>
                                     <td class="text-center">{{ $subMenu->url_path }}</td>
                                     <td class="text-center">{{ $subMenu->icon }}</td>
                                 </tr>
