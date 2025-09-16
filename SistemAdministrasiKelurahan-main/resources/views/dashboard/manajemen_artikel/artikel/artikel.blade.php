@@ -69,7 +69,7 @@
                                         </button>
                                     </form>
 
-                                    @if ($article->commentable == 1)
+                                    <!-- @if ($article->commentable == 1)
                                     <form method="POST"
                                         action="{{ route('manajemen-artikel.artikel.comment-activation', $article->id) }}">
                                         @csrf
@@ -91,7 +91,7 @@
                                             <i class="fas fa-comment-slash"></i>
                                         </button>
                                     </form>
-                                    @endif
+                                    @endif -->
 
                                     @if ($article->enabled == 1)
                                     <form method="POST"

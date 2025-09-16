@@ -16,13 +16,13 @@
     <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-header">Komentar
-                <div class="btn-actions-pane-right "><a type="button"
+                <!-- <div class="btn-actions-pane-right "><a type="button"
                         class="btn btn-lg btn-danger btn-sm text-white font-weight-normal m-1 mb-2 mt-2 btn-responsive"
                         href="#"><i class="fas fa-trash-alt"></i> Hapus Data Terpilih</a>
                     {{-- <a type="button" class="btn btn-lg btn-focus btn-sm text-white font-weight-normal "
                             href="{{ route('manajemen-artikel.kategori.create') }}">+
                     Tambah Data </a> --}}
-                </div>
+                </div> -->
             </div>
             <div class="table-responsive">
                 <table class="align-middle mb-0 table table-borderless table-striped table-hover p-5">
