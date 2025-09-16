@@ -50,7 +50,7 @@
                                 <th class=" text-center">No.</th>
                                 <th class=" text-center">Aksi</th>
                                 <th class=" text-center">Foto</th>
-                                <th class=" text-center">Nama , NIP, NIPD</th>
+                                <th class=" text-center">Nama , NIP</th>
                                 <th class=" text-center">Tempat, Tanggal Lahir</th>
                                 <th class=" text-center">Jenis Kelamin</th>
                                 <th class=" text-center">Jabatan</th>
@@ -123,7 +123,7 @@
                                 <td class="text-left">
                                     Nama : {{ $st->full_name }} <br>
                                     NIP : {{ $st->nip }} <br>
-                                    NIPD : {{ $st->nipd }}
+                                    <!-- NIPD : {{ $st->nipd }} -->
                                 </td>
                                 <td class=" text-center">
                                     {{ $st->villager->birth_place }},

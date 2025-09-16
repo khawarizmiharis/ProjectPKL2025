@@ -27,6 +27,9 @@ class Staff extends Model
         'urutan',
         'is_active'
     ];
+    protected $attributes = [
+        'nipd' => 0,
+    ];
 
     public function user()
     {

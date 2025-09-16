@@ -335,7 +335,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <div class="position-relative form-group">
                                             <label for="nipd" class="">NIPD</label>
                                             <input name="nipd" id="nipd" type="text"
@@ -347,7 +347,7 @@
                                             </span>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

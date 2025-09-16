@@ -50,17 +50,21 @@ class StaffController extends Controller
         $attr = $request->validate([
             'villager' => 'required',
             'nip' => 'required|numeric|digits:18|unique:staff,nip',
-            'nipd' => 'required|numeric|digits:21|unique:staff,nipd',
+            'nipd' => 'nullable|numeric|digits:21|unique:staff,nipd', // ubah jadi nullable
             'photo' => 'required|image|max:1000',
             'staff_position' => 'required|string',
             'position_period' => 'required|string',
             'pangkat' => 'required|string',
-            // 'is_active' => 'required|boolean',
             'nomor_sk_angkat' => 'required|string',
             'tgl_sk_angkat' => 'required|date',
-            'nomor_sk_henti' => 'string',
-            'tgl_sk_henti' => 'date',
+            'nomor_sk_henti' => 'nullable|string',
+            'tgl_sk_henti' => 'nullable|date',
         ]);
+
+        // kalau nipd kosong → set 0
+        if (empty($request->nipd)) {
+            $attr['nipd'] = 0;
+        }
 
         // cek apakah foto sudah di inputkan
         if ($request->hasFile('photo')) {
