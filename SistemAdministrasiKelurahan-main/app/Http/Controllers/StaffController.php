@@ -190,25 +190,17 @@ class StaffController extends Controller
      */
     public function destroy(Staff $staff)
     {
-        $staffUserData = $staff->user;
-        $staffVillagerData = $staffUserData->villager;
-        $countStaffUser = $staffUserData->where('id', $staff->user_id)->count();
-        $countStaffVillager = $staffVillagerData->where('id', $staff->user_id)->count();
-        // dd($staffVillagerData->where('id', $staff->user_id)->count());
+        $staffUserData = $staff->user; // bisa null
+        $staffVillagerData = $staffUserData ? $staffUserData->villager : null;
 
-        if ($countStaffVillager == 1) {
-            // update user_id di tabel villagers
-            $staffVillagerData->update([
-                'user_id' => null
-            ]);
+        if ($staffVillagerData && $staffVillagerData->id == $staff->user_id) {
+            $staffVillagerData->update(['user_id' => null]);
         }
 
-        if ($countStaffUser == 1) {
-            // hapus foto dari storage jika akun user si staff ada fotonya
+        if ($staffUserData) {
             if ($staffUserData->photo) {
                 \Storage::delete($staffUserData->photo);
             }
-            // hapus akun user si staff
             $staffUserData->delete();
         }
 
@@ -217,6 +209,7 @@ class StaffController extends Controller
         }
 
         $staff->delete();
+
         Alert::success(' Berhasil ', 'Staff berhasil dihapus');
         return redirect()->route('info-kelurahan.kepengurusan');
     }
