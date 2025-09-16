@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -18,7 +17,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nik', 'full_name', 'email', 'password', 'phone', 'photo', 'is_active'
+        'nik',
+        'full_name',
+        'email',
+        'password',
+        'phone',
+        'photo',
+        'is_active',
+        'last_login',
     ];
 
     /**
@@ -27,7 +33,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -37,7 +44,13 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_active' => 'boolean',
+        'last_login' => 'datetime',
     ];
+
+    // -----------------------
+    // RELATIONS
+    // -----------------------
 
     public function letterSubmissions()
     {
@@ -59,27 +72,32 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
-    // ini jangan di uncomment dulu, ntar eror pas register
-    // SQLSTATE[HY000]: General error: 1364 Field 'model_type' doesn't have a default value
-    // public function roles()
-    // {
-    //     return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
-    // }
-
-    // public function articleComments()
-    // {
-    //     return $this->hasMany(ArticleComment::class, 'email', 'email');
-    // }
-
-    public function complaints() {
-        $this->hasMany(Complaint::class);
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class);
     }
 
-    public function complaintComments() {
+    public function complaintComments()
+    {
         return $this->hasMany(ComplaintComment::class);
     }
 
-    public function umkmProfile() {
+    public function umkmProfile()
+    {
         return $this->hasOne(UmkmProfile::class);
+    }
+
+    // -----------------------
+    // ACCESSORS / HELPERS
+    // -----------------------
+
+    public function getPhotoUrlAttribute()
+    {
+        return $this->photo ? asset('storage/' . $this->photo) : null;
+    }
+
+    public function getNameWithNikAttribute()
+    {
+        return "{$this->full_name} ({$this->nik})";
     }
 }

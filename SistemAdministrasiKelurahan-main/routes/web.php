@@ -376,42 +376,33 @@ Route::middleware('auth')->group(function () {
         });
     });
 
+    // Manajemen Pengguna
+    Route::prefix('dashboard/manajemen-pengguna')
+        ->middleware('permission:Manajemen Pengguna')
+        ->group(function () {
 
-    //ManajemenPengguna
-    Route::prefix('/dashboard/manajemen-pengguna')->middleware('permission:Manajemen Pengguna')->group(function () {
+            // Pengguna
+            Route::prefix('pengguna')->group(function () {
+                Route::get('', 'UserController@index')->name('manajemen-pengguna.pengguna');
+                Route::get('/tambah', 'UserController@create')->name('manajemen-pengguna.pengguna-create');
+                Route::post('/tambah', 'UserController@store')->name('manajemen-pengguna.pengguna-store');
+                Route::patch('/ubah-role', 'UserController@updateRole')->name('manajemen-pengguna.pengguna.update-user-role');
+                Route::patch('/{user}/aktivasi', 'UserController@activation')->name('manajemen-pengguna.pengguna-activation');
+                Route::delete('/{user}/delete', 'UserController@destroy')->name('manajemen-pengguna.pengguna-destroy');
+                Route::delete('/mass-destroy', 'UserController@massDestroy')->name('manajemen-pengguna.pengguna.massDestroy');
+            });
 
-        // Pengguna
-        Route::prefix('/pengguna')->group(function () {
-            Route::get('', 'UserController@index')->name('manajemen-pengguna.pengguna');
-            // store user
-            Route::get('/tambah', 'UserController@create')->name('manajemen-pengguna.pengguna-create');
-            Route::post('/tambah', 'UserController@store')->name('manajemen-pengguna.pengguna-store');
-            // Update User Role
-            Route::patch('/ubah-role-pengguna', 'UserController@updateRole')->name('manajemen-pengguna.pengguna.update-user-role');
-            // delete user
-            Route::delete('/{user}/delete', 'UserController@destroy')->name('manajemen-pengguna.pengguna-destroy');
-            // user activation
-            Route::patch('/{user}/aktivasi', 'UserController@activation')->name('manajemen-pengguna.pengguna-activation');
-            Route::delete('/pengguna/mass-destroy', [UserController::class, 'massDestroy'])->name('users.massDestroy');
+            // Role dan Hak Akses
+            Route::prefix('role')->group(function () {
+                Route::get('', 'UserRoleAccessController@index')->name('manajemen-pengguna.role');
+                Route::post('/tambah-role', 'UserRoleAccessController@storeRole')->name('manajemen-pengguna.role-dan-hak-akses.store-role');
+                Route::patch('/ubah-role', 'UserRoleAccessController@updateRole')->name('manajemen-pengguna.role-dan-hak-akses.update-role');
+                Route::delete('/{role}/hapus-role', 'UserRoleAccessController@destroyRole')->name('manajemen-pengguna.role-dan-hak-akses.destroy-role');
+                Route::post('/tambah-role-permission', 'UserRoleAccessController@storeRolePermission')->name('manajemen-pengguna.role-dan-hak-akses.store-role-permission');
+                Route::patch('/{role}/role-permission', 'UserRoleAccessController@updateRolePermission')->name('manajemen-pengguna.role-dan-hak-akses.update-role-permission');
+            });
+
         });
-
-        // RoleDanHakAkses
-        Route::prefix('/role')->group(function () {
-            Route::get('', 'UserRoleAccessController@index')->name('manajemen-pengguna.role');
-            // Store Role
-            Route::post('/tambah-role', 'UserRoleAccessController@storeRole')->name('manajemen-pengguna.role-dan-hak-akses.store-role');
-            // Update Role
-            Route::patch('/ubah-role', 'UserRoleAccessController@updateRole')->name('manajemen-pengguna.role-dan-hak-akses.update-role');
-            // Destroy Role
-            Route::delete('/{role}/hapus-role', 'UserRoleAccessController@destroyRole')->name('manajemen-pengguna.role-dan-hak-akses.destroy-role');
-            // Store Role Permission
-            Route::post('/tambah-role-permission', 'UserRoleAccessController@storeRolePermission')->name('manajemen-pengguna.role-dan-hak-akses.store-role-permission');
-            // Update Role Permission
-            Route::patch('/{role}/role-permission', 'UserRoleAccessController@updateRolePermission')->name('manajemen-pengguna.role-dan-hak-akses.update-role-permission');
-            // Destroy Role Permission
-            // Route::delete('/{permission}/hapus-role-permission', 'UserRoleAccessController@destroyRolePermission')->name('manajemen-pengguna.role-dan-hak-akses.destroy-role-permission');
-        });
-    });
 
     //Layanan
     Route::prefix('/dashboard/layanan')->middleware('permission:Layanan')->group(function () {
