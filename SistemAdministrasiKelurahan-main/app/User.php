@@ -100,4 +100,12 @@ class User extends Authenticatable
     {
         return "{$this->full_name} ({$this->nik})";
     }
+
+    public function setPasswordAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['password'] = bcrypt($value);
+        }
+    }
+
 }

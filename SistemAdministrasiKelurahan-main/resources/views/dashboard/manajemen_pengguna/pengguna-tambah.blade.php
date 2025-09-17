@@ -71,6 +71,47 @@
                         @enderror
                     </div>
 
+                    {{-- Input Email --}}
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" 
+                            name="email" 
+                            id="email" 
+                            value="{{ old('email') }}"
+                            class="form-control @error('email') is-invalid @enderror" 
+                            placeholder="Masukkan email pengguna" required>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{-- Input Password --}}
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" 
+                            name="password" 
+                            id="password" 
+                            class="form-control @error('password') is-invalid @enderror" 
+                            placeholder="Masukkan password" required>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{-- Konfirmasi Password --}}
+                    <div class="form-group">
+                        <label for="password_confirmation">Konfirmasi Password</label>
+                        <input type="password" 
+                            name="password_confirmation" 
+                            id="password_confirmation" 
+                            class="form-control" 
+                            placeholder="Ulangi password" required>
+                    </div>
+
                     {{-- Upload Foto --}}
                     <div class="form-group">
                         <label for="photo">Foto (opsional, maks: 1MB)</label>

@@ -34,6 +34,8 @@ class UserController extends Controller
         $request->validate([
             'staff' => 'required|exists:staff,id',
             'role'  => 'required|exists:roles,name',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed', // pakai konfirmasi password
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
 
@@ -55,8 +57,10 @@ class UserController extends Controller
             $user = new User();
             $user->nik = $staff->villager->nik;
             $user->full_name = $staff->villager->full_name;
-            $user->email = $staff->villager->nik . '@example.com';
-            $user->password = Hash::make('123456');
+            $user->email     = $request->email; // email manual
+            // $user->email = $staff->villager->nik . '@example.com';
+            $user->password  = Hash::make($request->password); // password manual
+            // $user->password = Hash::make('123456');
             $user->phone = $staff->phone ?? $staff->villager->phone ?? '';
             $user->photo = $photoPath;
             $user->is_active = 1;
