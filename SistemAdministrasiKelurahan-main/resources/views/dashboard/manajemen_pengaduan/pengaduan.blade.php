@@ -39,15 +39,19 @@
                             <td class=" text-center">{{$number + 1}}</td>
                             <td class=" text-center">
                                 <div class="d-flex justify-content-center">
-                                    <span class="komenPengaduan" data-toggle="modal" data-target="#komenPengaduan">
+                                    <!-- <span class="komenPengaduan" data-toggle="modal" data-target="#komenPengaduan">
                                         <a href="#" class="btn btn-info text-white btn-sm mr-1" data-toggle="tooltip"
                                             title="Balas Komentar" data-placement="bottom">
                                             <i class="fas fa-comment"></i>
                                         </a>
-                                    </span>
+                                    </span> -->
 
 
-                                    <form id="delete-form" action="#" method="post">
+                                    <form id="delete-form-{{ $complaint->id }}" 
+                                        action="{{ route('manajemen-pengaduan.destroy', $complaint->id) }}" 
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm mr-1" data-toggle="tooltip"
                                             title="Hapus Pengaduan" data-placement="bottom">
                                             <i class="fas fa-trash-alt"></i>
@@ -97,11 +101,9 @@
         modal.find("#updateStatusModal #letter_id").attr('value', letter_id);
     });
 
-
-
-    $(document).on('click', '#delete-form', function(e) {
-        var form = this;
+    $(document).on('submit', 'form[id^="delete-form-"]', function(e) {
         e.preventDefault();
+        var form = this;
         swal.fire({
             title: 'Hapus Data Ini?',
             text: "Data Tidak Akan Kembali ",
@@ -112,18 +114,15 @@
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                return form.submit();
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
+                form.submit();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
                 swal.fire(
                     'Dibatalkan',
                     'Data anda masih tersimpan :)',
                     'error'
                 )
             }
-        })
+        });
     });
 </script>
 

@@ -50,5 +50,13 @@ class ComplaintController extends Controller
 
         return redirect()->back();
     }
+    public function destroy(Complaint $complaint)
+    {
+        $complaint->delete();
+
+        Alert::success('Berhasil', 'Data pengaduan berhasil dihapus');
+        return redirect()->route('manajemen-pengaduan.data-pengaduan');
+    }
+
 }
 

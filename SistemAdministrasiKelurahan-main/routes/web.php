@@ -328,6 +328,7 @@ Route::middleware('auth')->group(function () {
         // Pengaduan
         Route::prefix('/data-pengaduan')->group(function () {
             Route::get('', 'ComplaintController@index')->name('manajemen-pengaduan.data-pengaduan');
+            Route::delete('/{complaint}', 'ComplaintController@destroy')->name('manajemen-pengaduan.destroy');
         });
     });
 
