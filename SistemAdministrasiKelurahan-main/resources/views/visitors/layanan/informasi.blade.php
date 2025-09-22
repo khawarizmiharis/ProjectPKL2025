@@ -250,6 +250,124 @@
                 <!-- Tambahkan layanan lain sesuai kebutuhan -->
             </tbody>
         </table>
+
+        {{-- Start Service Section --}}
+        <section id="service">
+            <div class="container mb-4 mt-4">
+                <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="col-lg-10">
+                        <h3 class="p-3 text-center fw-bold mb-4">Form Layanan</h3>
+                        <hr>
+                        <form action="{{ route('visitors.service.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            {{-- Nama & Email --}}
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <label for="name" class="form-label">Nama <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" id="name"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        placeholder="Nama lengkap anda"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <small><i class="text-danger">{{ $message }}</i></small>
+                                    @enderror
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" id="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        placeholder="name@example.com"
+                                        value="{{ old('email') }}">
+                                    @error('email')
+                                        <small><i class="text-danger">{{ $message }}</i></small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Nomor HP & Jenis Layanan --}}
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <label for="phone" class="form-label">Nomor Handphone <span class="text-danger">*</span></label>
+                                    <input type="text" name="phone" id="phone"
+                                        class="form-control @error('phone') is-invalid @enderror"
+                                        placeholder="081234567891"
+                                        value="{{ old('phone') }}">
+                                    @error('phone')
+                                        <small><i class="text-danger">{{ $message }}</i></small>
+                                    @enderror
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <label for="service_category_id" class="form-label">Jenis Layanan <span class="text-danger">*</span></label>
+                                    <select name="service_category_id" id="service_category_id"
+                                        class="form-control @error('service_category_id') is-invalid @enderror" required>
+                                        <option value="">-- Pilih layanan --</option>
+                                        @foreach ($service_categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ old('service_category_id') == $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('service_category_id')
+                                        <small><i class="text-danger">{{ $message }}</i></small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Deskripsi Layanan --}}
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Keterangan <span class="text-danger">*</span></label>
+                                <textarea name="description" id="description" rows="3"
+                                    class="form-control @error('description') is-invalid @enderror"
+                                    placeholder="Tuliskan detail layanan yang anda ajukan">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <small><i class="text-danger">{{ $message }}</i></small>
+                                @enderror
+                            </div>
+
+                            {{-- Upload Dokumen (Opsional) --}}
+                            <div class="mb-3">
+                                <label for="document" class="form-label">Upload Dokumen Pendukung (opsional)</label>
+                                <input type="file" name="document" id="document"
+                                    class="form-control @error('document') is-invalid @enderror" accept=".pdf,.jpg,.png,.jpeg">
+                                @error('document')
+                                    <small><i class="text-danger">{{ $message }}</i></small>
+                                @enderror
+                            </div>
+
+                            {{-- Tombol Submit --}}
+                            <div class="row justify-content-center mt-5">
+                                <button type="submit" class="btn-submit">Ajukan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{-- End Service Section --}}
     </div>
 </div>
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            showConfirmButton: true, // tampilkan tombol OK
+        });
+    </script>
+@endif
+
+@if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            html: `{!! implode('<br>', $errors->all()) !!}`,
+        });
+    </script>
+@endif
 @endsection

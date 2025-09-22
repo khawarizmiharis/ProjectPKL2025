@@ -15,11 +15,11 @@ class AddFullnameAndPhotoToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Menghapus kolom 'name' yang lama
-            $table->dropColumn('name');
+            // $table->dropColumn('name');
 
             // Menambahkan kolom baru setelah 'id' dan 'nik'
-            $table->string('full_name')->after('nik');
-            $table->string('photo')->nullable()->after('phone');
+            // $table->string('full_name')->after('nik');
+            // $table->string('photo')->nullable()->after('phone');
         });
     }
 

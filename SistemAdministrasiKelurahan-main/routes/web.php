@@ -6,6 +6,9 @@ use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\LayananPublikController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ServiceRequestController;
+use App\ServiceCategory;
+use App\Http\Controllers\ServiceRequestDashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\VillageIdentityController;
 
@@ -332,6 +335,15 @@ Route::middleware('auth')->group(function () {
         });
     });
 
+    //Manajemen Layanan
+    Route::prefix('dashboard/manajemen-layanan')
+        ->name('manajemen-layanan.')
+        ->middleware(['auth', 'permission:Manajemen Layanan']) // ganti 'admin' ke permission
+        ->group(function() {
+            Route::get('/', [ServiceRequestDashboardController::class, 'index'])->name('index');          // Tabel semua pengajuan
+            Route::get('/{service}', [ServiceRequestDashboardController::class, 'show'])->name('show');    // Detail pengajuan
+            Route::delete('/{service}', [ServiceRequestDashboardController::class, 'destroy'])->name('destroy'); // Hapus pengajuan
+    });
 
     // Manajemen UMKM
     Route::prefix('/dashboard/manajemen-umkm')->group(function () {
@@ -480,12 +492,19 @@ Route::prefix('profil-kelurahan')->group(function () {
     Route::get('/administratif', 'AdministratifController@index')->name('profil-kelurahan.administratif.index');
 });
 
-
-// Layanan
+// Layanan (tampilkan form + data kategori)
 Route::get('/layanan/informasi', function () {
-    return view('visitors.layanan.informasi');
+    $service_categories = ServiceCategory::all();
+    return view('visitors.layanan.informasi', compact('service_categories'));
 })->name('layanan.informasi');
 
+Route::post('/layanan/informasi/store', [ServiceRequestController::class, 'store'])
+    ->name('visitors.service.store');
+
+// // Layanan
+// Route::get('/layanan/informasi', function () {
+//     return view('visitors.layanan.informasi');
+// })->name('layanan.informasi');
 // // Layanan_publik
 // Route::prefix('layanan-publik')->group(function () {
 //     // Pengaduan

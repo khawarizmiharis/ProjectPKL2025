@@ -43,9 +43,17 @@
                 $menus = $userRoleId
                     ? \DB::table('dashboard_menus')
                         ->select('dashboard_menus.id', 'dashboard_menus.name')
-                        ->join('role_has_permissions', 'dashboard_menus.id', '=', 'role_has_permissions.permission_id')
+                        // ->join('permissions', 'dashboard_menus.name', '=', 'permissions.name')
+                        ->join('permissions', function($join){
+                            $join->on('permissions.name', '=', DB::raw("
+                                CASE WHEN dashboard_menus.name='Menu Utama' THEN 'Dashboard'
+                                    ELSE dashboard_menus.name END
+                            "));
+                        })
+                        ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
                         ->where('role_has_permissions.role_id', $userRoleId)
-                        ->whereNotIn('dashboard_menus.name', ['Layanan', 'Manajemen Surat', 'Manajemen UMKM', 'Manajemen Menu']) // 🚫 sembunyikan menu
+                        ->whereNotIn('dashboard_menus.name', ['Layanan', 'Manajemen Surat', 'Manajemen UMKM', 'Manajemen Menu'])
+                        ->orderByRaw("FIELD(dashboard_menus.id, 1,2,3,4,5,6,11,9,7,8,10)")
                         ->get()
                     : collect();
                 @endphp
