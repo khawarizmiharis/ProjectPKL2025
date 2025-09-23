@@ -20,7 +20,6 @@
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">Aksi</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">No. HP</th>
@@ -29,29 +28,13 @@
                             <th class="text-center">Dokumen</th>
                             <!-- <th class="text-center">Status</th> -->
                             <th class="text-center">Tanggal Pengajuan</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($services as $number => $service)
                         <tr>
                             <td class="text-center">{{ $number + 1 }}</td>
-                            <td class="text-center">
-                                <div class="d-flex justify-content-center">
-                                    <a href="{{ route('manajemen-layanan.show', $service->id) }}" 
-                                        class="btn btn-info btn-sm mr-1" title="Detail">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <form id="delete-form-{{ $service->id }}" 
-                                        action="{{ route('manajemen-layanan.destroy', $service->id) }}" 
-                                        method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
                             <td class="text-center">{{ $service->name }}</td>
                             <td class="text-center">
                                 @if($service->email)
@@ -74,20 +57,48 @@
                                     <span class="text-muted">-</span>
                                 @endif
                             </td>
-                            <!-- <td class="text-center">
-                                @if($service->status == 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                @elseif($service->status == 'approved')
-                                    <span class="badge bg-success">Disetujui</span>
-                                @elseif($service->status == 'rejected')
-                                    <span class="badge bg-danger">Ditolak</span>
-                                @endif
-                            </td> -->
                             <td class="text-center">{{ $service->created_at->format('d-m-Y H:i') }}</td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <!-- Tombol Detail -->
+                                    <a href="{{ route('manajemen-layanan.show', $service->id) }}" 
+                                        class="btn btn-info btn-sm mr-1" title="Detail">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+
+                                    <!-- Tombol WhatsApp -->
+                                    @if($service->phone)
+                                        @php
+                                            $phone = preg_replace('/[^0-9]/', '', $service->phone);
+                                            if (substr($phone, 0, 1) === '0') {
+                                                $phone = '62' . substr($phone, 1);
+                                            }
+                                            $message = urlencode("Halo {$service->name},\nPengajuan layanan Anda dengan jenis *{$service->category->name}* sudah kami terima. Mohon tunggu proses selanjutnya.\n\nTerima kasih 🙏");
+                                        @endphp
+                                        <a href="https://wa.me/{{ $phone }}?text={{ $message }}" 
+                                           target="_blank" 
+                                           class="btn btn-success btn-sm mr-1" 
+                                           title="Balas via WhatsApp">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                    @endif
+
+                                    <!-- Tombol Hapus -->
+                                    <form id="delete-form-{{ $service->id }}" 
+                                        action="{{ route('manajemen-layanan.destroy', $service->id) }}" 
+                                        method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="10" class="text-center">Belum ada pengajuan layanan</td>
+                            <td colspan="9" class="text-center">Belum ada pengajuan layanan</td>
                         </tr>
                         @endforelse
                     </tbody>
