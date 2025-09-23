@@ -45,7 +45,7 @@
                             <td class="text-center">{{ $complaint->email ?? '-' }}</td>
                             <td class="text-center">
                                 @if($complaint->phone_number)
-                                    <a href="https://wa.me/{{ $complaint->phone_number_for_whatsapp }}?text={{ urlencode('Halo '.$complaint->name.', saya ingin menanggapi pengaduan Anda.') }}"
+                                    <a href="https://wa.me/{{ $complaint->phone_number_for_whatsapp }}?text={{ urlencode('Halo '.$complaint->name.', terima kasih atas pengaduannya. Laporan Anda akan kami proses dan tindak lanjuti secepatnya.') }}"
                                     target="_blank">
                                     {{ $complaint->phone_number }}
                                     </a>

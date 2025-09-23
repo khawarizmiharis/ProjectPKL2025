@@ -43,7 +43,16 @@
                                     <span class="text-muted">-</span>
                                 @endif
                             </td>
-                            <td class="text-center">{{ $service->phone }}</td>
+                            <td class="text-center">
+                                @if($service->phone)
+                                    <a href="https://wa.me/{{ $service->phone_for_whatsapp }}?text={{ urlencode('Halo '.$service->name.', terima kasih telah mengajukan layanan. Permohonan Anda akan kami proses secepatnya.') }}"
+                                    target="_blank">
+                                        {{ $service->phone }}
+                                    </a>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </td>
                             <td class="text-center">{{ $service->category->name }}</td>
                             <td class="text-center">
                                 {{ \Illuminate\Support\Str::limit($service->description, 50, '...') }}
