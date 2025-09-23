@@ -471,7 +471,7 @@
 {{-- End Card 2 Section --}} -->
 
 {{-- Start Complaint Section --}}
-<section id="complaint">
+<!-- <section id="complaint">
     <div class="container mb-4 mt-4">
         <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
             <div class="col-lg-10">
@@ -556,7 +556,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 {{-- End Complaint Section --}}
 
 {{-- Start Government Shortcut Section --}}

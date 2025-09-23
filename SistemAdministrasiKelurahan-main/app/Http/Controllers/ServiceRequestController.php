@@ -14,7 +14,7 @@ class ServiceRequestController extends Controller
         $request->validate([
             'service_category_id' => 'required|exists:service_categories,id',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'nullable|email|max:255',
             'phone' => 'required|string|max:15',
             'description' => 'required|string',
             'document' => 'nullable|file|mimes:pdf,jpg,png|max:2048',

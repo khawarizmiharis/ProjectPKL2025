@@ -275,7 +275,7 @@
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <label for="email" class="form-label">Email</label>
                                     <input type="email" name="email" id="email"
                                         class="form-control @error('email') is-invalid @enderror"
                                         placeholder="name@example.com"

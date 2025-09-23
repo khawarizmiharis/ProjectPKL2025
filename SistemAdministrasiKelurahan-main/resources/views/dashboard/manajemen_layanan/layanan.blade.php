@@ -53,7 +53,13 @@
                                 </div>
                             </td>
                             <td class="text-center">{{ $service->name }}</td>
-                            <td class="text-center">{{ $service->email }}</td>
+                            <td class="text-center">
+                                @if($service->email)
+                                    {{ $service->email }}
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </td>
                             <td class="text-center">{{ $service->phone }}</td>
                             <td class="text-center">{{ $service->category->name }}</td>
                             <td class="text-center">

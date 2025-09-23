@@ -34,7 +34,7 @@
                 } 
                 ?>
                 <li class="drop-down{{ activeProfilKelurahan(request()->path()) }}">
-                    <a href="#">Profil Kelurahan</a>
+                    <a href="javascript:void(0)">Profil Kelurahan</a>
                     <ul>
                         <li><a href="{{ route('profil-kelurahan.sejarah') }}">Sejarah</a></li>
                         <li><a href="{{ route('profil-kelurahan.visi-misi') }}">Visi & Misi</a></li>
@@ -67,9 +67,31 @@
                     <a href="{{ route('visitors.artikel.index') }}">Berita</a>
                 </li>
                 {{-- Layanan --}}
-                <li class="{{ request()->is('layanan/informasi') ? 'active' : '' }}">
-                    <a href="{{ route('layanan.informasi') }}">Layanan</a>
+                <?php 
+                function activeLayanan($urlPath) {
+                    if (
+                        $urlPath == 'layanan/informasi' || 
+                        $urlPath == 'layanan/form-pengaduan'
+                    ) {
+                        return ' active';
+                    }
+                    return '';
+                } 
+                ?>
+                <li class="drop-down{{ activeLayanan(request()->path()) }}">
+                    <a href="javascript:void(0)">Layanan</a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('layanan.informasi') }}">Informasi</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('layanan.form-pengaduan') }}">Form Pengaduan</a>
+                        </li>
+                    </ul>
                 </li>
+                <!-- <li class="{{ request()->is('layanan/informasi') ? 'active' : '' }}">
+                    <a href="{{ route('layanan.informasi') }}">Layanan</a>
+                </li> -->
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {{-- <li class="drop-down{{ request()->is('/kegiatan-masyarakat/umkm') ? 'active' : '' }}">
                 <a href="#">Kegiatan Masyarakat</a>

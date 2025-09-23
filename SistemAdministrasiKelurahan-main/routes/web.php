@@ -325,15 +325,22 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    //Manajemen Pengaduan
+    // Manajemen Pengaduan
     Route::prefix('/dashboard/manajemen-pengaduan')->group(function () {
 
         // Pengaduan
         Route::prefix('/data-pengaduan')->group(function () {
             Route::get('', 'ComplaintController@index')->name('manajemen-pengaduan.data-pengaduan');
+
+            // Detail Pengaduan
+            Route::get('/{complaint}', 'ComplaintController@show')->name('manajemen-pengaduan.show');
+
+            // Hapus Pengaduan
             Route::delete('/{complaint}', 'ComplaintController@destroy')->name('manajemen-pengaduan.destroy');
         });
+
     });
+
 
     //Manajemen Layanan
     Route::prefix('dashboard/manajemen-layanan')
@@ -492,14 +499,21 @@ Route::prefix('profil-kelurahan')->group(function () {
     Route::get('/administratif', 'AdministratifController@index')->name('profil-kelurahan.administratif.index');
 });
 
-// Layanan (tampilkan form + data kategori)
+// Informasi Layanan
 Route::get('/layanan/informasi', function () {
     $service_categories = ServiceCategory::all();
     return view('visitors.layanan.informasi', compact('service_categories'));
 })->name('layanan.informasi');
 
 Route::post('/layanan/informasi/store', [ServiceRequestController::class, 'store'])
-    ->name('visitors.service.store');
+    ->name('visitors.service.store'); // tetap pakai nama lama
+
+// Form Pengaduan
+Route::get('/layanan/form-pengaduan', [ComplaintController::class, 'create'])
+    ->name('layanan.form-pengaduan');
+
+Route::post('/layanan/form-pengaduan/store', [ComplaintController::class, 'store'])
+    ->name('layanan.form-pengaduan.store');
 
 // // Layanan
 // Route::get('/layanan/informasi', function () {

@@ -21,7 +21,7 @@
             <hr>
             --}}
 
-            <form action="{{ route('visitors.complaint.store') }}" method="POST">
+            <form action="{{ route('visitors.complaint.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="user_id" id="user_id" value="{{ isset($user_id) ? $user_id : '' }}">
 
@@ -29,22 +29,22 @@
                     <div class="col-sm-6 mb-3">
                         <label for="name" class="form-label">Nama <span class="text-danger">*</span></label>
                         <input type="text" name="name" id="name"
-                               class="form-control @error('name') is-invalid @enderror"
-                               placeholder="Nama lengkap Anda"
-                               value="{{ old('name', isset($user) ? $user->full_name : '') }}"
-                               required>
+                            class="form-control @error('name') is-invalid @enderror"
+                            placeholder="Nama lengkap Anda"
+                            value="{{ old('name', isset($user) ? $user->full_name : '') }}"
+                            required>
                         @error('name')
                             <small class="text-danger fst-italic">{{ $message }}</small>
                         @enderror
                     </div>
 
+                    {{-- Email sekarang opsional, hapus required --}}
                     <div class="col-sm-6 mb-3">
-                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email"
-                               class="form-control @error('email') is-invalid @enderror"
-                               placeholder="name@example.com"
-                               value="{{ old('email', isset($user) ? $user->email : '') }}"
-                               required>
+                            class="form-control @error('email') is-invalid @enderror"
+                            placeholder="name@example.com"
+                            value="{{ old('email', isset($user) ? $user->email : '') }}">
                         @error('email')
                             <small class="text-danger fst-italic">{{ $message }}</small>
                         @enderror
@@ -55,10 +55,10 @@
                     <div class="col-sm-6 mb-3">
                         <label for="phone_number" class="form-label">Nomor Handphone <span class="text-danger">*</span></label>
                         <input type="text" name="phone_number" id="phone_number"
-                               class="form-control @error('phone_number') is-invalid @enderror"
-                               placeholder="081234567891"
-                               value="{{ old('phone_number', isset($user) ? $user->phone : '') }}"
-                               required>
+                            class="form-control @error('phone_number') is-invalid @enderror"
+                            placeholder="081234567891"
+                            value="{{ old('phone_number', isset($user) ? $user->phone : '') }}"
+                            required>
                         @error('phone_number')
                             <small class="text-danger fst-italic">{{ $message }}</small>
                         @enderror
@@ -77,6 +77,7 @@
                                     </option>
                                 @endforeach
                             @endif
+                            <option value="lainnya">Lainnya...</option>
                         </select>
                         @error('complaint_category_id')
                             <small class="text-danger fst-italic">{{ $message }}</small>
@@ -84,12 +85,30 @@
                     </div>
                 </div>
 
+                {{-- Input kategori lainnya (hidden dulu, muncul kalau dipilih lainnya) --}}
+                <div class="mb-3 d-none" id="other_category_wrapper">
+                    <label for="other_category" class="form-label">Kategori Lainnya</label>
+                    <input type="text" name="other_category" id="other_category" 
+                        class="form-control" placeholder="Tulis kategori lainnya...">
+                </div>
+
                 <div class="mb-3">
                     <label for="complaint" class="form-label">Isi Aduan <span class="text-danger">*</span></label>
                     <textarea name="complaint" id="complaint" rows="4"
-                              class="form-control @error('complaint') is-invalid @enderror"
-                              required>{{ old('complaint') }}</textarea>
+                            class="form-control @error('complaint') is-invalid @enderror"
+                            required>{{ old('complaint') }}</textarea>
                     @error('complaint')
+                        <small class="text-danger fst-italic">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                {{-- Upload gambar opsional --}}
+                <div class="mb-3">
+                    <label for="attachment" class="form-label">Upload Gambar Pendukung (opsional)</label>
+                    <input type="file" name="attachment" id="attachment" 
+                        class="form-control @error('attachment') is-invalid @enderror"
+                        accept="image/*">
+                    @error('attachment')
                         <small class="text-danger fst-italic">{{ $message }}</small>
                     @enderror
                 </div>
@@ -98,6 +117,21 @@
                     <button type="submit" class="btn-submit">Kirim</button>
                 </div>
             </form>
+
+            {{-- JS untuk kategori lainnya --}}
+            <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const select = document.getElementById('complaint_category_id');
+                const otherWrapper = document.getElementById('other_category_wrapper');
+                select.addEventListener('change', function () {
+                    if (this.value === 'lainnya') {
+                        otherWrapper.classList.remove('d-none');
+                    } else {
+                        otherWrapper.classList.add('d-none');
+                    }
+                });
+            });
+            </script>
         </div>
     </div>
 </div>
